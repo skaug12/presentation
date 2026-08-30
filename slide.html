@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>발표 장표 · 이슬기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  html, body { background: #F8F7F4; }
+  #bar { position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+         display: flex; align-items: center; gap: 16px;
+         padding: 12px 20px; font-family: 'Pretendard', -apple-system, sans-serif;
+         font-size: 13px; background: rgba(248,247,244,.92);
+         backdrop-filter: blur(6px); border-bottom: 1px solid #E0DDD6; }
+  #bar a { color: #6B6B6B; text-decoration: none; white-space: nowrap; }
+  #bar a:hover { color: #980000; }
+  #bar .where { color: #9A9A9A; margin-left: auto; text-align: right;
+                overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .reveal-viewport { padding-top: 46px; box-sizing: border-box; }
+  #err { font-family: 'Pretendard', -apple-system, sans-serif; color: #2C2C2C;
+         max-width: 520px; margin: 140px auto; padding: 0 24px; line-height: 1.7; }
+  #err a { color: #980000; }
+</style>
+</head>
+<body>
+<div id="bar">
+  <a href="trends.html">← 트렌드 모음</a>
+  <a id="full" href="#">전체 발표에서 보기 →</a>
+  <span class="where" id="where"></span>
+</div>
+<div class="reveal"><div class="slides"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var deck = q.get('d') || '';
+  var n = parseInt(q.get('n'), 10);
+
+  // 같은 아카이브의 발표 파일만 허용 (경로 이탈 차단)
+  if (!/^presentation-[^\/\\?#]+\.html$/.test(deck) || !(n >= 0)) { fail(); return; }
+
+  var deckUrl = encodeURI(deck);
+  document.getElementById('full').href = deckUrl + '#/' + n;
+
+  fetch(deckUrl)
+    .then(function (r) { if (!r.ok) throw 0; return r.text(); })
+    .then(function (html) {
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var sec = doc.querySelectorAll('.slides > section')[n];
+      if (!sec) throw 0;
+
+      // 덱의 스타일을 그대로 가져와 원래 보이던 모습 유지
+      doc.querySelectorAll('head style').forEach(function (s) {
+        document.head.appendChild(s.cloneNode(true));
+      });
+      doc.querySelectorAll('head link[rel="stylesheet"]').forEach(function (l) {
+        if (!document.querySelector('link[href="' + l.getAttribute('href') + '"]')) {
+          document.head.appendChild(l.cloneNode(true));
+        }
+      });
+      // 이 뷰어의 상단 바 스타일이 덱 스타일보다 나중에 오도록 다시 붙인다
+      document.head.appendChild(document.querySelector('head > style').cloneNode(true));
+
+      document.querySelector('.slides').appendChild(sec.cloneNode(true));
+
+      var title = (doc.title || '발표').split(' · ');
+      document.getElementById('where').textContent =
+        (title[title.length - 1] || doc.title) + ' · ' + (n + 1) + '번째 장표';
+      document.title = (sec.querySelector('h1,h2,h3') || {}).textContent || doc.title;
+
+      Reveal.initialize({
+        hash: false, controls: false, progress: false, keyboard: false,
+        touch: false, fragments: false, slideNumber: false,
+        width: 1280, height: 720, margin: 0.04, center: true, transition: 'none'
+      });
+    })
+    .catch(fail);
+
+  function fail() {
+    if (/^presentation-[^\/\\?#]+\.html$/.test(deck)) {
+      location.replace(encodeURI(deck) + (n >= 0 ? '#/' + n : ''));
+      return;
+    }
+    document.body.innerHTML =
+      '<div id="err"><p>장표를 찾지 못했습니다.</p>' +
+      '<p><a href="trends.html">트렌드 모음으로 돌아가기</a></p></div>';
+  }
+})();
+</script>
+</body>
+</html>
