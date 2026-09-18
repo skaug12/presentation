@@ -222,10 +222,10 @@
   <div class="label">FAQ 목차</div>
   <nav>
     <ol>
-      <li><a href="#q1">클로드와 클로드 코드의 차이</a></li>
+      <li><a href="#q1">클로드 · 클로드 코드 · Cowork</a></li>
       <li><a href="#q2">Skill과 Agent</a></li>
       <li><a href="#q3">MCP, API</a></li>
-      <li><a href="#q4">클로드 코드 쓰는 방법 5가지</a></li>
+      <li><a href="#q4">클로드 코드 쓰는 방법 4가지</a></li>
       <li><a href="#q5">VS Code와 터미널</a></li>
       <li><a href="#q6">VS Code에서 쓰면 좋은 이유</a></li>
       <li><a href="#q7">맥과 윈도우의 차이</a></li>
@@ -256,22 +256,22 @@
       <p>2026 AI부사수 팀 멤버들이 세션 전·중·후에 자주 묻는 질문을 모았습니다.</p>
       <p>사전 서베이에서 한 멤버가 "저희가 했던 질문들을 FAQ 형태로 보관하시면 좋지 않을까"라고 아이디어를 주셔서 시작된 문서예요.</p>
       <p>새로운 질문이 나오면 계속 추가됩니다. 편하게 슬랙 <code>#1--ai부사수-주중</code>·<code>#1--ai부사수-주말</code>에 물어봐주세요.</p>
-      <p style="margin-top: 14px; color: var(--text-dim); font-size: 13px;">최초 작성: 2026-04-11 · 기반: AI부사수 1~3회차 발표자료 + 2026 여름시즌 사전 서베이<br>최근 갱신: 2026-08-30 · 26여름 시즌 마감 점검 (모델·주소·연결 방식 최신화, 스킬 모음집 연결)</p>
+      <p style="margin-top: 14px; color: var(--text-dim); font-size: 13px;">최초 작성: 2026-04-11 · 기반: AI부사수 1~3회차 발표자료 + 2026 여름시즌 사전 서베이<br>최근 갱신: 2026-09-18 · Cowork 통합 반영 (01·04번 정정)</p>
     </div>
   </header>
 
   <section class="q" id="q1">
     <div class="num">01</div>
-    <h2>클로드와 클로드 코드의 차이</h2>
-    <h3>Q. 클로드(Claude)랑 클로드 코드(Claude Code)는 뭐가 다른가요?</h3>
-    <p>한 문장으로: 클로드는 "대화하는 AI", 클로드 코드는 "내 컴퓨터에서 일하는 AI"입니다.</p>
+    <h2>클로드, 클로드 코드, Cowork의 차이</h2>
+    <h3>Q. 클로드(Claude), 클로드 코드(Claude Code), Cowork는 뭐가 다른가요?</h3>
+    <p>한 문장으로: 클로드는 "대화하는 AI", 클로드 코드는 "내 컴퓨터에서 일하는 AI"입니다. Cowork는 세 번째 제품이 아니라 <strong>클로드한테 일을 시키는 방식</strong>의 이름이었어요. 아래에서 따로 설명할게요.</p>
     <table>
       <thead><tr><th>구분</th><th>Claude (클로드)</th><th>Claude Code (클로드 코드)</th></tr></thead>
       <tbody>
-        <tr><td>주 용도</td><td>채팅·질문·글쓰기</td><td>파일 편집·자동화·스킬 실행</td></tr>
-        <tr><td>내 컴퓨터 파일 접근</td><td>✗ (업로드해야 봄)</td><td>✓ (직접 읽고 쓰기)</td></tr>
-        <tr><td>터미널/명령 실행</td><td>✗</td><td>✓</td></tr>
-        <tr><td>사용 장소</td><td>웹, 모바일 앱, 데스크톱 앱</td><td>VS Code, 터미널, 웹·앱(Code 전용)</td></tr>
+        <tr><td>주 용도</td><td>채팅·질문·글쓰기, 잔일 맡기기</td><td>파일 편집·자동화·스킬 실행</td></tr>
+        <tr><td>내 컴퓨터 파일 접근</td><td>△ (데스크톱 앱에서 폴더를 열어주면 가능)</td><td>✓ (직접 읽고 쓰기)</td></tr>
+        <tr><td>터미널/명령 실행</td><td>✗ (내 컴퓨터에서는 안 됨)</td><td>✓</td></tr>
+        <tr><td>사용 장소</td><td>웹, 모바일 앱, 데스크톱 앱, 크롬 사이드패널</td><td>VS Code, 터미널, 웹·앱(Code 전용)</td></tr>
       </tbody>
     </table>
     <p>도식으로 보면 이런 관계예요.</p>
@@ -279,14 +279,21 @@
                     │
                Claude (모델)
                     │
-        ┌───────────┼───────────┐
-        │           │           │
-      Claude      Claude      Claude
-      (앱/웹)      Desktop     Code
-        │         (+Cowork)      │
-      대화 중심    파일 작업     내 컴퓨터
-                 (샌드박스)     직접 제어</pre>
+        ┌───────────┴───────────┐
+        │                       │
+      Claude                Claude Code
+     (누구나)              (개발·자동화용)
+        │                       │
+  물어보기 + 맡기기          코드 짜고 고치기
+   (옛 Cowork 포함)               │
+        │                       │
+  웹 · 데스크톱 앱 ·        VS Code · 터미널 ·
+  모바일 앱 · 크롬          웹 · 앱(Code 전용)</pre>
     <p>둘 다 같은 Claude 모델을 쓰지만, 어디까지 손이 닿는지가 달라요. 클로드는 대화창 안에서 작업하고, 클로드 코드는 내 컴퓨터 속 파일을 읽고 수정하는 <strong>코드</strong>를 짭니다.</p>
+    <div class="principle">
+      <h4>Cowork는 프로그램 이름이 아니라, 클로드한테 일을 <strong>맡기는</strong> 방식이었어요</h4>
+      <p>클로드한테 <strong>물어보는 것</strong>과 <strong>맡기는 것</strong>은 다릅니다. 영수증 사진 30장을 엑셀로 정리하고 싶다고 해볼게요. 물어보면 어떻게 하면 되는지 방법을 알려줍니다. 정리는 내가 합니다. 맡기면 다운로드 폴더를 직접 열어서 사진을 하나씩 읽고, 엑셀 파일을 만들어서 폴더에 넣어줍니다. 나는 결과만 봅니다.<br><br>이 <strong>맡기기</strong> 쪽에 붙은 이름이 Cowork였어요. 2026년 1월에 맥 데스크톱 앱에 생겼고, 입력창 아래 Cowork 버튼을 눌러야 그 모드로 들어갔습니다. 이후 웹·모바일·크롬에도 생겼고, <strong>2026년 9월 16일 (수)에 그 버튼이 없어졌습니다.</strong> 지금은 그냥 말하면 클로드가 알아서 답만 줄지 직접 해줄지 정해요.<br><br>그래서 <strong>데스크톱 앱·모바일 앱·Cowork 중에 뭘 쓰냐</strong>는 질문은, 노트북·휴대폰·카카오톡 중에 뭘 쓰냐고 묻는 것과 비슷합니다. 앞의 둘은 기계고 카카오톡은 그 안에서 도는 프로그램이잖아요. 데스크톱 앱과 모바일 앱은 클로드로 들어가는 <strong>문</strong>이고, Cowork는 그 문으로 들어가서 하던 <strong>일 시키는 방식</strong>이었어요.</p>
+    </div>
   </section>
 
   <section class="q" id="q2">
@@ -321,20 +328,35 @@
 
   <section class="q" id="q4">
     <div class="num">04</div>
-    <h2>클로드 코드 쓰는 방법 5가지</h2>
+    <h2>클로드 코드 쓰는 방법 4가지</h2>
     <h3>Q. 클로드 코드는 어디서 쓸 수 있나요?</h3>
-    <p>지금 기준으로 다섯 가지 방법이 있어요.</p>
+    <p>지금 기준으로 네 가지 방법이 있어요.</p>
     <table>
       <thead><tr><th>방법</th><th>특징</th><th>어떤 때?</th></tr></thead>
       <tbody>
-        <tr><td><strong>모바일 앱</strong><br>(Claude 앱)</td><td>채팅 중심, 가벼운 질문</td><td>이동 중 아이디어 메모, 질문만</td></tr>
+        <tr><td><strong>모바일 앱</strong><br>(Claude 앱)</td><td>채팅 중심, 진행 상황 확인</td><td>이동 중 아이디어 메모, 질문만</td></tr>
         <tr><td><strong>웹앱</strong><br>(claude.ai/code)</td><td>브라우저에서 프로젝트 접근</td><td>다른 사람 컴퓨터에서 급하게</td></tr>
-        <tr><td><strong>Cowork</strong><br>(Claude Desktop의 탭)</td><td>샌드박스 안에서 파일 작업</td><td>카드뉴스 자동화 같은 정해진 흐름 실행</td></tr>
         <tr><td><strong>VS Code 확장</strong></td><td>에디터·채팅·파일 트리가 한 화면</td><td>매일 본격 작업 (제일 추천)</td></tr>
         <tr><td><strong>터미널 (CLI)</strong></td><td>명령줄에서 직접 부름</td><td>스크립트 자동화, 서버 작업</td></tr>
       </tbody>
     </table>
-    <p>제일 많이 쓰는 건 VS Code. 가장 부담 없이 시작할 수 있는 건 Cowork나 모바일 앱. AI부사수 팀에서는 VS Code를 기준으로 같이 연습합니다.</p>
+    <p>제일 많이 쓰는 건 VS Code. AI부사수 팀에서는 VS Code를 기준으로 같이 연습합니다. 터미널이 무서우면 클로드 데스크톱 앱에서 말로 시키는 것부터 시작해도 돼요.</p>
+    <p>예전에 여기 있던 <strong>Cowork</strong> 줄은 뺐습니다. 클로드 코드를 쓰는 방법이 아니라 클로드 쪽 기능이었고, 지금은 클로드에 합쳐졌거든요. <a href="#q1">01번</a>에 설명해뒀습니다.</p>
+    <p><strong>그럼 클로드 데스크톱 앱이랑 모바일 앱은 뭐가 다른가요?</strong> 둘은 같은 클로드예요. 로그인하면 대화 목록도 똑같이 보입니다. 다른 건 딱 하나, <strong>내 컴퓨터 폴더를 열 수 있느냐</strong>입니다.</p>
+    <table>
+      <thead><tr><th>이런 걸 시키면</th><th>데스크톱 앱</th><th>모바일 앱</th></tr></thead>
+      <tbody>
+        <tr><td>일 시키고, 중간에 방향 바꾸고, 결과 보기</td><td>✓</td><td>✓</td></tr>
+        <tr><td>노트북에서 하던 작업 이어서 보기</td><td>✓</td><td>✓</td></tr>
+        <tr><td>노션·구글드라이브 같은 커넥터, 스킬</td><td>✓</td><td>✓</td></tr>
+        <tr><td>다운로드 폴더 파일 열어서 고치기</td><td>✓</td><td>✗</td></tr>
+        <tr><td>내 컴퓨터에 깔아둔 연결(슬랙·아임웹 MCP)</td><td>✓</td><td>✗</td></tr>
+        <tr><td>내 화면에서 브라우저 직접 눌러주기</td><td>✓</td><td>✗</td></tr>
+        <tr><td>필요한 요금제</td><td>유료면 다 됨</td><td>Pro · Max · Team</td></tr>
+      </tbody>
+    </table>
+    <p>그림을 그려보면 이래요. 노트북에서 "이 폴더 사진들 정리해줘"라고 시켜놓고 나갑니다. 일은 앤트로픽 서버에서 돌기 때문에 노트북을 닫아도 계속됩니다. 지하철에서 휴대폰으로 진행 상황을 보다가 "아 그건 빼고"라고 방향을 바꿔도 되고요.</p>
+    <p>반대로 <strong>휴대폰만 들고 처음부터</strong> "내 노트북 다운로드 폴더 열어줘"는 안 됩니다. 그 노트북이 켜져 있고 데스크톱 앱이 열려 있어야 하고, 시작도 노트북에서 했어야 해요. <strong>모바일은 리모컨</strong>이라고 보시면 맞습니다.</p>
     <p style="margin-top:12px;">
       <a href="https://github.com/thehfk/hfk-ai-bss/blob/main/claude-code-platforms.md" target="_blank" style="font-weight:600;">→ 플랫폼별 권한·기능 상세 비교</a>
     </p>
@@ -362,7 +384,7 @@
       <li><strong>클로드 채팅창</strong>: 오른쪽에 대화창. 파일을 드래그해서 "이 파일 봐줘" 식으로 바로 전달 가능</li>
       <li><strong>터미널</strong>: 아래쪽에 붙여놓고 필요할 때 바로 명령어 실행</li>
     </ol>
-    <p>Cowork나 모바일은 쉽지만 "내가 지금 뭐가 바뀌는지" 확인하기 어려워요. VS Code는 모든 변화가 실시간으로 보입니다. 여러 일의 진행 상황을 점검하며 진행하기에 가장 좋은 환경이에요.</p>
+    <p>클로드 앱(데스크톱·모바일)은 시작하기 쉽지만 "내가 지금 뭐가 바뀌는지" 줄 단위로 확인하기는 어려워요. VS Code는 모든 변화가 실시간으로 보입니다. 여러 일의 진행 상황을 점검하며 진행하기에 가장 좋은 환경이에요.</p>
   </section>
 
   <section class="q" id="q7">
@@ -509,7 +531,7 @@ claude mcp add gmail-회사 -- npx -y @shinzolabs/gmail-mcp@latest</pre>
         <tr><td>MCP 연결·자동화(hooks)</td><td>가능</td><td>가능 (둘이 동일)</td></tr>
       </tbody>
     </table>
-    <p><strong>디바이스 연동</strong>: VS Code와 터미널의 로컬 세션도 Remote Control로 모바일·브라우저에서 원격 제어됩니다. Cowork(클라우드 세션)는 데스크탑·웹·모바일(베타)에서 같은 작업을 이어갈 수 있고요. 선호하는 작업 방식에 따라 고르시면 됩니다.</p>
+    <p><strong>디바이스 연동</strong>: VS Code와 터미널의 로컬 세션도 Remote Control로 모바일·브라우저에서 원격 제어됩니다. 클라우드에서 도는 클로드 세션(옛 Cowork)은 데스크탑·웹·모바일·크롬 사이드패널에서 같은 작업을 이어갑니다. 선호하는 작업 방식에 따라 고르시면 됩니다.</p>
   </section>
 
   <section class="q" id="q16">
@@ -645,7 +667,7 @@ npx remotion skills add</pre>
 
   <footer>
     <div>이 문서는 질문이 나올 때마다 계속 추가됩니다.</div>
-    <div class="log">업데이트 로그<br>2026-04-11 최초 작성 (1~3회차 + 사전 서베이 기반)<br>2026-08-16 13~22번 추가 · 26여름 주말 팀 채널 질문과 3~5회차 발표자료에서 회수<br>2026-08-30 26여름 마감 점검 · 모델 표와 웹앱 주소 정정, 노션·Gmail 커넥터 반영, 스킬 모음집 연결</div>
+    <div class="log">업데이트 로그<br>2026-04-11 최초 작성 (1~3회차 + 사전 서베이 기반)<br>2026-08-16 13~22번 추가 · 26여름 주말 팀 채널 질문과 3~5회차 발표자료에서 회수<br>2026-08-30 26여름 마감 점검 · 모델 표와 웹앱 주소 정정, 노션·Gmail 커넥터 반영, 스킬 모음집 연결<br>2026-09-18 Cowork가 클로드에 통합된 것 반영 · 01번을 Cowork 포함으로 다시 씀, 04번에서 Cowork 행 빼고 데스크톱/모바일 비교표 추가</div>
     <div class="log" style="margin-top:10px;"><a href="https://thehfk.github.io/hfk-ai-bss/log-26summer-sun.html" style="color:var(--text-sub);">→ 26여름 주말 팀 회차별 기록 (발표 자료 · 그날 나온 것)</a></div>
   </footer>
 </main>
