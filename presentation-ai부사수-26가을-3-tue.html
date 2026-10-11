@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>매주 하던 일을 한 줄 명령으로 · 26가을 AI부사수 3회차</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #F8F7F4;
+    --text: #2C2C2C;
+    --text-sub: #6B6B6B;
+    --text-dim: #9A9A9A;
+    --accent: #8B5E3C;
+    --accent2: #3D5A80;
+    --accent3: #5B7B5E;
+    --accent4: #7B6B8A;
+    --accent5: #8A5E5E;
+    --accent6: #5A7B7B;
+    --card-bg: #F1EFEA;
+    --r-background-color: var(--bg);
+    --r-main-font: 'Pretendard', -apple-system, sans-serif;
+    --r-heading-font: 'Pretendard', -apple-system, sans-serif;
+    --r-main-color: var(--text);
+    --r-heading-color: var(--text);
+    --r-main-font-size: 30px;
+  }
+  .reveal { font-weight: 400; }
+  .reveal h1 { font-size: 2.4em; font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; }
+  .reveal h2 { font-size: 1.3em; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5em; }
+  .reveal h3 { font-size: 0.7em; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 6px; word-break: keep-all; overflow-wrap: break-word; }
+  .reveal p { font-size: 0.6em; line-height: 1.6; color: var(--text-sub); }
+  .reveal li { font-size: 0.6em; line-height: 1.6; color: var(--text-sub); }
+  .reveal ul { list-style: none; padding-left: 0; margin: 0; }
+  .reveal ul li { padding-left: 14px; position: relative; }
+  .reveal ul li::before { content: ""; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; border-radius: 50%; background: var(--text-dim); }
+  .reveal ol { padding-left: 18px; }
+  .reveal ol li { padding-left: 4px; }
+  .reveal ol li::before { display: none; }
+  .reveal section { text-align: left; padding: 36px 60px 56px !important; box-sizing: border-box; overflow: hidden; }
+  .reveal .slides section:not(.present) { opacity: 0 !important; visibility: hidden !important; }
+  .reveal code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.88em; }
+  .reveal .slides { text-align: left; }
+  .reveal .slide-number { font-family: 'Pretendard'; font-size: 11px; color: var(--text-dim); }
+  .reveal .controls { color: var(--accent); }
+  .reveal .progress { display: none; }
+
+  .sub { color: var(--text-sub); }
+  .dim { color: var(--text-dim); }
+  .accent { color: var(--accent); }
+  .accent2 { color: var(--accent2); }
+  .accent3 { color: var(--accent3); }
+  .accent4 { color: var(--accent4); }
+  .accent5 { color: var(--accent5); }
+  .accent6 { color: var(--accent6); }
+  .bold { font-weight: 600; }
+  .small { font-size: 0.6em !important; }
+  .tiny { font-size: 0.52em !important; }
+
+  .label { font-size: 0.42em; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+
+  .grid { display: grid; gap: 24px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card { background: var(--card-bg); border-radius: 8px; padding: 22px 24px; overflow: hidden; }
+  .card h3 { margin: 0; }
+  .card p { margin: 0; }
+  .card ul, .card ol { margin: 0; }
+  .card > * + * { margin-top: 12px !important; }
+  .card li + li { margin-top: 3px; }
+
+  .code-block { background: #2C2C2C; border-radius: 8px; padding: 18px 22px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.52em; line-height: 1.85; color: #D4D0C8; text-align: left; }
+  .code-block .prompt { color: var(--accent3); }
+  .code-block .cmd { color: #D4A574; }
+  .code-block .comment { color: #6B6B6B; }
+
+  .skill-tag { display: inline-block; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.5em; font-weight: 500; padding: 3px 10px; border-radius: 4px; background: rgba(139,94,60,0.08); color: var(--accent); margin-bottom: 8px; }
+
+  .summary-card { background: var(--card-bg); border-radius: 8px; padding: 14px 24px; text-align: center; }
+  .qblock { background: rgba(139,94,60,0.06); border-radius: 8px; padding: 14px 20px; }
+
+  .placeholder { border: 1.5px dashed rgba(139,94,60,0.4); background: rgba(139,94,60,0.03); }
+  .fillnote { font-size: 0.46em; color: var(--accent); background: rgba(139,94,60,0.07); border-radius: 6px; padding: 8px 14px; }
+
+  .stat-num { font-size: 1.4em; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+  .stat-label { font-size: 0.46em; color: var(--text-sub); margin-top: 4px; }
+
+  .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #F8F7F4; font-size: 0.48em; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+
+  #custom-progress { position: fixed; bottom: 0; left: 0; right: 0; height: 28px; background: #ECEAE5; display: flex; z-index: 100; font-family: 'Pretendard', sans-serif; }
+  #custom-progress .seg { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.02em; position: relative; transition: background 0.3s, color 0.3s; cursor: pointer; }
+  #custom-progress .seg.active { background: var(--accent); color: #F8F7F4; }
+  #custom-progress .seg.done { background: rgba(139,94,60,0.2); color: var(--accent); }
+  #custom-progress .seg + .seg { border-left: 1px solid rgba(0,0,0,0.06); }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%; text-align:center;"><h1>매주 하던 일을 <span class="accent2">한 줄 명령으로</span></h1><p style="font-size:0.78em; color:var(--text-sub); font-weight:400; margin-top:16px;">3회차 · 2회차 돌아보기 · 지난 2주 AI 트렌드 · ① 사원급 AI부사수 만들고 세 번 돌리기</p><p class="dim" style="font-size:0.46em; margin-top:40px;">26가을 AI부사수(TUE) 3회차 &middot; 10월 13일 (화) 19:30 &middot; 5층 오아시스덕수궁 &middot; @Seulki.log</p></div></section>
+
+<section><div class="label">Time table · 3회차 · 19:30–22:00</div><h2>오늘 두 시간 반을 이렇게 씁니다</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">15분 · 19:30</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">돌아보기</span></p><p class="dim" style="margin-top:6px;">2회차 4L, 2주 동안 한 줄씩</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">15분 · 19:45</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">지난 2주 AI 트렌드</span></p><p class="dim" style="margin-top:6px;">실습과 이어지는 소식 넷</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">20분 · 20:00</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">클로드 코드와 같이 쓰는 도구 넷</span></p><p class="dim" style="margin-top:6px;">Codex · Orca · Headroom · Aside</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">10분 · 20:20</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">① 사원급 AI부사수란</span></p><p class="dim" style="margin-top:6px;">제 ① 칸 스킬 하나를 열어 봅니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent6">10분 · 20:30</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">쉬는 시간</span></p></div><div class="card" style="padding:16px 20px; "><h3 class="accent6">60분 · 20:40</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">실습: 만들고 세 번 돌리기</span></p><p class="dim" style="margin-top:6px;">①에서 하나를 스킬로 만들어 파일 세 건에</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">20분 · 21:40</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">공유 · 4L 회고</span></p><p class="dim" style="margin-top:6px;">세 번 중 몇 번, 한 분 30초</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">오늘 결과물</span> <span class="sub"><span class="bold">① 사원급 AI부사수 하나</span>와, 그 스킬이 세 번 중 몇 번 맞았는지 <span class="bold">숫자 하나</span></span></p></div></section>
+
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 1 · 돌아보기 · 15분</div><h1 style="font-size:1.8em;">2회차에서 <span class="accent2">이어 갈 것</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">2회차에는 클로드 코드와 구글 계정을 연결하고, 첫 스킬 <span class="bold">/주간일정</span>을 만들고, 업무 스무 개를 PP 매트릭스에 놓았습니다.<br>오늘은 그 표의 <span class="bold">① 칸</span>을 스킬로 바꿉니다.</p></div></section>
+
+<section>
+  <div class="label">Recap &middot; 지금까지 &middot; 9월 15일 &rarr; 오늘</div>
+  <h2>지금까지 한 것, 오늘 하는 것, 앞으로 할 것</h2>
+  <div class="card" style="padding:12px 20px; margin-bottom:12px;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.5em; line-height:1.7; color:var(--text);">
+      <thead>
+        <tr style="color:var(--text-dim); font-weight:600; border-bottom:1px solid rgba(0,0,0,0.08);">
+          <td style="padding:4px 8px; width:14%;">언제</td><td style="padding:4px 8px; width:20%;">무엇을</td><td style="padding:4px 8px;">만든 것</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:4px 8px;" class="dim">1회차 &middot; 9월 15일 (화)</td><td style="padding:4px 8px;" class="bold">개념 강의</td><td style="padding:4px 8px;">클로드 코드 &middot; 워크스페이스 &middot; 스킬 &middot; PP 매트릭스 &rarr; 넘기고 싶은 일 하나</td></tr>
+        <tr><td style="padding:4px 8px;" class="dim">2회차 &middot; 9월 29일 (화)</td><td style="padding:4px 8px;" class="bold">설치 &middot; 업무 리스트업</td><td style="padding:4px 8px;">VS Code + 구글 연결 &middot; 첫 스킬 <code class="accent">/주간일정</code> &middot; <code class="accent">pp-매트릭스.md</code></td></tr>
+        <tr style="background:rgba(0,0,0,0.03);"><td style="padding:4px 8px;" class="accent bold">3회차 &middot; 오늘</td><td style="padding:4px 8px;" class="accent bold">① 사원급</td><td style="padding:4px 8px;" class="bold">①에서 하나를 스킬로 만들고 실제 파일 세 건에 돌립니다 &rarr; 스킬 하나 + 틀린 곳 목록</td></tr>
+        <tr><td style="padding:4px 8px;" class="dim">4회차 &middot; 10월 27일 (화)</td><td style="padding:4px 8px;">② 대리급</td><td style="padding:4px 8px;">반복되지만 아직 서툰 일. 오늘 적은 틀린 곳으로 품질을 올리는 법도 같이 봅니다</td></tr>
+        <tr><td style="padding:4px 8px;" class="dim">5회차 &middot; 11월 10일 (화)</td><td style="padding:4px 8px;">③ 과장급</td><td style="padding:4px 8px;">드물지만 내가 잘 아는 일. 머릿속 순서를 글로 적어 둡니다</td></tr>
+        <tr><td style="padding:4px 8px;" class="dim">6회차 &middot; 11월 24일 (화)</td><td style="padding:4px 8px;">④ 파트너급</td><td style="padding:4px 8px;">①②③에서 아낀 시간을 미뤄 둔 일에 씁니다</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="summary-card" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0;">
+      <span class="accent2 bold">오늘은 스킬 하나만 만듭니다</span>
+      <span class="sub">틀린 곳은 <span class="bold">적기만 하고 고치지 않습니다.</span> 고치는 일은 4회차에 합니다. 오늘 고치기 시작하면 세 번 돌릴 시간이 모자랍니다.</span>
+    </p>
+  </div>
+
+</section>
+
+<section><div class="label">Recap · 2회차 4L · 15명</div><h2>Lacked · 아직 부족했던 것</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent5">'어떻게 활용할지 모르겠다' · '원하는 결과를 얻으려면 어떤 프롬프트를 써야 하는지 감이 안 온다'</h3><p style="color:var(--text); margin-top:6px;">가장 많았던 답변입니다</p><p class="dim" style="margin-top:6px;">→ 오늘은 프롬프트를 잘 쓰려고 애쓰지 않습니다. <span class="bold">내가 매주 하는 순서</span>를 클로드 코드가 묻고, 나는 답만 합니다. 2회차 인터뷰 프롬프트와 같은 방식입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">'이해 없이 가이드를 따라 설치만 했다' · '터미널에서 버벅였다'</h3><p style="color:var(--text); margin-top:6px;">정상입니다</p><p class="dim" style="margin-top:6px;">→ 설치 과정은 몰라도 됩니다. 오늘부터는 <span class="bold">폴더를 열고, 한 줄 적고, 예를 누르는 것</span>만 반복합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">'회사 일은 노션 · 먼데이닷컴에서 하고, 지메일 · 드라이브는 잘 안 쓴다'</h3><p style="color:var(--text); margin-top:6px;">구글이 아니어도 됩니다</p><p class="dim" style="margin-top:6px;">→ ① 칸의 일은 대부분 <span class="bold">내보내기 한 번</span>으로 파일이 됩니다. CSV · 엑셀로 내려받은 파일로 시작합니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">9월 29일 이후 질문 스레드가 비어 있었습니다</span> <span class="sub">혼자 하다 막힌 곳이 분명 있었을 겁니다. <span class="bold">오늘 체크인에서 그 한 줄부터</span> 듣겠습니다</span></p></div></section>
+
+<section><div class="label">Recap · 2회차 4L · Long for</div><h2>Long for · 바라는 것</h2><p style="margin-bottom:12px;">적어 주신 것 중 ① 사원급에 들어가는 것이 많았습니다. 오늘 실습 후보로 그대로 씁니다.</p><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">'스킬 만드는 법을 알고 싶다' · '업무용 · 개인용 스킬 만들기'</h3><p style="color:var(--text); margin-top:6px;">오늘 Part 5 실습 전부가 이 답입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent">'광고 효율 자동 업데이트, 대시보드화' · '고객사 리포트 자동화'</h3><p style="color:var(--text); margin-top:6px;">매주 같은 숫자를 같은 양식에 옮기는 일. <span class="bold">① 칸의 대표 예</span>입니다</p><p class="dim" style="margin-top:6px;">1회차 일정표에 3회차를 '메일 정리, 일정과 할 일 파악, 대시보드 관리'로 적었습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent">'슬랙 · 메일로 들어오는 업무를 분류해 보고 싶다'</h3><p style="color:var(--text); margin-top:6px;">들어온 요청을 정해진 칸으로 나누는 일. 이것도 ①입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">'업무뿐 아니라 개인 일상에도'</h3><p style="color:var(--text); margin-top:6px;">개인 일도 ① 칸에 넣어도 됩니다</p><p class="dim" style="margin-top:6px;">카드 명세서 정리, 사진 폴더 이름 바꾸기처럼 매달 돌아오는 일이면 같은 방법으로 됩니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">한 분이 이렇게 적었습니다</span> <span class="sub">'수영을 배우는 것 같았습니다. 아무것도 모르는 상태라 실수해도 괜찮을 것 같고, 그래서 더 재미있습니다.' 오늘도 <span class="bold">실수해도 되는 일</span>부터 고릅니다</span></p></div></section>
+
+<section><div class="label">Check-in · 한 분 30초</div><h2>2주 사이, 한 줄씩</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">VS Code를 며칠 열었나</h3><p style="color:var(--text); margin-top:6px;">하루 한 번이 목표였습니다. 0일이어도 괜찮습니다. 숫자만 말합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">/주간일정을 돌려 봤나</h3><p style="color:var(--text); margin-top:6px;">2회차에 만든 첫 스킬입니다. 됐다 / 안 됐다 / 안 돌려 봤다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">막힌 곳 한 줄</h3><p style="color:var(--text); margin-top:6px;">설치, 구글 연결, 폴더 위치 무엇이든</p><p class="dim" style="margin-top:6px;">제가 화면에 받아 적고, 같은 문제가 두 명 이상이면 실습 시작 전에 다 같이 풉니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">pp-매트릭스.md가 없는 분</span> <span class="sub">괜찮습니다. 실습 첫 10분에 2회차 인터뷰 프롬프트로 ① 칸만 먼저 채웁니다</span></p></div></section>
+
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 2 · What's New · 15분</div><h1 style="font-size:1.8em;">지난 2주, <span class="accent2">무슨 일이 있었나</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">9월 29일부터 오늘까지 나온 소식 중 <span class="bold">오늘 실습과 이어지는 것</span>만 넷 골랐습니다.<br>클로드 새 모델, 챗GPT의 GPT-6, 제미나이 무료 플랜 변화, 그리고 반복 업무를 시간에 맡기는 기능입니다.</p></div></section>
+
+<section>
+  <div class="label">Trend 1 &middot; Anthropic &middot; 9월 22일 ~ 10월 7일</div>
+  <h2>클로드 5.5 세 가지가 3주 사이에 모두 나왔습니다</h2>
+  <p style="margin-bottom:12px;">1회차에 말씀드린 대로 Opus &middot; Sonnet &middot; Haiku는 <span class="bold">크기가 다른 같은 Claude</span>입니다. 이번에 세 크기가 모두 5.5로 바뀌었습니다.</p>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent">Opus 5.5 &middot; 9월 22일</h3>
+      <p style="color:var(--text); margin-top:6px;">가장 큰 모델입니다. 오래 걸리는 일, 여러 단계를 이어서 하는 일에 씁니다.</p>
+      <p class="dim" style="margin-top:6px;">2회차 일주일 전에 나왔습니다. 이전 Opus 5보다 빠르고 값이 내려갔습니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2">Sonnet 5.5 &middot; 9월 28일</h3>
+      <p style="color:var(--text); margin-top:6px;">중간 크기입니다. 앤트로픽 발표로는 Sonnet 5보다 <span class="bold">30% 빠르고</span>, 대부분의 일에서 <span class="bold">비용이 최대 30% 적습니다.</span></p>
+      <p class="dim" style="margin-top:6px;">claude.ai 채팅에서 가장 많이 쓰는 크기입니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3">Haiku 5.5 &middot; 10월 7일</h3>
+      <p style="color:var(--text); margin-top:6px;">가장 작고 빠른 모델입니다. 앤트로픽은 <span class="bold">같은 일을 많이, 자주 돌리는 작업</span>용이라고 소개했습니다.</p>
+      <p class="dim" style="margin-top:6px;">같은 날 클로드 코드 변경 기록에도 Haiku 5.5가 올라왔습니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:14px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">① 사원급과 무슨 상관인가</span>
+      순서가 정해진 반복 업무는 큰 모델이 필요 없는 경우가 많습니다. 작은 모델은 빠르고 사용량도 덜 씁니다. 클로드 코드 채팅창에 <code class="accent">/model</code> 을 적으면 지금 쓰는 모델이 보이고 바꿀 수 있습니다. 오늘은 기본값 그대로 두고, <span class="bold">스킬이 세 번 맞게 돈 다음에</span> 작은 모델로 바꿔 봅니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Trend 2 &middot; OpenAI &middot; 10월 7일</div>
+  <h2>챗GPT가 GPT-6로 바뀌고, 답이 화면으로 나옵니다</h2>
+  <p style="margin-bottom:12px;">10월 7일부터 챗GPT의 기본 모델이 GPT-6로 바뀌었습니다. <span class="bold">무료 사용자도 씁니다.</span> 유료(Plus 이상)는 GPT-6 Sol, 무료는 GPT-6 Luna입니다.</p>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:16px 20px;">
+      <h3 class="accent">Intelligent UI</h3>
+      <p style="color:var(--text); margin-top:6px;">질문에 맞춰 <span class="bold">답의 모양을 챗GPT가 고릅니다.</span></p>
+      <ul style="margin-top:8px;">
+        <li>비교를 물으면 <span class="bold">좌우로 나란한 표</span></li>
+        <li>원리를 물으면 <span class="bold">눌러 볼 수 있는 그림</span></li>
+        <li>계산이 필요하면 대화창 안에 <span class="bold">계산기 &middot; 더치페이 계산기</span></li>
+      </ul>
+      <p class="dim" style="margin-top:6px;">쉬운 질문에는 그냥 글로 답합니다. 생각을 다 끝내기 전에 답을 먼저 보여주기 시작합니다.</p>
+    </div>
+    <div class="card" style="padding:16px 20px;">
+      <h3 class="accent3">클로드 코드로 하는 것과 다른 점</h3>
+      <p style="color:var(--text); margin-top:6px;">챗GPT 화면에 나온 표는 <span class="bold">그 대화 안에</span> 있습니다. 다음 주에 같은 표가 필요하면 다시 물어야 합니다.</p>
+      <p style="color:var(--text); margin-top:8px;">클로드 코드가 만든 표는 <span class="bold">워크스페이스에 파일로</span> 저장되고, 다음 주 스킬이 그 파일을 다시 읽어 지난주와 비교합니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:14px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">한 번 묻는 일과 매주 하는 일은 도구가 다릅니다</span>
+      한 번 궁금한 것은 챗GPT의 보기 좋은 답이 편합니다. 매주 돌아오는 일은 <span class="bold">지난번 결과가 파일로 쌓이는 쪽</span>이 빨라집니다. 오늘 만드는 ① 사원급은 뒤쪽입니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Trend 3 &middot; Google &middot; Anthropic &middot; 10월 6일 ~ 9일</div>
+  <h2>무료로 쓰던 좋은 모델이 줄어들고 있습니다</h2>
+  <p style="margin-bottom:12px;">같은 주에 두 회사가 요금제를 바꿨습니다. 방향은 같습니다. <span class="bold">좋은 모델은 유료로, 대신 쓰는 양은 늘려 준다.</span></p>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:16px 20px;">
+      <h3 class="accent5">제미나이 &middot; 10월 9일부터</h3>
+      <ul style="margin-top:8px;">
+        <li><span class="bold">무료</span>: Flash와 Pro를 못 씁니다. 가장 작은 <span class="bold">Flash-Lite</span>만 씁니다</li>
+        <li><span class="bold">AI Plus (월 $4.99)</span>: Pro가 빠집니다. 시점은 메일로 따로 안내</li>
+        <li><span class="bold">AI Pro (월 $19.99)</span>: 그대로이고, 상위 요금제에만 있던 <span class="bold">Deep Think</span>가 추가됩니다</li>
+      </ul>
+      <p class="dim" style="margin-top:6px;">회사 계정에서 제미나이를 무료로 쓰던 분은 이번 주부터 답의 수준이 달라졌을 수 있습니다.</p>
+    </div>
+    <div class="card" style="padding:16px 20px;">
+      <h3 class="accent">클로드 스타트업 프로그램 &middot; 10월 6일</h3>
+      <ul style="margin-top:8px;">
+        <li><span class="bold">대상</span>: 설립 5년 이내이거나, 최근 2년 안에 투자를 받은 회사</li>
+        <li><span class="bold">혜택</span>: Claude 팀 플랜 <span class="bold">1년 무료</span>(프리미엄 좌석 최대 5개) + API 크레딧 $1,000</li>
+        <li><span class="bold">신청</span>: claude.com/programs/startups</li>
+      </ul>
+      <p class="dim" style="margin-top:6px;">해당하는 회사에 다니시는 분은 대표님께 이 장을 보여드려도 됩니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:14px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">회사에 비용을 요청할 때 필요한 숫자</span>
+      '편해졌다'로는 결재가 나지 않습니다. pp-매트릭스.md 에 적은 <span class="bold">'한 번에 몇 분' &times; '한 달에 몇 번'</span>이 줄어든 만큼이 근거가 됩니다. 오늘 실습 끝에 이 숫자를 적는 이유입니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Trend 4 &middot; 클로드 코드 공식 문서 &middot; 10월 6일 업데이트</div>
+  <h2>반복 업무를 시간에 맡기는 방법이 세 가지 있습니다</h2>
+  <p style="margin-bottom:12px;">'매주 월요일 9시에 /주간일정 돌려줘'를 걸어 두는 기능입니다. 10월 6일 업데이트로, 예약 실행 중에 만든 결과 페이지(아티팩트)는 <span class="bold">묻지 않고 나만 보는 페이지로 올라가게</span> 바뀌었습니다. 아침에 결과 링크만 열어 보면 됩니다.</p>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent">/loop &middot; VS Code 안에서</h3>
+      <p style="color:var(--text); margin-top:6px;">채팅창에 <code class="accent">/loop 1h 받은편지함에서 답장 안 한 메일 정리해줘</code>처럼 적습니다.</p>
+      <p class="dim" style="margin-top:6px;">VS Code 창이 열려 있는 동안만 돕니다. 반복 예약은 7일 뒤 저절로 꺼집니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2">데스크톱 앱 &middot; 내 컴퓨터에서</h3>
+      <p style="color:var(--text); margin-top:6px;">Code 탭 &rarr; <span class="bold">Routines</span> &rarr; <span class="bold">New routine</span> &rarr; <span class="bold">Local</span>. 매일 &middot; 평일 &middot; 매주 중에 고릅니다.</p>
+      <p class="dim" style="margin-top:6px;">앱이 켜져 있고 컴퓨터가 깨어 있어야 합니다. 잠자는 동안 놓친 것은 깨어날 때 한 번만 돌립니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3">클라우드 &middot; 컴퓨터가 꺼져 있어도</h3>
+      <p style="color:var(--text); margin-top:6px;">같은 Routines 화면에서 클라우드로 만듭니다. 노트북을 닫아도 돕니다.</p>
+      <p class="dim" style="margin-top:6px;">대신 <span class="bold">내 컴퓨터의 파일은 못 읽습니다.</span> 간격은 최소 1시간입니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:14px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">오늘은 예약을 걸지 않습니다</span>
+      틀리는 스킬을 예약하면 <span class="bold">틀린 결과가 매주 쌓입니다.</span> 스킬이 실제 파일 세 건에서 세 번 다 맞은 뒤에 겁니다. 빠르면 4회차 끝에 같이 걸어 봅니다.
+    </p>
+  </div>
+
+</section>
+
+<section><div class="label">Try Now · 한 줄씩</div><h2>트렌드에서 이번 주에 해 볼 것</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">/model 한 번 쳐 보기</h3><p style="color:var(--text); margin-top:6px;">지금 내가 어떤 크기의 클로드를 쓰고 있는지 확인합니다</p><p class="dim" style="margin-top:6px;">바꾸지는 않습니다. 보기만 합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">같은 질문을 챗GPT에도</h3><p style="color:var(--text); margin-top:6px;">'팀 주간 회의 안건 정리 양식 비교해줘'처럼 비교 질문을 하나 던져 봅니다</p><p class="dim" style="margin-top:6px;">답이 화면으로 나오는 것을 직접 보면, 클로드 코드로 할 일과 챗GPT로 할 일이 갈립니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">내 계정 요금제 확인</h3><p style="color:var(--text); margin-top:6px;">회사에서 쓰는 제미나이 · 챗GPT가 무료인지 유료인지</p><p class="dim" style="margin-top:6px;">무료라면 지난주부터 답이 달라졌을 수 있습니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">트렌드는 따라가지 않아도 됩니다</span> <span class="sub">1회차 원칙 그대로 <span class="bold">하나를 깊이</span> 씁니다. 새 소식은 '내 ① 칸 일에 쓸 데가 있나'만 보고 넘깁니다</span></p></div></section>
+
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 3 · 같이 쓰는 도구 · 20분</div><h1 style="font-size:1.8em;">클로드 코드 옆에 <span class="accent2">붙여 쓰는 도구 넷</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">Codex · Orca · Headroom · Aside. 넷 다 <span class="bold">오늘 설치하지 않아도 됩니다.</span><br>어디에 쓰는지 예시로 알아 두고, 스킬이 세 번 맞게 돈 뒤 필요한 것부터 붙입니다.</p><p class="dim" style="font-size:0.5em; margin-top:20px;">1회차 원칙 그대로 클로드 코드 하나를 깊이 씁니다. 넷 다 클로드 코드 옆에서 돕는 도구입니다</p></div></section>
+
+<section>
+  <div class="label">Tools &middot; 한 장으로 보기</div>
+  <h2>넷은 하는 일이 서로 다릅니다</h2>
+  <p style="margin-bottom:12px;"><span class="bold">'언제 꺼내 쓰나'</span>로 나누면 겹치지 않습니다.</p>
+  <div class="grid grid-2" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent">Codex &middot; 두 번째 검토자</h3>
+      <p style="color:var(--text); margin-top:6px;">OpenAI가 만든 코딩 에이전트입니다. 클로드 코드가 만든 결과를 <span class="bold">다른 회사의 AI가 한 번 더</span> 확인합니다.</p>
+      <p class="dim" style="margin-top:6px;">ChatGPT 유료 플랜 &middot; VS Code 확장 + 터미널</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2">Orca &middot; 여러 에이전트를 동시에</h3>
+      <p style="color:var(--text); margin-top:6px;">클로드 코드와 Codex를 <span class="bold">한 화면에 같이 띄워</span> 돌리는 데스크톱 앱입니다. 같은 일을 둘에게 맡겨 결과를 비교합니다.</p>
+      <p class="dim" style="margin-top:6px;">무료 &middot; 오픈소스 &middot; 맥 &middot; 윈도우 &middot; 리눅스</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3">Headroom &middot; 사용량 줄이기</h3>
+      <p style="color:var(--text); margin-top:6px;">클로드 코드가 읽는 긴 내용을 <span class="bold">모델에 보내기 전에 내 컴퓨터에서 줄여</span> 줍니다. 한도에 덜 걸립니다.</p>
+      <p class="dim" style="margin-top:6px;">무료 &middot; 오픈소스 &middot; 터미널에서 실행</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent4">Aside &middot; 로그인해야 들어가는 사이트</h3>
+      <p style="color:var(--text); margin-top:6px;">AI가 <span class="bold">내가 로그인해 둔 웹사이트를 직접 눌러</span> 일하는 브라우저입니다. 연결 방법이 없는 관리자 화면에 씁니다.</p>
+      <p class="dim" style="margin-top:6px;">내 Claude &middot; ChatGPT 구독을 연결해 씀 &middot; aside.com</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">역할을 나누면 이렇습니다</span>
+      내 폴더의 파일은 <span class="bold">클로드 코드</span>, 그 결과 확인은 <span class="bold">Codex</span>, 여러 개를 동시에 돌릴 때는 <span class="bold">Orca</span>, 사용량이 모자랄 때는 <span class="bold">Headroom</span>, 웹사이트 화면에서만 되는 일은 <span class="bold">Aside</span>입니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Tool 1 &middot; Codex &middot; 2회차 Tips 장에서 한 줄로 말씀드린 것</div>
+  <h2>Codex를 VS Code에 같이 설치해 두 번째 검토자로 씁니다</h2>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent">설치 두 가지</h3>
+      <ul style="margin-top:8px;">
+        <li><span class="bold">VS Code 확장</span>: 확장 탭에서 'Codex' 검색 &rarr; 게시자가 <span class="bold">OpenAI</span>인 것 설치 &rarr; ChatGPT 계정으로 로그인</li>
+        <li><span class="bold">CLI</span>: VS Code 터미널에 <code class="accent">npm install -g @openai/codex</code> &rarr; <code class="accent">codex</code> 로 로그인 <span class="dim">(윈도우는 npm.cmd)</span></li>
+      </ul>
+      <p class="dim" style="margin-top:6px;">확장만 있으면 Codex 창에서 따로 쓰고, <span class="bold">CLI까지 있으면 클로드 코드가 Codex를 불러 씁니다.</span> 오늘 소개하는 것은 뒤쪽입니다. ChatGPT 유료 플랜이 필요합니다.</p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3">제 예시 &middot; 9월 외부 고객 프로젝트</h3>
+      <p style="color:var(--text); margin-top:6px;">고객에게 보여 줄 분석 숫자와 근거를 클로드 코드로 만든 뒤, <code class="accent">codex exec</code> 로 <span class="bold">일부러 반박하게</span> 한 번 더 돌렸습니다.</p>
+      <p style="color:var(--text); margin-top:6px;">결론은 맞았는데 <span class="bold">근거 문장이 틀린 곳 3건</span>이 나왔습니다. 고객 앞에서 설명하다 걸렸으면 결론까지 의심받았을 자리입니다.</p>
+    </div>
+  </div>
+  <div class="card" style="padding:12px 20px; margin-bottom:10px;">
+    <p style="font-size:0.48em; line-height:1.9; color:var(--text); margin:0; font-family:ui-monospace,Menlo,monospace;">
+      <span class="accent bold">여러분 예시 &middot; 클로드 코드 채팅창에 그대로</span><br>
+      codex exec 로 이번주-보고서.xlsx 의 증감 숫자를 이번주.csv 와 대조해 주세요. <span class="bold">틀린 칸만 목록으로</span> 알려 주시고, 파일은 고치지 마세요.
+    </p>
+  </div>
+  <div class="qblock" style="padding:10px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">같은 회사 AI끼리는 같은 곳에서 틀립니다</span>
+      다른 회사의 AI에게 확인시키면 서로 놓친 곳이 보입니다. 오늘 실습 Step 3의 '결과 파일을 열어 숫자 하나를 직접 대조'를 Codex에 한 번 더 맡깁니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">My Case &middot; 검증용 Codex &middot; 8월 30일부터</div>
+  <h2>제 검증용 Codex는 보내기 직전에 한 번 멈춰 세웁니다</h2>
+  <p style="margin-bottom:12px;">제 워크스페이스에는 멤버에게 메시지를 보내고, 게시글을 올리고, 환불하는 스크립트가 있습니다. <span class="bold">되돌릴 수 없는 일</span>입니다. 클로드 코드가 이 파일들을 고치면 Codex가 자동으로 검토하게 걸어 두었습니다.</p>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent">1 &middot; 고치면 검토</h3>
+      <p style="color:var(--text); margin-top:6px;">클로드 코드가 보내기 &middot; 게시 &middot; 환불 &middot; 배포 파일을 고치고 대답을 마치면, Codex가 <span class="bold">바뀐 부분만 읽기 전용으로</span> 검토합니다.</p>
+      <p class="dim" style="margin-top:6px;">뒤에서 돌아서 작업을 막지 않습니다. 파일은 못 고칩니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2">2 &middot; 두 가지만 찾기</h3>
+      <p style="color:var(--text); margin-top:6px;">(가) <span class="bold">엉뚱한 사람이 대상</span>이 되는 경우<br>(나) <span class="bold">실패했는데 성공으로 보이는</span> 경우</p>
+      <p class="dim" style="margin-top:6px;">문체 &middot; 이름 짓기 &middot; 칭찬은 보고하지 말라고 적었습니다. 없으면 '없음' 한 단어.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3">3 &middot; 실행 직전에 멈춤</h3>
+      <p style="color:var(--text); margin-top:6px;">그 스크립트를 <span class="bold">실제로 보내려는 순간</span> 한 번 멈추고 지적을 보여줍니다. 미리보기 실행은 통과시킵니다.</p>
+      <p class="dim" style="margin-top:6px;">보낼지 말지는 제가 정합니다. 세기는 끔 &middot; 경고만 &middot; 멈춤 셋 중에 고릅니다.</p>
+    </div>
+  </div>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:12px 16px; text-align:center;">
+      <div class="stat-num">90</div>
+      <div class="stat-label">8월 30일 ~ 10월 11일 검토 횟수</div>
+    </div>
+    <div class="card" style="padding:12px 16px; text-align:center;">
+      <div class="stat-num">64</div>
+      <div class="stat-label">지적이 나온 검토 (나머지 26번은 '없음')</div>
+    </div>
+    <div class="card" style="padding:12px 16px; text-align:center;">
+      <div class="stat-num">83</div>
+      <div class="stat-label">지적 건수 (같은 파일을 고치며 다시 나온 것 포함)</div>
+    </div>
+  </div>
+  <div class="qblock" style="padding:10px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">합격 / 불합격을 기계가 정하지 않습니다</span>
+      매번 막으면 끄게 되고, 매번 통과하면 안 보게 됩니다. 그래서 <span class="bold">과속방지턱</span>처럼 한 번 멈추게만 했습니다. 판단은 사람이 합니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">My Case &middot; 검증용 Codex &middot; 실제로 잡은 것</div>
+  <h2>클로드 코드가 놓친 것을 Codex가 이렇게 잡았습니다</h2>
+  <p style="margin-bottom:12px;">지적은 한 건에 <span class="bold">세 줄</span>로 받습니다. 어디 &middot; 무엇이 틀리나 &middot; 어떤 상황에서 터지나. 아래 둘은 실제 기록을 쉬운 말로 옮긴 것입니다.</p>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent5">(가) 엉뚱한 사람에게 &middot; 9월 4일</h3>
+      <p style="color:var(--text); margin-top:6px;">행사 도착 체크 메시지를 보내는 스크립트가 공지 명단과 신청 폼을 <span class="bold">이름으로</span> 맞추고 있었습니다.</p>
+      <p class="dim" style="margin-top:6px;">재현: 공지 명단과 폼에 <span class="bold">같은 이름의 다른 사람</span>이 있으면, 실제 신청자가 아닌 사람에게 메시지가 갑니다.</p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent5">(나) 실패인데 성공으로 &middot; 8월 30일</h3>
+      <p style="color:var(--text); margin-top:6px;">단체 메일 발송 스크립트가 연결이 끊기면 <span class="bold">같은 메일을 다시 보내게</span> 되어 있었습니다.</p>
+      <p class="dim" style="margin-top:6px;">재현: 메일 서버가 이미 받아 놓고 응답 직전에 연결이 끊기면, <span class="bold">같은 사람이 메일을 두 번</span> 받습니다.</p>
+    </div>
+  </div>
+  <div class="card" style="padding:14px 22px; margin-bottom:10px;">
+    <p style="font-size:0.48em; line-height:1.9; color:var(--text); margin:0; font-family:ui-monospace,Menlo,monospace;">
+      <span class="accent bold"># 여러분 버전 &middot; /검증 스킬: 방금 만든 결과를 Codex에게 반박하게 한다</span><br>
+      <span class="bold">읽는 것</span> &nbsp;&middot; 방금 만든 결과 파일과, 그 결과를 만든 원본 파일<br>
+      <span class="bold">대조</span> &nbsp;&middot; 원본의 숫자 &middot; 명단과 결과가 같은지<br>
+      <span class="bold">내놓는 것</span> &nbsp;&middot; 한 건에 세 줄(어디 / 무엇이 틀리나 / 어떤 상황에서). 없으면 '없음'<br>
+      <span class="bold">묻는 곳</span> &nbsp;&middot; 지적이 나오면 고치기 전에 나에게 보여준다<br>
+      <span class="accent5 bold">하지 않을 것 &middot; Codex는 읽기만 한다(codex exec -s read-only). 문체 &middot; 칭찬은 보고하지 않는다</span>
+    </p>
+  </div>
+  <div class="qblock" style="padding:10px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">사원급이 만들고, 다른 회사 AI가 검토합니다</span>
+      오늘 만든 스킬을 세 번 돌린 뒤, 결과마다 <code class="accent">/검증</code> 을 한 번씩 붙여 보세요. 클로드 코드에 '위 다섯 줄로 /검증 스킬을 만들어줘'라고 적으면 됩니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Tool 2 &middot; Orca &middot; onorca.dev</div>
+  <h2>Orca는 같은 일을 여러 에이전트에게 동시에 맡깁니다</h2>
+  <p style="margin-bottom:12px;">Y Combinator가 투자한 Stably AI가 만든 <span class="bold">무료 오픈소스 데스크톱 앱</span>입니다. 클로드 코드 &middot; Codex &middot; 제미나이 등 터미널에서 도는 에이전트를 한 화면에 띄웁니다. 결제는 <span class="bold">각자 쓰던 구독</span> 그대로입니다.</p>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent">일마다 작업 공간을 나눕니다</h3>
+      <p style="color:var(--text); margin-top:6px;">작업 하나마다 <span class="bold">폴더 사본(워크트리)</span>을 따로 만들어, 두 에이전트가 같은 파일을 동시에 고쳐도 섞이지 않습니다.</p>
+      <p class="dim" style="margin-top:6px;">그래서 워크스페이스가 깃(Git) 폴더여야 합니다. '이 폴더를 깃으로 관리하게 해줘'로 시작합니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2">폰으로 확인합니다</h3>
+      <p style="color:var(--text); margin-top:6px;">iOS &middot; 안드로이드 앱으로 에이전트가 <span class="bold">지금 무엇을 하는지, 사용량이 얼마나 남았는지</span> 봅니다.</p>
+      <p class="dim" style="margin-top:6px;">2회차에 본 /remote-control과 비슷하지만, 여러 에이전트를 한 번에 봅니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3">비교해서 고릅니다</h3>
+      <p style="color:var(--text); margin-top:6px;">같은 프롬프트를 여러 에이전트에 보내고, <span class="bold">결과를 함께 열어 보고 나은 쪽</span>만 가져옵니다.</p>
+      <p class="dim" style="margin-top:6px;">고친 내용(diff)을 앱 안에서 바로 확인합니다.</p>
+    </div>
+  </div>
+  <div class="card" style="padding:12px 20px; margin-bottom:10px;">
+    <p style="font-size:0.5em; line-height:1.9; color:var(--text); margin:0;">
+      <span class="accent bold">예시 &middot; 고객사 리포트 첫 양식 정하기</span><br>
+      '지난달 광고 CSV로 고객사 월간 리포트 초안을 만들어줘'를 <span class="bold">클로드 코드와 Codex에 동시에</span> 보냅니다. 20분 뒤 두 초안을 양쪽에 열어, 표 구성은 이쪽, 요약 문장은 저쪽을 골라 스킬의 '내놓는 것' 줄에 적습니다. 양식이 정해지면 그다음부터는 스킬 하나로 돌립니다.
+    </p>
+  </div>
+  <div class="qblock" style="padding:10px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">언제 꺼내나</span>
+      스킬이 세 개 이상 돌고, 깃이 익숙해진 뒤입니다. 6회차 '스킬을 묶어 에이전트로'에서 다시 봅니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Tool 3 &middot; Headroom &middot; github.com/headroomlabs-ai/headroom</div>
+  <h2>Headroom은 클로드가 읽을 양을 먼저 줄여 줍니다</h2>
+  <p style="margin-bottom:12px;">2회차 Tips 장에서 '클로드는 질문할 때마다 대화 전체를 다시 읽는다'고 했습니다. Headroom은 그 사이에 서서, <span class="bold">긴 검색 결과 &middot; 로그 &middot; 표 데이터를 모델에 보내기 전에 내 컴퓨터에서 압축</span>합니다. 원본은 내 컴퓨터에 두고, 필요하면 다시 꺼내 읽습니다.</p>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent">설치와 실행 &middot; 터미널</h3>
+      <ul style="margin-top:8px;">
+        <li>설치: <code class="accent">pip install "headroom-ai[all]"</code> <span class="dim">(파이썬 3.10 이상)</span></li>
+        <li>실행: <code class="accent">headroom wrap claude</code> &rarr; 압축을 거치는 클로드 코드가 터미널에 뜹니다</li>
+        <li>얼마나 아꼈나: <code class="accent">headroom savings</code></li>
+        <li>되돌리기: <code class="accent">headroom unwrap claude</code></li>
+      </ul>
+      <p class="dim" style="margin-top:6px;">VS Code 확장 패널이 아니라 <span class="bold">VS Code 터미널의 claude</span>에 붙습니다.</p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3">얼마나 줄어드나 &middot; 만든 쪽 측정치</h3>
+      <ul style="margin-top:8px;">
+        <li>JSON 같은 표 데이터: <span class="bold">60~95%</span></li>
+        <li>폴더 전체 훑어보기: 42%</li>
+        <li>코드 검색 결과: 21%</li>
+        <li>사람이 쓴 문장: <span class="bold">거의 안 줄어듭니다</span></li>
+      </ul>
+      <p class="dim" style="margin-top:6px;">같은 모양이 반복되는 내용일수록 많이 줄어듭니다. 내 작업에서는 savings 명령으로 직접 확인합니다.</p>
+    </div>
+  </div>
+  <div class="card" style="padding:12px 20px; margin-bottom:10px;">
+    <p style="font-size:0.5em; line-height:1.9; color:var(--text); margin:0;">
+      <span class="accent bold">예시 &middot; 메일 정리 스킬이 한도에 자주 걸릴 때</span><br>
+      '지난 3개월 받은 메일 중 견적 메일만 표로' 같은 스킬은 2회차에 설치한 gws가 메일 수백 통을 <span class="bold">JSON</span>으로 가져옵니다. 가장 많이 줄어드는 종류입니다. 같은 스킬을 <code class="accent">headroom wrap claude</code> 로 띄운 창에서 돌리고, savings로 몇 % 줄었는지 봅니다.
+    </p>
+  </div>
+  <div class="qblock" style="padding:10px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">언제 꺼내나</span>
+      한 주에 두 번 이상 사용량 한도에 걸릴 때입니다. 그 전에는 2회차 팁(새 대화, 범위 좁히기)이 먼저입니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Tool 4 &middot; Aside &middot; aside.com</div>
+  <h2>Aside는 로그인해 둔 사이트에서 AI가 대신 누릅니다</h2>
+  <p style="margin-bottom:12px;">크롬 기반의 <span class="bold">AI 브라우저</span>입니다. 연결 방법(API)이 없는 관리자 화면도, 내가 로그인해 둔 탭이면 AI가 직접 열고 입력합니다. 비밀번호는 브라우저가 채우고 <span class="bold">AI에게는 보여주지 않습니다.</span> 쓰던 Claude &middot; ChatGPT 구독을 연결해 씁니다.</p>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent">제 예시 1 &middot; 알림톡 템플릿 56개 &middot; 9월 13일</h3>
+      <p style="color:var(--text); margin-top:6px;">아임웹 알림톡 템플릿은 관리자 화면에서 <span class="bold">한 개씩 손으로</span> 만드는 방법밖에 없습니다. 문안은 클로드 코드로 쓰고, <span class="bold">클로드 코드가 Aside에 열어 둔 로그인 탭을 이어받아</span> 56개를 입력했습니다.</p>
+      <p class="dim" style="margin-top:6px;">로그인은 제가 직접 했고, 아임웹 비밀번호는 어디에도 저장하지 않았습니다.</p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3">제 예시 2 &middot; 레터 썸네일 &middot; 10월 8일</h3>
+      <p style="color:var(--text); margin-top:6px;">피그마 연결 도구(MCP)는 무료 플랜 호출 한도와 폰트 문제로 글자를 못 고쳤습니다. 클로드 코드가 Aside 탭에 열린 피그마를 이어받아 <span class="bold">템플릿 복제 &rarr; 제목 교체 &rarr; PNG 저장</span>까지 했습니다.</p>
+      <p class="dim" style="margin-top:6px;">원본 프레임은 건드리지 않고 항상 복제본에서. 스킬의 '하지 않을 것' 줄 그대로입니다.</p>
+    </div>
+  </div>
+  <div class="card" style="padding:12px 20px; margin-bottom:10px;">
+    <p style="font-size:0.5em; line-height:1.9; color:var(--text); margin:0;">
+      <span class="accent bold">여러분 예시 &middot; 2회차 4L의 '회사 일은 먼데이닷컴에서'</span><br>
+      Aside에서 먼데이닷컴 보드를 열어 둔 채 '이번 주 마감 항목만 담당자 &middot; 마감일로 표를 만들어 CSV로 내려받아줘'. 내려받은 CSV를 워크스페이스에 넣으면 그 뒤는 오늘 만드는 클로드 코드 스킬이 이어받습니다.
+    </p>
+  </div>
+  <div class="qblock" style="padding:10px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">회사 계정은 보안 규정부터</span>
+      화면 내용이 AI 서버로 전송되는 것은 클로드 코드와 같습니다. 1회차 '넣지 않는 것' 기준을 그대로 지키고, 보내기 &middot; 결제 &middot; 삭제 버튼은 사람이 누릅니다.
+    </p>
+  </div>
+
+</section>
+
+<section><div class="label">Tools · 순서</div><h2>넷 중 무엇부터 붙이나</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">이번 주 · Codex</h3><p style="color:var(--text); margin-top:6px;">오늘 만든 스킬의 결과를 <span class="bold">두 번째로 확인</span>하는 데 바로 씁니다. 설치하고 <code class="accent">/검증</code> 스킬 하나면 됩니다</p><p class="dim" style="margin-top:6px;">ChatGPT 유료 플랜이 필요합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">필요할 때 · Aside</h3><p style="color:var(--text); margin-top:6px;">① 칸 일의 첫 단계가 <span class="bold">로그인해야 보이는 화면</span>이라면. 내보내기를 대신 시킵니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">한도에 자주 걸리면 · Headroom</h3><p style="color:var(--text); margin-top:6px;">일주일에 두 번 이상 막힐 때. 터미널에 익숙해진 뒤</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">스킬이 셋 이상이면 · Orca</h3><p style="color:var(--text); margin-top:6px;">여러 일을 동시에 돌리고 결과를 비교할 때. 6회차 무렵</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">도구는 스킬 뒤에 옵니다</span> <span class="sub">도구를 먼저 깔면 깔고 끝납니다. <span class="bold">세 번 맞게 도는 스킬 하나</span>가 있어야 어느 도구가 필요한지 보입니다</span></p></div></section>
+
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 4 · ① 사원급 AI부사수란 · 10분</div><h1 style="font-size:1.8em;">① 사원급 AI부사수에게 <span class="accent2">무엇을 맡기나</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">반복도가 높고, 내가 제일 잘 아는 일입니다.<br><span class="bold">새로 들어온 사원에게 첫 주에 맡기는 일</span>과 같습니다. 순서가 정해져 있고, 맞았는지 내가 바로 압니다.</p></div></section>
+
+<section><div class="label">① 사원급 · 예시 · 1회차 일정표와 2회차 4L에서</div><h2>사원급에게 맡기는 일 다섯 가지</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">일정과 할 일</h3><p style="color:var(--text); margin-top:6px;">'이번 주 캘린더 일정을 날짜별로 정리하고, 회의마다 준비할 것을 한 줄씩'</p><p class="dim" style="margin-top:6px;">2회차에 만든 /주간일정이 이미 ① 사원급입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">메일 정리</h3><p style="color:var(--text); margin-top:6px;">'지난주 받은 메일 중 답장 안 한 것만, 보낸 사람 · 제목 · 날짜로 표를 만들어줘'</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">리포트 숫자 채우기</h3><p style="color:var(--text); margin-top:6px;">'광고 관리자에서 내려받은 CSV로 주간 보고서의 지난주 대비 숫자를 채워줘'</p><p class="dim" style="margin-top:6px;">4L의 '광고 효율 대시보드' · '고객사 리포트'가 이 모양입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">들어온 요청 나누기</h3><p style="color:var(--text); margin-top:6px;">'이번 주 문의 메일을 주문 · 일정 변경 · 불만 세 칸으로 나눠 시트에 적어줘'</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">개인 일</h3><p style="color:var(--text); margin-top:6px;">'이번 달 카드 명세서 CSV를 식비 · 교통 · 구독으로 나눠 합계를 내줘'</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">다섯 개의 공통점</span> <span class="sub"><span class="bold">읽을 파일이 있고, 결과물이 있고, 맞았는지 내가 바로 압니다.</span> 셋 중 하나라도 없으면 ①이 아닙니다</span></p></div></section>
+
+<section>
+  <div class="label">My Case &middot; ① 칸 &middot; 2회차 PP 매트릭스의 /add-contacts</div>
+  <h2>제 ① 칸 스킬 하나를 열어 봅니다</h2>
+  <p style="margin-bottom:12px;">시즌이 바뀔 때마다 <span class="bold">새 멤버 전원을 구글 주소록에 넣는 일</span>입니다. 손으로 하면 시트에서 한 명씩 찾아 주소록에 옮겨 적습니다. 지금은 <code class="accent">/add-contacts 26가을</code> 한 줄입니다.</p>
+  <div class="card" style="padding:18px 24px; margin-bottom:14px;">
+    <p style="font-size:0.5em; line-height:2; color:var(--text); margin:0; font-family:ui-monospace,Menlo,monospace;">
+      <span class="accent bold"># 구글 주소록 일괄 추가 &middot; 맨 위 한 줄: 작은 모델(Haiku)로 돌린다</span><br><br>
+      <span class="bold">읽는 것</span> &nbsp;&middot; 멤버 시트에서 이번 시즌 행만<br>
+      <span class="bold">대조</span> &nbsp;&middot; 주소록에 이미 있는 사람인지, 휴대폰 번호 끝 8자리로 찾는다<br>
+      <span class="bold">내놓는 것</span> &nbsp;&middot; 새로 만들 사람 / 메모에 한 줄 더할 사람 목록을 <span class="bold">먼저 보여준다</span><br>
+      <span class="bold">묻는 곳</span> &nbsp;&middot; 목록을 보고 내가 'OK' 해야 실제로 주소록에 넣는다<br>
+      <span class="accent5 bold">하지 않을 것 &middot; 기존 메모를 지우지 않는다. 같은 줄을 두 번 넣지 않는다</span>
+    </p>
+  </div>
+  <div class="qblock" style="padding:14px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">사원급은 '보여주고, 허락받고, 실행'합니다</span>
+      주소록은 한 번 들어가면 되돌리기 번거롭습니다. 그래서 바로 넣지 않고 <span class="bold">목록부터 보여주게</span> 적었습니다. 2회차 기본 흐름 ②③(계획을 보여주고, 내가 예 / 아니오)과 같은 자리입니다. 오늘 만드는 스킬에도 이 자리를 하나 둡니다.
+    </p>
+  </div>
+
+</section>
+
+<section><div class="label">Concept · 1회차 '스킬은 어떻게 생겼을까' 그대로</div><h2>스킬 파일은 다섯 줄입니다</h2><p style="margin-bottom:12px;">2회차 마지막 장에 '다섯 줄 → 스킬 파일 → /내-명령'이라고 적었습니다. 그 다섯 줄입니다.</p><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">1 · 무엇을 읽는지</h3><p style="color:var(--text); margin-top:6px;">어느 폴더의 어떤 파일부터 시작하나</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">2 · 무엇과 대조하는지</h3><p style="color:var(--text); margin-top:6px;">지난번 결과물, 양식, 규칙 중 무엇을 기준으로 삼나</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">3 · 무엇을 내놓는지</h3><p style="color:var(--text); margin-top:6px;">표? 문서? 목록? 파일 이름까지</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">4 · 어디서 나에게 묻는지</h3><p style="color:var(--text); margin-top:6px;">보내기 전, 저장하기 전, 모르는 칸이 나왔을 때</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">5 · 절대 하지 않을 것</h3><p style="color:var(--text); margin-top:6px;">보내기 · 원본 고치기 · 없는 숫자 지어내기 중 무엇을 막을지</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">코딩이 아닙니다</span> <span class="sub">신입에게 첫날 적어 주는 업무 메모와 같습니다. <span class="bold">그 메모를 클로드 코드가 읽고 일합니다</span></span></p></div></section>
+
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Break · 20:30–20:40</div><h1 style="font-size:1.8em;">10분 <span class="accent2">쉬어 갑니다</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">쉬는 동안 <span class="bold">pp-매트릭스.md</span>를 열어 ① 칸을 한 번 읽어 두세요.<br>이번 주에 실제로 만졌던 파일이 있는 일에 표시해 두면, 바로 다음 순서에서 고르기 쉽습니다.</p></div></section>
+
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 5 · 실습 · 60분</div><h1 style="font-size:1.8em;">①에서 하나를 골라 <span class="accent2">세 번</span> 돌립니다</h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">열여섯 분 각자 하나. 작아도 됩니다. <span class="bold">끝까지 한 번 도는 것</span>이 오늘의 목표입니다.<br>실제 파일 세 건에 돌려, 세 번 중 몇 번 맞았는지 적습니다.</p><p class="dim" style="font-size:0.5em; margin-top:20px;">고르기 10분 · 스킬 만들기 15분 · 세 번 돌리고 틀린 곳 적기 35분</p></div></section>
+
+<section><div class="label">Step 1 · 고르기 · 10분</div><h2>무엇을 고르나 · 기준 넷</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">반복도 순위가 제일 앞</h3><p style="color:var(--text); margin-top:6px;">pp-매트릭스.md의 ①에서 <span class="bold">반복도 1위에 가까운 것</span></p><p class="dim" style="margin-top:6px;">이번 주에 바로 다시 쓰는 일이어야 오늘 만든 것을 다음 주에 확인합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">실수해도 되는 일</h3><p style="color:var(--text); margin-top:6px;">남에게 보내지 않는 일, 돈이 오가지 않는 일, 되돌릴 수 있는 일</p><p class="dim" style="margin-top:6px;">고객에게 바로 나가는 메일 · 결제 · 정산은 첫 스킬로 고르지 않습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">실제 파일 세 건이 있는 일</h3><p style="color:var(--text); margin-top:6px;">지난 몇 주 동안 <span class="bold">실제로 만졌던 파일 세 건</span></p><p class="dim" style="margin-top:6px;">고객 이름 · 연락처가 있으면 이름을 '고객1, 고객2'로 바꾼 사본으로. 사본 만들기도 클로드 코드에 시킵니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">20분 안에 한 번 도는 크기</h3><p style="color:var(--text); margin-top:6px;">파일 하나 넣고 결과 하나 나오는 크기</p><p class="dim" style="margin-top:6px;">'보고서 작성'은 너무 큽니다. '보고서의 지난주 대비 숫자 칸 채우기'가 맞는 크기입니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">헷갈리면</span> <span class="sub"><span class="bold">① 칸 첫 줄.</span> 고르는 데 10분 이상 쓰지 않습니다</span></p></div></section>
+
+<section>
+  <div class="label">Step 2 &middot; 예시 &middot; 2회차 순위표의 ① 1위</div>
+  <h2>다섯 줄을 채우면 이런 스킬 파일이 됩니다</h2>
+  <p style="margin-bottom:12px;">2회차 예시 표의 마케터가 고른 ① 1위, <span class="bold">'광고 성과 숫자를 주간 보고서에 옮기기'(매주 &middot; 1시간)</span>를 스킬로 적은 <span class="bold">예시</span>입니다.</p>
+  <div class="card" style="padding:18px 24px; margin-bottom:14px;">
+    <p style="font-size:0.5em; line-height:2; color:var(--text); margin:0; font-family:ui-monospace,Menlo,monospace;">
+      <span class="accent bold"># 주간광고리포트: 광고 관리자 CSV로 주간 보고서의 숫자 칸을 채운다</span><br><br>
+      <span class="bold">읽는 것</span> &nbsp;&middot; 이번 주에 내려받은 광고 CSV 하나 &middot; 지난주 보고서 파일<br>
+      <span class="bold">대조</span> &nbsp;&middot; 지난주 보고서의 숫자 (증감을 계산한다) &middot; 보고서 양식의 칸 이름<br>
+      <span class="bold">내놓는 것</span> &nbsp;&middot; 숫자를 채운 이번 주 보고서 <span class="bold">사본</span> 하나 + 가장 크게 변한 항목 세 줄 메모<br>
+      <span class="bold">묻는 곳</span> &nbsp;&middot; 보고서 칸 이름이 CSV에 없으면 멈추고 묻는다<br>
+      <span class="accent5 bold">하지 않을 것 &middot; 원본 보고서를 고치지 않는다. 없는 숫자를 짐작해 채우지 않는다. 보고서를 보내지 않는다</span>
+    </p>
+  </div>
+  <div class="qblock" style="padding:14px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">마지막 줄이 사원급을 안전하게 만듭니다</span>
+      AI가 가장 자주 틀리는 곳은 <span class="bold">없는 숫자를 그럴듯하게 채우는 것</span>입니다. '짐작해 채우지 않는다'를 적어 두면, 빈칸은 빈칸으로 두고 나에게 묻습니다. 판단은 사람이 하고, 찾고 옮기는 일만 맡깁니다.
+    </p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Step 2 &middot; 그대로 복사해 쓰기 &middot; 15분</div>
+  <h2>스킬을 만드는 프롬프트</h2>
+  <p style="margin-bottom:12px;">2회차 인터뷰와 같은 방식입니다. <span class="bold">내가 다섯 줄을 쓰지 않고, 클로드 코드가 묻고 나는 답합니다.</span> 워크스페이스를 연 채로 붙여 넣습니다.</p>
+  <div class="card" style="padding:16px 22px; margin-bottom:12px;">
+    <p style="font-size:0.48em; line-height:1.9; color:var(--text); margin:0; font-family:ui-monospace,Menlo,monospace;">
+      pp-매트릭스.md 의 ① 칸에 있는 '<span class="accent bold">(고른 업무 이름)</span>'을 스킬로 만들려고 합니다.<br>
+      저와 인터뷰해서 아래 다섯 가지를 채워 주세요. <span class="bold">질문은 한 번에 하나씩</span> 해 주세요.<br>
+      &nbsp;1. 무엇을 읽는지 (파일 이름과 위치)<br>
+      &nbsp;2. 무엇과 대조하는지 (지난번 결과물 &middot; 양식 &middot; 규칙)<br>
+      &nbsp;3. 무엇을 내놓는지 (형식과 파일 이름)<br>
+      &nbsp;4. 어디서 저에게 물어야 하는지<br>
+      &nbsp;5. 절대 하지 않을 것<br>
+      제 답이 '보고서 작성'처럼 크면, 파일 하나로 끝나는 크기로 쪼개게 되물어 주세요.<br>
+      다 채우면 <span class="bold">계획을 먼저 보여주고</span>, 제가 '예'라고 하면 이 워크스페이스의 .claude/skills/(이름)/SKILL.md 로 저장해 주세요.<br>
+      원본 파일은 고치지 말고, 결과는 새 파일로 만들어 주세요.
+    </p>
+  </div>
+  <div class="grid grid-2" style="gap:16px;">
+    <div class="card" style="padding:12px 18px;">
+      <h3 class="accent">이름은 짧게</h3>
+      <p class="dim" style="margin-top:6px;">'주간광고리포트'처럼 띄어쓰기 없이. 이 이름이 그대로 <code class="accent">/주간광고리포트</code> 명령이 됩니다.</p>
+    </div>
+    <div class="card" style="padding:12px 18px;">
+      <h3 class="accent3">저장한 뒤 파일을 열어 봅니다</h3>
+      <p class="dim" style="margin-top:6px;">왼쪽 폴더에서 SKILL.md를 엽니다. <span class="bold">5번 '하지 않을 것'</span>이 비어 있으면 직접 한 줄 적습니다.</p>
+    </div>
+  </div>
+
+</section>
+
+<section><div class="label">Step 3 · 실행 · 35분</div><h2>세 번 돌립니다</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">1 · 새 대화를 엽니다</h3><p style="color:var(--text); margin-top:6px;">스킬을 만든 대화 말고 <span class="bold">새 창</span>에서. 그래야 스킬 파일만 보고 일하는지 알 수 있습니다</p><p class="dim" style="margin-top:6px;">채팅창에 / 를 쳤을 때 내 스킬 이름이 보이면 준비가 끝났습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">2 · 첫 번째 파일</h3><p style="color:var(--text); margin-top:6px;"><code class="accent">/주간광고리포트 이번주.csv</code> 처럼 스킬 이름 뒤에 파일을 적습니다</p><p class="dim" style="margin-top:6px;">계획을 보여주면 읽고 ③ 예. 결과 파일을 직접 열어 봅니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">3 · 두 번째 · 세 번째 파일</h3><p style="color:var(--text); margin-top:6px;">다른 주의 파일로 두 번 더 돌립니다</p><p class="dim" style="margin-top:6px;">한 번 맞은 것은 우연일 수 있습니다. <span class="bold">세 번 중 몇 번</span>이 오늘의 숫자입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">4 · 틀린 곳은 적기만</h3><p style="color:var(--text); margin-top:6px;">워크스페이스에 <code class="accent">틀린-곳.md</code>를 만들고 한 줄씩</p><p class="dim" style="margin-top:6px;">빠뜨린 것 · 지어낸 것 · 형식이 다른 것 · 원본을 건드린 것. <span class="bold">고치지 않습니다.</span> 4회차 재료입니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">맞았는지는 내가 판단합니다</span> <span class="sub">클로드 코드가 '완료했습니다'라고 해도 <span class="bold">결과 파일을 열어서</span> 숫자 하나를 직접 대조합니다. 이게 사원급 결과를 검토하는 상사의 일입니다</span></p></div></section>
+
+<section><div class="label">Trouble · 3분 규칙</div><h2>안 될 때 · 넷 중 하나입니다</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent5">/ 를 쳐도 내 스킬이 안 보임</h3><p style="color:var(--text); margin-top:6px;">새 창을 엽니다. 그래도 없으면 '내 스킬 파일이 어디 저장됐는지 알려줘'</p><p class="dim" style="margin-top:6px;">워크스페이스 안 <code class="accent">.claude/skills/(이름)/SKILL.md</code> 에 있어야 합니다. 2회차 '받은 스킬을 넣는 법' 장과 같은 자리입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent">결과가 엉뚱함</h3><p style="color:var(--text); margin-top:6px;">파일의 <span class="bold">모양</span>을 한 줄 설명합니다</p><p class="dim" style="margin-top:6px;">'열이 다섯 개고, 셋째 열이 광고비야'. 고객 이름 같은 내용은 넣지 않고 모양만</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">파일을 못 찾음</h3><p style="color:var(--text); margin-top:6px;">'이 폴더에 뭐가 있는지 보여줘'부터</p><p class="dim" style="margin-top:6px;">파일이 워크스페이스 밖(다운로드 폴더 등)에 있으면 클로드 코드는 못 봅니다. 사본을 폴더 안으로 옮깁니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">빨간 글씨 오류</h3><p style="color:var(--text); margin-top:6px;">2회차 그대로, <span class="bold">전부 복사해서</span> 붙여 넣고 '무엇을 하다가 났는지' 한 줄</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">3분 안에 안 풀리면 손을 드세요</span> <span class="sub">한 분 문제에 20분을 쓰면 다른 분들이 세 번 돌릴 시간이 없어집니다</span></p></div></section>
+
+<section><div class="label">Tip · 2회차 4L Lacked에서</div><h2>구글을 안 쓰는 회사라면</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">노션 · 먼데이닷컴</h3><p style="color:var(--text); margin-top:6px;">표 화면에서 <span class="bold">CSV로 내보내기</span>가 있습니다. 그 파일을 워크스페이스에 넣고 시작합니다</p><p class="dim" style="margin-top:6px;">노션은 클로드에 바로 연결하는 커넥터도 있지만, 오늘은 내보낸 파일로 합니다. 연결은 스킬이 세 번 맞게 돈 뒤에 붙입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">사내 시스템 · ERP</h3><p style="color:var(--text); margin-top:6px;">대부분 엑셀 다운로드 버튼이 있습니다</p><p class="dim" style="margin-top:6px;">회사 보안 규정상 내려받기가 안 되는 자료는 오늘 고르지 않습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">메신저 · 카톡</h3><p style="color:var(--text); margin-top:6px;">대화 내보내기(txt)로 시작합니다</p><p class="dim" style="margin-top:6px;">사람 이름이 들어 있으면 '이름을 A, B로 바꾼 사본 만들어줘'를 먼저 시킵니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">내보내기 한 번은 사람이 해도 괜찮습니다</span> <span class="sub">1시간 걸리던 일이 '내보내기 1분 + 한 줄 명령'이 되면 ① 사원급으로 충분합니다</span></p></div></section>
+
+<section><div class="label">Share · 21:40</div><h2>한 분 30초 · 이것만 말합니다</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">스킬 이름</h3><p style="color:var(--text); margin-top:6px;">'/주간광고리포트'처럼 한 줄</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">세 번 중 몇 번</h3><p style="color:var(--text); margin-top:6px;">3/3 · 2/3 · 1/3 · 0/3. 0이어도 됩니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">어디서 틀렸나</h3><p style="color:var(--text); margin-top:6px;">빠뜨린 것 · 지어낸 것 · 형식이 다른 것</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">원래 몇 분 걸리던 일인가</h3><p style="color:var(--text); margin-top:6px;">pp-매트릭스.md의 '한 번에 몇 분'. 11월에 이 숫자와 비교합니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">같은 일이 나오면 손을 드세요</span> <span class="sub">2회차에 짝을 지은 것처럼, 같은 모양의 일을 가진 분끼리 <span class="bold">스킬 파일을 서로 보내 줍니다.</span> 남이 만든 다섯 줄을 내 파일에 맞게 고치는 쪽이 처음 만드는 것보다 빠릅니다</span></p></div></section>
+
+<section><div class="label">Next · 10월 27일 · 4회차 · ② 대리급 AI부사수</div><h2>다음 회차까지</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">이번 2주에 하실 것</h3><p style="color:var(--text); margin-top:6px;">오늘 만든 스킬을 그 일이 돌아올 때마다 <span class="bold">실제로 두 번 이상</span> 씁니다</p><p class="dim" style="margin-top:6px;">손으로 하던 일을 할 시간이 되면, 손 대신 /이름 부터</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">적어 오실 것</h3><p style="color:var(--text); margin-top:6px;"><code class="accent">틀린-곳.md</code> 한 줄씩. 그리고 결과를 <span class="bold">내가 직접 고친 곳</span>도 같이</p><p class="dim" style="margin-top:6px;">4회차는 이 목록으로 스킬의 품질을 올리는 법부터 시작합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">골라 오실 것</h3><p style="color:var(--text); margin-top:6px;">pp-매트릭스.md의 <span class="bold">② 칸</span>에서 하나. 반복되지만 아직 서툰 일</p><p class="dim" style="margin-top:6px;">그 일을 잘한 결과물 예시가 하나 있으면 같이 가져와 주세요. 남이 만든 좋은 예시여도 됩니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">질문은 슬랙 스레드에</h3><p style="color:var(--text); margin-top:6px;">막힌 곳 한 줄이면 됩니다. 답하고 4회차 자료에 넣겠습니다</p><p class="dim" style="margin-top:6px;">예약 실행(Trend 4)은 아직 걸지 않습니다. 세 번 다 맞은 분만 저에게 먼저 알려 주세요</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">막힌 것이 가장 좋은 재료입니다</span> <span class="sub">오늘 0/3이었던 분의 틀린 곳 목록이 4회차를 가장 많이 바꿉니다</span></p></div></section>
+
+<section><div class="label">4L · 21:50</div><h2>오늘 4L, 한 줄씩</h2><p style="margin-bottom:12px;">슬랙 캔버스 <span class="bold">4L 리뷰_26가을_AI부사수(TUE)</span>의 3회차 칸에 적어 주세요.</p><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">Liked</h3><p style="color:var(--text); margin-top:6px;">좋았던 것</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">Learned</h3><p style="color:var(--text); margin-top:6px;">새로 알게 된 것</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">Lacked</h3><p style="color:var(--text); margin-top:6px;">내게 부족했던 것</p><p class="dim" style="margin-top:6px;">2회차 Lacked가 오늘 순서를 바꿨습니다. 오늘 것은 4회차를 바꿉니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">Long for</h3><p style="color:var(--text); margin-top:6px;">바라는 것</p></div></div></section>
+
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%; text-align:center;"><h1 style="font-size:1.8em;">오늘은 하나가 세 번 돌면 됩니다</h1><p style="font-size:0.66em; color:var(--text); margin-top:28px; line-height:1.9;">①에서 고른 일 하나가 스킬 파일이 되고, 실제 파일 세 건에 돌아간 것.<br>세 번 중 몇 번 맞았는지 숫자 하나, 그리고 틀린 곳 목록.<br>2주 뒤에 그 목록으로 스킬을 고칩니다.</p><div style="margin-top:40px;"><p class="dim" style="font-size:0.46em;">26가을 AI부사수(TUE) 3회차 &middot; 10월 13일 (화) &middot; @Seulki.log</p></div></div></section>
+</div>
+</div>
+
+<div id="custom-progress">
+  <div class="seg" data-section="0" onclick="goSection(0)">오프닝</div>
+  <div class="seg" data-section="1" onclick="goSection(1)">돌아보기</div>
+  <div class="seg" data-section="2" onclick="goSection(2)">AI 트렌드</div>
+  <div class="seg" data-section="3" onclick="goSection(3)">같이 쓰는 도구</div>
+  <div class="seg" data-section="4" onclick="goSection(4)">① 사원급</div>
+  <div class="seg" data-section="5" onclick="goSection(5)">쉬는 시간</div>
+  <div class="seg" data-section="6" onclick="goSection(6)">실습</div>
+  <div class="seg" data-section="7" onclick="goSection(7)">공유</div>
+  <div class="seg" data-section="8" onclick="goSection(8)">마무리</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+<script>
+  const sections = [[0, 1], [2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12], [13, 14, 15, 16, 17, 18, 19, 20, 21], [22, 23, 24, 25], [26], [27, 28, 29, 30, 31, 32, 33], [34], [35, 36, 37]];
+
+  function goSection(idx) {
+    if (sections[idx]) Reveal.slide(sections[idx][0]);
+  }
+
+  function updateProgress() {
+    const cur = Reveal.getIndices().h;
+    document.querySelectorAll('#custom-progress .seg').forEach((seg, i) => {
+      const s = sections[i];
+      seg.classList.remove('active', 'done');
+      if (cur >= s[0] && cur <= s[s.length - 1]) seg.classList.add('active');
+      else if (cur > s[s.length - 1]) seg.classList.add('done');
+    });
+  }
+
+  Reveal.initialize({
+    hash: true,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    center: true,
+    controls: true,
+    controlsLayout: 'edges',
+    slideNumber: 'c/t',
+  });
+
+  Reveal.on('slidechanged', updateProgress);
+  Reveal.on('ready', updateProgress);
+</script>
+</body>
+</html>
