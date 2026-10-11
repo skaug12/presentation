@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두 달 월급 대신 멕시코에서 배운 것</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #F8F7F4;
+    --text: #2C2C2C;
+    --text-sub: #6B6B6B;
+    --text-dim: #9A9A9A;
+    --accent: #8B5E3C;
+    --accent2: #3D5A80;
+    --accent3: #5B7B5E;
+    --accent4: #7B6B8A;
+    --accent5: #8A5E5E;
+    --accent6: #5A7B7B;
+    --card-bg: #F1EFEA;
+    --r-background-color: var(--bg);
+    --r-main-font: 'Pretendard', -apple-system, sans-serif;
+    --r-heading-font: 'Pretendard', -apple-system, sans-serif;
+    --r-main-color: var(--text);
+    --r-heading-color: var(--text);
+    --r-main-font-size: 30px;
+  }
+  .reveal { font-weight: 400; }
+  .reveal h1 { font-size: 2.4em; font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; }
+  .reveal h2 { font-size: 1.3em; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5em; }
+  .reveal h3 { font-size: 0.7em; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 6px; word-break: keep-all; overflow-wrap: break-word; }
+  .reveal p { font-size: 0.6em; line-height: 1.6; color: var(--text-sub); }
+  .reveal li { font-size: 0.6em; line-height: 1.6; color: var(--text-sub); }
+  .reveal ul { list-style: none; padding-left: 0; margin: 0; }
+  .reveal ul li { padding-left: 14px; position: relative; }
+  .reveal ul li::before { content: ""; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; border-radius: 50%; background: var(--text-dim); }
+  .reveal ol { padding-left: 18px; }
+  .reveal ol li { padding-left: 4px; }
+  .reveal ol li::before { display: none; }
+  .reveal section { text-align: left; padding: 36px 60px 56px !important; box-sizing: border-box; overflow: hidden; }
+  .reveal .slides section:not(.present) { opacity: 0 !important; visibility: hidden !important; }
+  .reveal code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.88em; }
+  .reveal .slides { text-align: left; }
+  .reveal .slide-number { font-family: 'Pretendard'; font-size: 11px; color: var(--text-dim); }
+  .reveal .controls { color: var(--accent); }
+  .reveal .progress { display: none; }
+
+  .sub { color: var(--text-sub); }
+  .dim { color: var(--text-dim); }
+  .accent { color: var(--accent); }
+  .accent2 { color: var(--accent2); }
+  .accent3 { color: var(--accent3); }
+  .accent4 { color: var(--accent4); }
+  .accent5 { color: var(--accent5); }
+  .accent6 { color: var(--accent6); }
+  .bold { font-weight: 600; }
+  .small { font-size: 0.6em !important; }
+  .tiny { font-size: 0.52em !important; }
+
+  .label { font-size: 0.42em; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+
+  .grid { display: grid; gap: 24px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card { background: var(--card-bg); border-radius: 8px; padding: 22px 24px; overflow: hidden; }
+  .card h3 { margin: 0; }
+  .card p { margin: 0; }
+  .card ul, .card ol { margin: 0; }
+  .card > * + * { margin-top: 12px !important; }
+  .card li + li { margin-top: 3px; }
+
+  .code-block { background: #2C2C2C; border-radius: 8px; padding: 18px 22px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.52em; line-height: 1.85; color: #D4D0C8; text-align: left; }
+  .code-block .prompt { color: var(--accent3); }
+  .code-block .cmd { color: #D4A574; }
+  .code-block .comment { color: #6B6B6B; }
+
+  .skill-tag { display: inline-block; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.5em; font-weight: 500; padding: 3px 10px; border-radius: 4px; background: rgba(139,94,60,0.08); color: var(--accent); margin-bottom: 8px; }
+
+  .summary-card { background: var(--card-bg); border-radius: 8px; padding: 14px 24px; text-align: center; }
+  .qblock { background: rgba(139,94,60,0.06); border-radius: 8px; padding: 14px 20px; }
+
+  .placeholder { border: 1.5px dashed rgba(139,94,60,0.4); background: rgba(139,94,60,0.03); }
+  .fillnote { font-size: 0.46em; color: var(--accent); background: rgba(139,94,60,0.07); border-radius: 6px; padding: 8px 14px; }
+
+  .stat-num { font-size: 1.4em; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+  .stat-label { font-size: 0.46em; color: var(--text-sub); margin-top: 4px; }
+
+  .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #F8F7F4; font-size: 0.48em; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+
+  #custom-progress { position: fixed; bottom: 0; left: 0; right: 0; height: 28px; background: #ECEAE5; display: flex; z-index: 100; font-family: 'Pretendard', sans-serif; }
+  #custom-progress .seg { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.02em; position: relative; transition: background 0.3s, color 0.3s; cursor: pointer; }
+  #custom-progress .seg.active { background: var(--accent); color: #F8F7F4; }
+  #custom-progress .seg.done { background: rgba(139,94,60,0.2); color: var(--accent); }
+  #custom-progress .seg + .seg { border-left: 1px solid rgba(0,0,0,0.06); }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section>
+  <style>
+    .ph { width:100%; height:100%; object-fit:cover; border-radius:8px; display:block; }
+    .cap { font-size:0.36em; color:var(--text-dim); margin-top:6px !important; }
+    .ask { font-size:0.46em; color:var(--accent5); background:rgba(138,94,94,0.08); border-radius:6px; padding:8px 14px; }
+    .tl td { padding:6px 10px; border-bottom:1px solid rgba(0,0,0,0.08); vertical-align:top; }
+  </style>
+  <div style="display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center; height:640px;">
+    <div style="text-align:left;">
+      <div class="label">K-EXPO Mexico 2026 · Lessons Learned</div>
+      <h1 style="font-size:1.9em;"><span class="accent2">두 달 월급</span> 대신<br>멕시코에서 배운 것</h1>
+      <p style="font-size:0.6em; margin-top:22px;">2026년 9월 24일~25일 · World Trade Center Mexico City<br>밥무(이츠케이) 부스 B-12 · 출장자 2인 중 1인</p>
+      <p class="dim" style="font-size:0.44em; margin-top:36px;">AAR 밋업 · 10월 21일 (수) · 오아시스 덕수궁 · @Seulki.log</p>
+    </div>
+    <div style="height:560px;"><img class="ph" src="img/mexico-lessons/team.jpg" alt="부스 앞의 우정과 슬기"></div>
+  </div>
+
+</section>
+
+<section><div class="label">Agenda</div><h2>오늘 20분은 이렇게 갑니다</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">우정이의 제안</h3><p style="color:var(--text); margin-top:6px;">8월 5일 카톡 한 통에서 시작한 일. 무엇을 하기로 했고 무엇은 하지 않기로 했는지</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">나의 상황</h3><p style="color:var(--text); margin-top:6px;">내가 도울 수 있었던 것, 그리고 처음 알게 된 것 다섯 가지</p><p class="dim" style="margin-top:6px;">부스 세팅 · 판로 개척 · 도매와 소매 · 외국인의 취향 · B2B 비즈니스 언어</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">멕시코</h3><p style="color:var(--text); margin-top:6px;">일 말고, 멕시코는 좋았습니다. 사진으로 보여 드립니다</p></div></div></section>
+
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 1 · 우정이의 제안</div><h1 style="font-size:1.8em;"><span class="accent2">마음의 안식처</span>가 필요하다는 연락</h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">우정이가 KOTRA 한국우수상품전(K-EXPO 멕시코) B2B 참가업체로 선정되었습니다.<br>혼자 갈 생각이었다가, 같이 선정된 기업들을 찾아보고 당황해서 연락이 왔습니다.</p><p class="dim" style="font-size:0.5em; margin-top:20px;">2026년 8월 5일 (수) 카톡</p></div></section>
+
+<section>
+  <div class="label">8월 5일 · 하루 만에 정해진 일</div>
+  <h2>점심에 받은 연락, 오후에 끝난 결정</h2>
+  <div class="card" style="padding:12px 20px; margin-bottom:14px;">
+    <table class="tl" style="width:100%; border-collapse:collapse; font-size:0.5em; line-height:1.7; color:var(--text);">
+      <tr><td class="dim" style="width:12%;">12:16</td><td>행사 일정 · 부스 배치 사진과 링크가 옵니다<br><span class="bold">"내 예상보다 너무 사이즈가 커서" · "내가 왜 선정됐는지 아직도 의문"</span><br><span class="bold accent5">"마음의 안식처가 필요함"</span></td></tr>
+      <tr><td class="dim">13:17</td><td>남편 허락</td></tr>
+      <tr><td class="dim">13:18</td><td>회사(HFK) 허락. 마침 그날 미팅이 있었습니다</td></tr>
+      <tr><td class="dim" style="border-bottom:none;">16:49</td><td style="border-bottom:none;">우정: <span class="bold">"모든 것이 날 돕는구나"</span></td></tr>
+    </table>
+  </div>
+  <div class="summary-card">
+    <p style="font-size:0.54em; color:var(--text); margin:0;">
+      <span class="accent2 bold">출국까지 7주</span>
+      <span class="sub">9월 23일 인천 출발, 현장은 9월 24일~25일 이틀, 9월 28일 새벽 귀국</span>
+    </p>
+  </div>
+
+</section>
+
+<section><div class="label">Deal · 무엇을 하고 무엇을 하지 않는가</div><h2>처음에 정한 선</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent5">비용은 보태지 못한다</h3><p style="color:var(--text); margin-top:6px;">처음부터 미리 말했습니다. 우정이의 답은 "돈은 내가 어떻게든 마련해볼게"</p><p class="dim" style="margin-top:6px;">출장 패키지(항공 · 호텔 2인 1실)는 우정이가 부담했습니다. 저는 무보수입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent">대신 준비는 내가 한다</h3><p style="color:var(--text); margin-top:6px;">조사, 인쇄물, 바이어 연락, 링크드인까지. 업무로 할 수 있는 것은 모두 맡았습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">AI를 많이 붙인다</h3><p style="color:var(--text); margin-top:6px;">7주 동안 만든 문서와 산출물 대부분을 Claude와 함께 만들었습니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">스스로 정한 기준</span> <span class="sub"><span class="bold">"두 달 월급 받았다 생각하고"</span> 일하기로 했습니다</span></p></div></section>
+
+<section>
+  <div class="label">The Show · 어떤 행사였나</div>
+  <h2>46개사 중 43개사가 화장품 · 식품이었습니다</h2>
+  <div style="display:grid; grid-template-columns:1fr 1.1fr; gap:24px; align-items:stretch;">
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div class="card" style="padding:14px 20px;"><p style="font-size:1.5em; font-weight:700; color:var(--accent); line-height:1.1;">37 : 4</p><p class="stat-label">화장품 존 37개사, 우리 존(생활용품 · K-TECH) 4개사</p></div>
+      <div class="card" style="padding:14px 20px;"><p style="font-size:1.5em; font-weight:700; color:var(--accent); line-height:1.1;">2일</p><p class="stat-label">9월 24일 B2B, 25일 B2B와 B2C가 함께 열림</p></div>
+      <div class="card" style="padding:14px 20px;"><p style="color:var(--text); font-size:0.5em;"><span class="bold">우리가 판 것</span> · 18/10 스테인리스 한국식 수저 세트(밥무). 스마일 · 단청 컬렉션, 전 제품 기프트박스</p></div>
+    </div>
+    <div><img class="ph" style="height:440px;" src="img/mexico-lessons/stage.jpg" alt="K-EXPO 멕시코 메인 무대"></div>
+  </div>
+  <div class="summary-card" style="margin-top:14px;">
+    <p style="font-size:0.52em; color:var(--text); margin:0;"><span class="accent2 bold">유통기한도, 위생 등록도 없는 물건은 우리뿐</span> <span class="sub">팔 것은 수저가 아니라 "리스크 없는 선물 매대"라고 정하고 갔습니다</span></p>
+  </div>
+
+</section>
+
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 2 · 나의 상황</div><h1 style="font-size:1.8em;">내가 <span class="accent2">도울 수 있었던 것</span>, <span class="accent2">처음 알게 된 것</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">정부지원사업과 컨설팅 업무 환경은 겪어 보았습니다. 조사하고, 문서로 만들고, AI를 붙이는 일은 할 줄 압니다.<br>수출, 도매, 전시 부스는 처음이었습니다.</p></div></section>
+
+<section>
+  <div class="label">What I Could Do · 7주 동안 만든 것</div>
+  <h2>출국 전에 준비물을 거의 다 만들었습니다</h2>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:14px;">
+    <div class="card" style="padding:14px 18px;"><h3 class="accent">조사</h3><p style="color:var(--text);">참가기업 49곳 전수 조사<br>멕시코 백화점 수저 세트 63건 가격<br>질문 24건을 실무자 답과 자료 조사로 비교</p></div>
+    <div class="card" style="padding:14px 18px;"><h3 class="accent2">현장 인쇄물</h3><p style="color:var(--text);">스페인어 · 영어 · 국문 QR POP<br>리드카드 100장, 방문자 슬립 104장<br>3개국어 QR 랜딩 페이지</p></div>
+    <div class="card" style="padding:14px 18px;"><h3 class="accent3">리드 관리</h3><p style="color:var(--text);">리드 기록 구글 폼 + 시트<br>상담 일지 · 팔로업이 자동으로 쌓이는 구조</p></div>
+    <div class="card" style="padding:14px 18px;"><h3 class="accent4">사전 아웃리치</h3><p style="color:var(--text);">멕시코시티 광역 타겟 52곳(A등급 15곳)<br>스페인어 메일 · WhatsApp · LinkedIn 문안</p></div>
+    <div class="card" style="padding:14px 18px;"><h3 class="accent5">링크드인</h3><p style="color:var(--text);">회사 페이지 · 프로필 세팅안<br>게시글 16편, 귀국 후 멕시코 편 6편</p></div>
+    <div class="card" style="padding:14px 18px;"><h3 class="accent6">현장과 그 뒤</h3><p style="color:var(--text);">상담 기록, 현지 정산<br>결과 정리 · 비용 정리 · 후기 콘텐츠</p></div>
+  </div>
+  <div class="summary-card">
+    <p style="font-size:0.52em; color:var(--text); margin:0;"><span class="accent2 bold">같은 존 3사를 포함해 49곳 중 47곳이 카탈로그 없이 왔습니다</span> <span class="sub">준비물만으로도 현장에서 앞쪽에 설 수 있었습니다</span></p>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Result · 이틀의 숫자</div>
+  <h2>상담 15회, 다시 찾아온 바이어 두 팀</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:14px;">
+    <div class="card" style="padding:14px 18px; text-align:center;"><p style="font-size:1.5em; font-weight:700; color:var(--accent); line-height:1.1;">7</p><p class="stat-label">사전 매칭 상담<br>(8건 주선, 1건 노쇼)</p></div>
+    <div class="card" style="padding:14px 18px; text-align:center;"><p style="font-size:1.5em; font-weight:700; color:var(--accent); line-height:1.1;">6</p><p class="stat-label">현장 워크인 상담<br>(첫날)</p></div>
+    <div class="card" style="padding:14px 18px; text-align:center; outline:2px solid var(--accent3);"><p style="font-size:1.5em; font-weight:700; color:var(--accent3); line-height:1.1;">2</p><p class="stat-label">다음 날 다시 온 팀<br>Good Swing · Marco Centro</p></div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div style="height:290px;"><img class="ph" src="img/mexico-lessons/meeting1.jpg" alt="상담 중인 바이어"></div>
+    <div style="height:290px;"><img class="ph" src="img/mexico-lessons/meeting2.jpg" alt="상담 테이블"></div>
+  </div>
+
+</section>
+
+<section><div class="label">What I Learned</div><h2>처음 알게 된 것 다섯</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">① 부스 세팅</h3><p style="color:var(--text); margin-top:6px;">부스는 생각한 모양이 아니었고, 표식 하나가 부족했습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">② 판로 개척</h3><p style="color:var(--text); margin-top:6px;">바이어는 세 갈래로 옵니다. 그리고 호의는 계약이 아닙니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">③ 도매와 소매</h3><p style="color:var(--text); margin-top:6px;">같은 수저에 가격이 둘인 이유</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">④ 외국인의 취향</h3><p style="color:var(--text); margin-top:6px;">가서 보니 달랐던 것</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">⑤ B2B 비즈니스 언어</h3><p style="color:var(--text); margin-top:6px;">MOQ, FOB, 그리고 말의 순서</p></div></div></section>
+
+<section>
+  <div class="label">① Booth · 설치 전과 후</div>
+  <h2>3&times;3 부스가 아니라 선반 하나와 상담 테이블이었습니다</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px;">
+    <div><div style="height:340px;"><img class="ph" src="img/mexico-lessons/booth-empty.jpg" alt="설치 전 빈 부스"></div><p class="cap">9월 23일 · 설치 전</p></div>
+    <div><div style="height:340px;"><img class="ph" src="img/mexico-lessons/booth-done.jpg" alt="설치를 마친 부스"></div><p class="cap">설치 끝</p></div>
+  </div>
+  <div class="grid grid-3" style="gap:12px;">
+    <div class="card" style="padding:10px 16px;"><p style="color:var(--text);"><span class="bold">한쪽은 선반, 앞은 4인 테이블.</span> 진열과 상담을 한 곳에서 합니다</p></div>
+    <div class="card" style="padding:10px 16px;"><p style="color:var(--text);"><span class="bold">쇼케이스는 대표 제품 하나.</span> 현장 교체가 안 되어 스마일로 정했습니다</p></div>
+    <div class="card" style="padding:10px 16px;"><p style="color:var(--text);"><span class="bold">구조는 미리 물어야 합니다.</span> 진열 수량 · POP 위치가 모두 여기에 묶입니다</p></div>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">① Booth · 준비날 레슨런</div>
+  <h2>"무엇부터 만져 보세요"를 말해 줄 표식이 없었습니다</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start;">
+    <div style="display:grid; grid-template-rows:1fr; gap:10px;">
+      <div style="height:300px;"><img class="ph" src="img/mexico-lessons/bestseller.jpg" alt="베스트셀러 스티커를 붙인 진열"></div>
+      <p class="cap">옆 부스가 나눠 준 Best Seller 스티커를 붙인 진열</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div class="card" style="padding:12px 18px;"><h3 class="accent">Try me · Best seller 스티커</h3><p style="color:var(--text); margin-top:6px;">바이어는 선반 앞에서 무엇부터 집을지 망설입니다. 스티커 한 장이 설명 한 문장을 대신합니다</p></div>
+      <div class="card" style="padding:12px 18px;"><h3 class="accent2">아크릴 프린팅 POP</h3><p style="color:var(--text); margin-top:6px;">종이 POP보다 오래가고 눈에 띕니다. KIFT 부스에서 보고 다음 출력물 목록에 넣었습니다</p></div>
+      <div class="card" style="padding:12px 18px;"><h3 class="accent3">B2C 날의 샘플 판매</h3><p style="color:var(--text); margin-top:6px;">둘째 날 일반 관람객이 들어오자 샘플 판매가 잘 통했습니다. 판매용 재고와 페소 거스름돈을 따로 챙깁니다</p></div>
+    </div>
+  </div>
+
+</section>
+
+<section><div class="label">② Channels · 판로 개척</div><h2>바이어는 세 갈래로 옵니다</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">KOTRA 비즈매칭</h3><p style="color:var(--text); margin-top:6px;">주최 측이 바이어와 상담을 주선합니다. 8건이 잡혔습니다</p><p class="dim" style="margin-top:6px;">상담 가능 시간을 열어 두지 않으면 주선이 잡히지 않습니다. 바이어 목록을 직접 열람하고 먼저 신청할 수도 있습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">직접 아웃리치</h3><p style="color:var(--text); margin-top:6px;">바이어 풀이 화장품 · 식품에 쏠려 있어 생활용품 바이어는 거의 없었습니다. 그래서 직접 찾아 등록하게 했습니다</p><p class="dim" style="margin-top:6px;">멕시코시티 52곳 · A등급 15곳에 스페인어 메일 · WhatsApp · 전화. 비즈매칭 마감(9월 11일)에서 거꾸로 날짜를 잡았습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">현장 워크인</h3><p style="color:var(--text); margin-top:6px;">지나가다 들른 바이어. 첫날 6팀과 상담했고, 그중 2팀이 다음 날 다시 왔습니다</p><p class="dim" style="margin-top:6px;">다시 온 바이어가 가장 확실한 관심 신호입니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">우리가 통제할 수 있는 것</span> <span class="sub">주선은 주최 측이, 워크인은 운이 정합니다. <span class="bold">직접 아웃리치만 우리가 직접 늘릴 수 있는 채널</span>이었습니다</span></p></div></section>
+
+<section>
+  <div class="label">② Channels · 현장에서 배운 것</div>
+  <h2>호의는 계약이 아니고, 약속은 시간까지 정해야 합니다</h2>
+  <div style="display:grid; grid-template-columns:0.9fr 1.1fr; gap:24px; align-items:start;">
+    <div>
+      <div style="height:380px;"><img class="ph" src="img/mexico-lessons/day2-line.jpg" alt="둘째 날 아침 등록 줄"></div>
+      <p class="cap">둘째 날 아침 · 국가 행사로 보안 검색 줄이 길었습니다</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div class="card" style="padding:12px 18px;"><h3 class="accent5">오전 미팅이 통째로 비었습니다</h3><p style="color:var(--text); margin-top:6px;">우리 제품 탓이 아니라 그날 열린 국가 행사 때문이었습니다. 다음에는 현지 공휴일 · 국가 행사부터 확인하고 일정을 잡습니다</p></div>
+      <div class="card" style="padding:12px 18px;"><h3 class="accent">"내일 올게요"는 오지 않습니다</h3><p style="color:var(--text); margin-top:6px;">첫날 워크인 호텔 팀은 다음 날 오지 않았습니다. 그 테이블에서 시간을 정하고, 당일 아침 리마인더를 보냅니다</p></div>
+      <div class="card" style="padding:12px 18px;"><h3 class="accent2">멕시코는 대놓고 거절하지 않습니다</h3><p style="color:var(--text); margin-top:6px;">곧 살 것처럼 반응하고 사라지는 일이 흔합니다. 진짜 신호는 말이 아니라 <span class="bold">행동</span>입니다. 수량 · 조건 질문, 재방문, 다음 할 일 합의</p></div>
+    </div>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">③ Wholesale vs Retail · 같은 수저, 두 가격</div>
+  <h2>바이어에게 받을 값은 $18.99가 아니라 $8~12입니다</h2>
+  <div style="display:flex; align-items:stretch; gap:10px; margin:18px 0 16px;">
+    <div class="card" style="flex:1; padding:14px 14px; text-align:center;"><p class="dim" style="font-size:0.4em;">한국</p><p class="bold" style="color:var(--text); font-size:0.54em;">밥무</p><p class="stat-num" style="font-size:0.9em;">FOB $8~12</p><p class="stat-label">부산항 배에 싣기까지</p></div>
+    <div style="display:flex; align-items:center; color:var(--text-dim); font-size:0.7em;">&rarr;</div>
+    <div class="card" style="flex:1.3; padding:14px 14px; text-align:center;"><p class="dim" style="font-size:0.4em;">멕시코</p><p class="bold" style="color:var(--text); font-size:0.54em;">수입 · 유통상</p><p class="stat-label" style="margin-top:8px;">운송 + 관세 + 세관 수수료 0.8%<br>+ 부가세(IVA) 16% + 자기 몫</p></div>
+    <div style="display:flex; align-items:center; color:var(--text-dim); font-size:0.7em;">&rarr;</div>
+    <div class="card" style="flex:1.1; padding:14px 14px; text-align:center;"><p class="dim" style="font-size:0.4em;">매장</p><p class="bold" style="color:var(--text); font-size:0.54em;">소매점</p><p class="stat-label" style="margin-top:8px;">백화점 · 편집숍<br>Mercado Libre · Amazon MX</p></div>
+    <div style="display:flex; align-items:center; color:var(--text-dim); font-size:0.7em;">&rarr;</div>
+    <div class="card" style="flex:1; padding:14px 14px; text-align:center; outline:2px solid var(--accent2);"><p class="dim" style="font-size:0.4em;">끝</p><p class="bold" style="color:var(--text); font-size:0.54em;">소비자</p><p class="stat-num" style="font-size:0.9em; color:var(--accent2);">$18.99</p><p class="stat-label">매장에서 내는 값</p></div>
+  </div>
+  <div class="grid grid-2" style="gap:14px;">
+    <div class="card" style="padding:12px 18px;"><p style="color:var(--text);"><span class="bold">소매가는 사슬 끝의 값입니다.</span> 중간에 선 사람마다 비용과 몫이 붙으므로, 도매가는 소매가에서 거꾸로 계산해야 합니다</p></div>
+    <div class="card" style="padding:12px 18px;"><p style="color:var(--text);"><span class="bold">견적은 FOB로, 짧게.</span> 관세 · 통관비는 바이어 부담, 유효기간 30~60일. 관세까지 우리가 지는 조건(DDP)은 약속하지 않습니다</p></div>
+  </div>
+
+</section>
+
+<section><div class="label">③ Wholesale vs Retail · 왜 나누는가</div><h2>도매와 소매를 따로 운영하는 이유</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">가격이 섞이면 무너집니다</h3><p style="color:var(--text); margin-top:6px;">도매가가 소비자에게 보이면 소매점은 팔 이유가 없어집니다. 그래서 단가표는 말로는 즉답하되, 종이는 진성 바이어에게만 줍니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">거래 방식이 다릅니다</h3><p style="color:var(--text); margin-top:6px;">소매는 한 개를 바로 결제합니다. 도매는 최소 주문 수량, 선금, 외상(30~90일, 백화점은 90~120일), 리드타임을 협상합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">바이어끼리 서로 압니다</h3><p style="color:var(--text); margin-top:6px;">정부 행사 바이어는 다시 오는 비율이 높고 건너건너 다 아는 사이입니다. 같은 나라에는 같은 단가를 줍니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">그래서 창구도 둘</span> <span class="sub">멕시코 도매상들은 도매 전용 등록 페이지(Mayorista)나 Faire 같은 도매 플랫폼을 따로 씁니다. 밥무 웹사이트에도 <span class="bold">도매 문의 페이지를 따로</span> 만들었습니다</span></p></div></section>
+
+<section>
+  <div class="label">④ Taste · 가설과 현장</div>
+  <h2>가기 전에 세운 가설, 가서 본 것</h2>
+  <div class="card" style="padding:12px 20px; margin-bottom:12px;">
+    <table class="tl" style="width:100%; border-collapse:collapse; font-size:0.52em; line-height:1.55; color:var(--text);">
+      <tr style="color:var(--text-dim); font-weight:600;"><td style="width:42%;">가기 전 가설</td><td>가서 본 것</td></tr>
+      <tr><td>멕시코는 젓가락 문화가 아니다. 스시 · 라면용, 그리고 선물로 소개한다</td><td class="accent5">[❓ 슬기: 바이어가 수저를 어떻게 받아들였는지]</td></tr>
+      <tr><td>단청 문양이 이국적인(exótico) 선물로 통할 것이다</td><td class="accent5">[❓ 슬기: 스마일과 단청 중 어느 쪽을 먼저 집었는지]</td></tr>
+      <tr><td>멕시코 백화점의 기본은 1,000페소짜리 24피스 6인용 세트다. 우리 2피스 세트는 <span class="bold">세트 값으로는 싸고(63개 중 아래에서 10번째), 한 조각 값으로는 비싸다(위에서 6번째)</span></td><td class="accent5">[❓ 슬기: 가격을 들은 바이어의 반응]</td></tr>
+      <tr><td style="border-bottom:none;">K-콘텐츠를 보러 온 관람객이 한국 밥상을 가져갈 물건으로 산다</td><td style="border-bottom:none;" class="accent5">[❓ 슬기: B2C 날 산 사람들은 누구였는지]</td></tr>
+    </table>
+  </div>
+  <div class="ask">[❓ 슬기: 취향에서 가장 놀랐던 것 한 문장. 이 장의 결론이 됩니다]</div>
+
+</section>
+
+<section>
+  <div class="label">④ Taste · 멕시코의 색</div>
+  <h2>매대도, 시장도, 색이 많고 진합니다</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+    <div><div style="height:430px;"><img class="ph" src="img/mexico-lessons/snacks.jpg" alt="편의점 과자 매대"></div><p class="cap">편의점 과자 매대</p></div>
+    <div><div style="height:430px;"><img class="ph" src="img/mexico-lessons/alebrijes.jpg" alt="시장의 알레브리헤"></div><p class="cap">시장의 알레브리헤(색을 입힌 목각 동물)</p></div>
+    <div><div style="height:430px;"><img class="ph" src="img/mexico-lessons/b2c.jpg" alt="둘째 날 B2C 관람객"></div><p class="cap">둘째 날 K-EXPO를 찾은 관람객</p></div>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">⑤ B2B Language · 외워 간 단어</div>
+  <h2>상담에서 반드시 나오는 단어들</h2>
+  <div class="card" style="padding:12px 20px; margin-bottom:12px;">
+    <table class="tl" style="width:100%; border-collapse:collapse; font-size:0.52em; line-height:1.55; color:var(--text);">
+      <tr><td class="bold accent" style="width:20%;">MOQ</td><td style="width:42%;">최소 주문 수량</td><td class="dim">"¿Cuál es el pedido mínimo?" 가장 강한 구매 신호입니다</td></tr>
+      <tr><td class="bold accent">FOB Busan</td><td>부산항 배에 싣기까지가 판매자 몫 (Incoterms 2020)</td><td class="dim">CIF는 표에 박지 않고 요청 시 개별 견적</td></tr>
+      <tr><td class="bold accent">리드타임</td><td>발주부터 선적까지 걸리는 기간</td><td class="dim">MOQ · 대표 가격과 함께 즉답해야 하는 세 숫자</td></tr>
+      <tr><td class="bold accent">T/T 30% 선금</td><td>송금으로 30% 먼저, 나머지는 선적 때</td><td class="dim">외상 요구(30~90일)는 멕시코에서 흔합니다</td></tr>
+      <tr><td class="bold accent">HS 8215</td><td>스테인리스 식기의 관세 분류 번호</td><td class="dim">올해 멕시코 관세 인상 두 번에 모두 빠졌습니다</td></tr>
+      <tr><td class="bold accent" style="border-bottom:none;">COFEPRIS</td><td style="border-bottom:none;">멕시코 식품 · 화장품 위생 등록</td><td class="dim" style="border-bottom:none;">수저는 필요 없습니다. 43개사와 다른 점입니다</td></tr>
+    </table>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:12px;">
+    <div style="height:150px;"><img class="ph" src="img/mexico-lessons/paperwork.jpg" alt="상담 서류"></div>
+    <div class="summary-card" style="display:flex; align-items:center; text-align:left;"><p style="font-size:0.5em; color:var(--text); margin:0;"><span class="accent2 bold">동행자는 세 숫자만은 즉답한다</span><br><span class="sub">MOQ · 대표 가격 · 리드타임. 그 이상의 조건은 대표에게 넘깁니다</span></p></div>
+  </div>
+
+</section>
+
+<section><div class="label">⑤ B2B Language · 말의 순서</div><h2>단어보다 중요한 것은 말의 순서였습니다</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">인사와 스몰토크가 먼저</h3><p style="color:var(--text); margin-top:6px;">멕시코는 처음인지, 행사는 어떤지 한두 마디. 바로 제품 설명부터 하면 오히려 실례입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">그다음 상대를 묻습니다</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">"¿A qué se dedica su empresa?"</span> 어떤 일을 하는 회사인지. 명함에 Licenciado · Ingeniero가 있으면 그 직함으로 부릅니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">가격은 즉답하고 수량으로 넘어갑니다</h3><p style="color:var(--text); margin-top:6px;">얼버무리면 신뢰를 잃습니다. "100세트면 X달러, 500세트면 Y달러입니다. 어떤 채널에서 판매하시나요?"</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">끝은 다음 할 일로</h3><p style="color:var(--text); margin-top:6px;">샘플, 견적, 다음 미팅 중 무엇을 언제 할지 정하고 헤어집니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">정리하면</span> <span class="sub">상대가 누구인지 알기 전에는 팔지 않고, 다음 할 일을 정하기 전에는 헤어지지 않습니다</span></p></div></section>
+
+<section><div class="label">Next · 현장 회고에서</div><h2>다음 전시에 가져갈 것</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">출력물에 스티커와 아크릴 POP</h3><p style="color:var(--text); margin-top:6px;">Try me · Best seller 스티커, 아크릴 프린팅 POP를 출력물 목록에 넣습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">일정 전에 현지 달력</h3><p style="color:var(--text); margin-top:6px;">미팅을 잡기 전에 현지 공휴일 · 국가 행사를 확인합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">B2C 날의 재고</h3><p style="color:var(--text); margin-top:6px;">일반 관람객이 겹치는 날에는 판매용 재고와 페소 거스름돈을 따로 챙깁니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">워크인은 현장에서 시간까지</h3><p style="color:var(--text); margin-top:6px;">약속은 그 테이블에서 시간을 정하고, 당일 아침 리마인더를 보냅니다</p></div></div></section>
+
+<section>
+  <div style="display:grid; grid-template-columns:1fr 1.3fr; gap:36px; align-items:center; height:640px;">
+    <div style="text-align:left;">
+      <div class="label">Part 3 · 멕시코</div>
+      <h1 style="font-size:1.8em;">그리고 멕시코는<br><span class="accent2">좋았습니다</span></h1>
+      <p style="font-size:0.6em; margin-top:22px;">일하러 간 나흘이었지만, 타코와 소칼로와 차풀테펙은 오래 남을 것 같습니다.</p>
+    </div>
+    <div style="height:560px;"><img class="ph" src="img/mexico-lessons/zocalo-lights.jpg" alt="소칼로 광장 야경"></div>
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Mexico · 먹은 것</div>
+  <h2>타코는 매일 먹었습니다</h2>
+  <div style="display:grid; grid-template-columns:repeat(3, 1fr); grid-template-rows:250px 250px; gap:12px;">
+    <img class="ph" src="img/mexico-lessons/taco-spread.jpg" alt="타코와 살사">
+    <img class="ph" src="img/mexico-lessons/taco-cooks.jpg" alt="토르티야를 굽는 타케리아">
+    <img class="ph" src="img/mexico-lessons/tacos.jpg" alt="타코 접시">
+    <img class="ph" src="img/mexico-lessons/salsa.jpg" alt="살사 컵">
+    <img class="ph" src="img/mexico-lessons/michelada.jpg" alt="코로나와 미첼라다">
+    <img class="ph" src="img/mexico-lessons/candy.jpg" alt="시장의 사탕 가게">
+  </div>
+
+</section>
+
+<section>
+  <div class="label">Mexico · 본 것</div>
+  <h2>밤의 소칼로, 낮의 차풀테펙</h2>
+  <div style="display:grid; grid-template-columns:repeat(3, 1fr); grid-template-rows:250px 250px; gap:12px;">
+    <img class="ph" src="img/mexico-lessons/zocalo.jpg" alt="소칼로 대성당 야경">
+    <img class="ph" src="img/mexico-lessons/bellas-artes.jpg" alt="예술궁전 야경">
+    <img class="ph" src="img/mexico-lessons/chapultepec.jpg" alt="차풀테펙 성">
+    <img class="ph" src="img/mexico-lessons/stained.jpg" alt="차풀테펙 성의 스테인드글라스">
+    <img class="ph" src="img/mexico-lessons/park.jpg" alt="차풀테펙 공원">
+    <img class="ph" src="img/mexico-lessons/calaveras.jpg" alt="시장의 해골 인형">
+  </div>
+
+</section>
+
+<section>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center; height:640px;">
+    <div style="height:520px;"><img class="ph" src="img/mexico-lessons/booth-after.jpg" alt="철수 후 빈 부스"></div>
+    <div style="text-align:left;">
+      <div class="label">Closing</div>
+      <h1 style="font-size:1.6em;">두 달 월급 대신<br><span class="accent2">처음 배운 다섯 가지</span></h1>
+      <p style="font-size:0.58em; margin-top:22px; line-height:1.9;">부스 세팅 · 판로 개척 · 도매와 소매<br>외국인의 취향 · B2B 비즈니스 언어</p>
+      <p style="font-size:0.54em; margin-top:18px; color:var(--text);">불러 준 우정이에게 고맙습니다. 후속 논의 두 팀이 첫 발주로 이어지기를 바랍니다.</p>
+      <p class="dim" style="font-size:0.44em; margin-top:30px;">AAR 밋업 · 10월 21일 (수) · @Seulki.log</p>
+    </div>
+  </div>
+</section>
+</div>
+</div>
+
+<div id="custom-progress">
+  <div class="seg" data-section="0" onclick="goSection(0)">오프닝</div>
+  <div class="seg" data-section="1" onclick="goSection(1)">우정이의 제안</div>
+  <div class="seg" data-section="2" onclick="goSection(2)">나의 상황</div>
+  <div class="seg" data-section="3" onclick="goSection(3)">① 부스 세팅</div>
+  <div class="seg" data-section="4" onclick="goSection(4)">② 판로 개척</div>
+  <div class="seg" data-section="5" onclick="goSection(5)">③ 도매와 소매</div>
+  <div class="seg" data-section="6" onclick="goSection(6)">④ 외국인의 취향</div>
+  <div class="seg" data-section="7" onclick="goSection(7)">⑤ B2B 언어</div>
+  <div class="seg" data-section="8" onclick="goSection(8)">멕시코</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+<script>
+  const sections = [[0, 1], [2, 3, 4, 5], [6, 7, 8, 9], [10, 11], [12, 13], [14, 15], [16, 17], [18, 19, 20], [21, 22, 23, 24]];
+
+  function goSection(idx) {
+    if (sections[idx]) Reveal.slide(sections[idx][0]);
+  }
+
+  function updateProgress() {
+    const cur = Reveal.getIndices().h;
+    document.querySelectorAll('#custom-progress .seg').forEach((seg, i) => {
+      const s = sections[i];
+      seg.classList.remove('active', 'done');
+      if (cur >= s[0] && cur <= s[s.length - 1]) seg.classList.add('active');
+      else if (cur > s[s.length - 1]) seg.classList.add('done');
+    });
+  }
+
+  Reveal.initialize({
+    hash: true,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    center: true,
+    controls: true,
+    controlsLayout: 'edges',
+    slideNumber: 'c/t',
+  });
+
+  Reveal.on('slidechanged', updateProgress);
+  Reveal.on('ready', updateProgress);
+</script>
+</body>
+</html>
