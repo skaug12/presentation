@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HFK 연말 파티 브리핑</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #F8F7F4;
+    --text: #2C2C2C;
+    --text-sub: #6B6B6B;
+    --text-dim: #9A9A9A;
+    --accent: #8B5E3C;
+    --accent2: #3D5A80;
+    --accent3: #5B7B5E;
+    --accent4: #7B6B8A;
+    --accent5: #8A5E5E;
+    --accent6: #5A7B7B;
+    --card-bg: #F1EFEA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 44px; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    font-size: 16px;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 100%;
+    padding: 0 20px 40px;
+    line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  #sticky-nav {
+    position: sticky;
+    top: 0;
+    left: -20px;
+    right: -20px;
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    height: 36px;
+    background: #ECEAE5;
+    display: flex;
+    z-index: 100;
+    font-family: 'Pretendard', sans-serif;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  #sticky-nav .nav-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    text-decoration: none;
+    border: none;
+    background: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #sticky-nav .nav-item + .nav-item { border-left: 1px solid rgba(0,0,0,0.06); }
+  #sticky-nav .nav-item.active { background: var(--accent); color: #F8F7F4; }
+
+  .section-separator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 20px;
+  }
+  .section-separator::before, .section-separator::after {
+    content: ""; flex: 1; height: 1px; background: rgba(0,0,0,0.08);
+  }
+  .section-separator .sep-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); white-space: nowrap;
+  }
+
+  .slide-section { padding: 20px 0; }
+  .slide-section:first-of-type { padding-top: 16px; }
+
+  h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.3; }
+  h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; line-height: 1.3; }
+  h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 6px; word-break: keep-all; overflow-wrap: break-word; }
+  p { font-size: 15px; line-height: 1.7; color: var(--text-sub); }
+  li { font-size: 15px; line-height: 1.7; color: var(--text-sub); }
+
+  ul { list-style: none; padding-left: 0; margin: 0; }
+  ul li { padding-left: 14px; position: relative; }
+  ul li::before { content: ""; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; border-radius: 50%; background: var(--text-dim); }
+  ol { padding-left: 18px; }
+  ol li { padding-left: 4px; }
+  ol li::before { display: none; }
+
+  code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.88em; }
+
+  .sub { color: var(--text-sub); }
+  .dim { color: var(--text-dim); font-size: 14px; }
+  .accent { color: var(--accent); }
+  .accent2 { color: var(--accent2); }
+  .accent3 { color: var(--accent3); }
+  .accent4 { color: var(--accent4); }
+  .accent5 { color: var(--accent5); }
+  .accent6 { color: var(--accent6); }
+  .bold { font-weight: 600; }
+
+  .label { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px 18px;
+    width: 100%;
+  }
+  .card h3 { margin: 0; }
+  .card p { margin: 0; }
+  .card ul, .card ol { margin: 0; }
+  .card > * + * { margin-top: 10px !important; }
+  .card li + li { margin-top: 3px; }
+
+  .stack { display: flex; flex-direction: column; gap: 12px; }
+
+  .code-block {
+    background: #2C2C2C;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.85;
+    color: #D4D0C8;
+    text-align: left;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .code-block .comment { color: #6B6B6B; }
+
+  .summary-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 12px 18px;
+    text-align: center;
+  }
+  .summary-card p { font-size: 14px; color: var(--text); margin: 0; }
+
+  .qblock {
+    background: rgba(139,94,60,0.06);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+
+  .stat-num { font-size: 32px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+  .stat-label { font-size: 13px; color: var(--text-sub); margin-top: 4px; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-card { background: var(--card-bg); border-radius: 8px; padding: 16px; text-align: center; }
+
+  .title-section { text-align: center; padding: 48px 0 32px; }
+  .closing-section { text-align: center; padding: 32px 0 48px; }
+
+  .card code { font-size: 13px; }
+
+  .skill-tag { display: inline-block; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 4px; background: rgba(139,94,60,0.08); color: var(--accent); margin-bottom: 8px; }
+  .fillnote { font-size: 14px; color: var(--accent); background: rgba(139,94,60,0.07); border-radius: 6px; padding: 10px 14px; margin-top: 12px; }
+  .step-number { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #F8F7F4; font-size: 13px; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+  .slide-section > * + * { margin-top: 12px; }
+  .stack .card, .stack .qblock { width: 100%; }
+</style>
+</head><body>
+<nav id="sticky-nav">
+  <button class="nav-item" data-target="sec-0">오프닝</button>
+  <button class="nav-item" data-target="sec-1">한눈에 보기</button>
+  <button class="nav-item" data-target="sec-2">연도별 파티</button>
+  <button class="nav-item" data-target="sec-3">해마다 이어진 것</button>
+  <button class="nav-item" data-target="sec-4">올해 정할 것</button>
+</nav>
+<div class="section-separator" id="sec-0"><span class="sep-label">HFK Year-End Party · 2019–2025</span></div>
+<div class="slide-section"><style>
+    .ph { width:100%; height:100%; object-fit:cover; border-radius:8px; display:block; }
+    .reveal .cap { line-height:1.5; color:var(--text-dim); margin-top:6px !important; }
+    .ask { color:var(--accent5); background:rgba(138,94,94,0.08); border-radius:6px; padding:6px 12px; display:inline-block; }
+    .tl td, .tl th { padding:7px 10px; border-bottom:1px solid rgba(0,0,0,0.08); vertical-align:top; text-align:left; }
+    .tl th { color:var(--text-dim); font-weight:500; }
+    .yr { font-weight:700; color:var(--accent); }
+    .bar { height:26px; border-radius:4px; background:var(--accent); }
+    .tl .ask, .cap .ask { padding:2px 8px; }
+    /* 모바일판(make_deck_mobile)에서만: 두 칸 배치를 세로로 쌓는다 */
+    .slide-section div[style*="grid-template-columns"] { grid-template-columns:1fr !important; height:auto !important; }
+    .slide-section div[style*="repeat(3"][style*="grid-template-rows"] { grid-template-columns:repeat(2, 1fr) !important; grid-template-rows:none !important; grid-auto-rows:130px; }
+    .slide-section div[style*="grid-template-columns:70px"] { grid-template-columns:44px 1fr 92px !important; }
+    .slide-section div[style*="height:"]:has(> img.ph) { height:240px !important; }
+    .slide-section .card:has(> table.tl) { overflow-x:auto; }
+    .slide-section table.tl:has(th) { min-width:560px; }
+  </style>
+  <div style="display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center; height:640px;">
+    <div style="text-align:left;">
+      <div class="label">HFK Year-End Party · 2019–2025</div>
+      <h1 style="font-size:1.9em;">HFK<br><span class="accent2">연말 파티 브리핑</span></h1>
+      <p style="margin-top:22px;">2019 성수부터 2025 사당까지<br>지난 파티를 보고 올해 파티의 기준을 정합니다</p>
+      <p class="dim" style="margin-top:36px;">2026 연말파티 TF 첫 모임 · HFK</p>
+    </div>
+    <div style="height:560px;"><img class="ph" src="img/hfk-year-end/plaza-tree.jpg" alt="2024년 더 플라자 메이플홀 창밖의 시청 트리"></div>
+  </div></div>
+<div class="slide-section"><div class="label">Agenda</div><h2>오늘은 이렇게 봅니다</h2><div class="stack" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">한눈에 보기</h3><p style="color:var(--text); margin-top:6px;">2019~2025년 연말 파티의 일시, 장소, 규모, 티켓비를 표로 정리했습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">연도별 파티</h3><p style="color:var(--text); margin-top:6px;">2019년부터 2025년까지 파티마다 무엇을 했는지 봅니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">해마다 이어진 것</h3><p style="color:var(--text); margin-top:6px;">장소와 규모는 매년 바뀌었지만 빠지지 않은 것이 네 가지 있습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">올해 정할 것</h3><p style="color:var(--text); margin-top:6px;">지난 파티를 보고 TF와 함께 정할 질문을 추립니다</p></div></div></div>
+<div class="section-separator" id="sec-1"><span class="sep-label">Overview · 2019–2025</span></div>
+<div class="slide-section"><div class="label">Overview · 2019–2025</div>
+  <h2>연도별 일시 · 장소 · 규모 · 티켓비</h2>
+  <div class="card" style="padding:10px 18px;">
+    <table class="tl" style="width:100%; border-collapse:collapse; line-height:1.5; color:var(--text);">
+      <tr><th style="width:8%;">연도</th><th style="width:27%;">이름 · 주제</th><th style="width:19%;">일시</th><th style="width:22%;">장소</th><th style="width:12%;">규모</th><th>티켓비</th></tr>
+      <tr><td class="yr">2019</td><td>Year-end Party</td><td>12월 21일 (토) 19:00</td><td>스피닝울프 성수 11층</td><td>신청 명단 59명</td><td>6만원</td></tr>
+      <tr><td class="yr">2020</td><td>On-tact Party</td><td>12월 26일 (토) 22:00</td><td>줌(Zoom) 온라인</td><td><span class="ask">❓ 확인</span></td><td>5천원</td></tr>
+      <tr><td class="yr">2021</td><td>지난 한 해를 잘 되돌아보는 방법</td><td>12월 <span class="ask">❓ 날짜</span></td><td>오아시스 덕수궁</td><td>20명</td><td><span class="ask">❓ 확인</span></td></tr>
+      <tr><td class="yr">2022</td><td>한옥 스탠딩파티</td><td>12월 15일 (목) 2회</td><td>혜화1938 (한옥 두 채)</td><td>정원 30명</td><td><span class="ask">❓ 확인</span></td></tr>
+      <tr><td class="yr">2023</td><td>Your presence will be our present</td><td>12월 2일 (토) 16:00</td><td>서울브루어리 성수 5층</td><td>목표 60명</td><td>6.5만 · 7만원</td></tr>
+      <tr><td class="yr">2024</td><td>HFK 10주년 연말 파티</td><td>12월 15일 (일) 18:00</td><td>더 플라자 호텔 메이플홀</td><td>91명</td><td>14.5만원</td></tr>
+      <tr><td class="yr" style="border-bottom:none;">2025</td><td style="border-bottom:none;">올해의 조각들</td><td style="border-bottom:none;">12월 20일 (토) 18:00</td><td style="border-bottom:none;">커먼테이블 (사당)</td><td style="border-bottom:none;">선착순 30명</td><td style="border-bottom:none;">12만원</td></tr>
+    </table>
+  </div>
+  <p class="cap" style="text-align:left;">2023년 티켓비는 얼리버드 6.5만원, 이후 7만원입니다. 2018년 이전 파티는 드라이브에서 기록을 찾지 못했습니다. <span class="ask">❓ 확인: 2018년 이전 연말 파티</span></p></div>
+<div class="section-separator" id="sec-2"><span class="sep-label">Part 1 · 연도별 파티</span></div>
+<div class="slide-section"><div><div class="label">Part 1 · 2019–2025</div><h1 style="font-size:1.8em;"><span class="accent2">연도별</span> 파티</h1><p style="color:var(--text); margin-top:24px; line-height:1.8;">신청서, TF 회의록, 후기, 당일 안내 문자에 적힌 것만 옮겼습니다.<br>기록이 없는 칸은 비워 두고 표시했습니다.</p></div></div>
+<div class="slide-section"><div class="label">2019 · 스피닝울프 성수</div>
+  <h2>성수 11층에서 3시간 반, 럭키드로우 19종</h2>
+  <div style="display:grid; grid-template-columns:1.15fr 1fr; gap:22px; align-items:start;">
+    <div class="card" style="padding:10px 18px;">
+      <table class="tl" style="width:100%; border-collapse:collapse; line-height:1.5; color:var(--text);">
+        <tr><td class="dim" style="width:30%;">18:30</td><td>체크인과 입장 기념사진</td></tr>
+        <tr><td class="dim">19:00</td><td>테이블별로 인사 나누기</td></tr>
+        <tr><td class="dim">19:30</td><td>저녁 식사와 자축의 시간<br><span class="dim">포토존 · 캘리그라피 이벤트 · HFK 사진전</span></td></tr>
+        <tr><td class="dim">20:50</td><td><span class="bold">2019 리뷰 &amp; 2020 프리뷰</span></td></tr>
+        <tr><td class="dim">21:30</td><td>#HFK사람들 어워드와 럭키드로우</td></tr>
+        <tr><td class="dim" style="border-bottom:none;">21:50</td><td style="border-bottom:none;">단체 사진</td></tr>
+      </table>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div class="card" style="padding:12px 18px;"><p style="font-size:1.3em; font-weight:700; color:var(--accent); line-height:1.1;">19종</p><p class="stat-label">럭키드로우(경품 추첨) 상품입니다. 멤버십 시즌권, 포터블 LP 턴테이블, 르라보 향수, LAMY 만년필 등</p></div>
+      <div class="card" style="padding:12px 18px;"><p style="color:var(--text);"><span class="bold">드레스코드</span> · White and Red<br><span class="bold">대상</span> · 2019년 HFK 전체 멤버(18겨울~19겨울 시즌)<br><span class="bold">신청 명단</span> · 기존 멤버 44명, 19겨울 뉴멤버 15명</p></div>
+      <div class="card" style="padding:12px 18px;"><p style="color:var(--text);"><span class="bold">나에게 보내는 칭찬 메시지</span>를 레터월, 포토월, 영상, 캘리그라피 가운데 원하는 방법으로 남기는 프로그램도 준비했습니다</p></div>
+    </div>
+  </div>
+  <p class="cap" style="text-align:left; margin-top:10px;"><span class="ask">❓ 확인: 2019년 현장 사진. 사진 앱 19 HFK 앨범에는 파티 날 사진이 없습니다</span></p></div>
+<div class="slide-section"><div class="label">2020 · On-tact Party</div>
+  <h2>2020년에는 밤 10시, 줌에서 만났습니다</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:stretch;">
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div class="card" style="padding:10px 18px;"><p style="color:var(--text);"><span class="bold">1부 · 색다른 재미</span><br>럭키드로우 번호를 뽑고 밸런스 퀴즈를 풀었습니다. 무작위로 뽑힌 3명에게는 배달 음식을 보냈습니다. 각자 집에서 연주해 합주도 했습니다</p></div>
+      <div class="card" style="padding:10px 18px;"><p style="color:var(--text);"><span class="bold">2부 · 지식의 향연</span><br>멤버 3명과 파트너 1명이 한 해 동안 공부한 주제를 짧게 발표했습니다. 주제는 두려움 없는 조직, 애자일, 포스트 코로나 디커플링, AI for Business였습니다. 이어서 재윤님이 HFK 2020 리뷰와 2021 프리뷰를 나눴습니다</p></div>
+      <div class="card" style="padding:10px 18px;"><p style="color:var(--text);"><span class="bold">3부 · 감동의 물결</span><br>다 같이 건배하고, 멤버들의 2020 리뷰를 듣고, 럭키드로우를 했습니다</p></div>
+    </div>
+    <div style="height:440px;"><img class="ph" src="img/hfk-year-end/online-zoom.jpg" alt="크리스마스 배경으로 줌에 모인 멤버들"></div>
+  </div>
+  <div class="summary-card" style="margin-top:14px;">
+    <p style="color:var(--text); margin:0;"><span class="accent2 bold">참가비 5천원 · 12월 26일 (토) 22:00~24:00</span> <span class="sub">코로나로 모일 수 없던 해에도 연말 파티는 열었습니다</span></p>
+  </div></div>
+<div class="slide-section"><div class="label">2021 · 2022</div>
+  <h2>북토크에서 한옥으로</h2>
+  <div style="display:grid; grid-template-columns:0.8fr 1.2fr; gap:22px; align-items:start;">
+    <div class="card" style="padding:14px 20px;">
+      <p class="yr" style="">2021</p>
+      <p style="color:var(--text); margin-top:8px;">주제는 <span class="bold">'지난 한 해를 잘 되돌아보는 방법'</span>이었습니다. 오아시스 덕수궁에 20명이 모였습니다.</p>
+      <p style="color:var(--text); margin-top:10px; line-height:1.8;">· 써보는경험팀 파트너 민지님의 북토크<br>· 비전보드 워크숍<br>· 선물 교환 이벤트</p>
+      <p style="margin-top:14px;"><span class="ask">❓ 확인: 12월 며칠인지 · 사진</span></p>
+      <p class="cap">프로그램은 2022년 신청서에 지난 파티로 소개된 내용입니다</p>
+    </div>
+    <div class="card" style="padding:10px 18px;">
+      <p class="yr" style="margin-bottom:6px;">2022 · 혜화1938 한옥 스탠딩파티</p>
+      <table class="tl" style="width:100%; border-collapse:collapse; line-height:1.5; color:var(--text);">
+        <tr><td class="bold" style="width:20%;">마당</td><td>2022년 한 해 동안 쌓인 HFK의 추억 전시</td></tr>
+        <tr><td class="bold">행랑채</td><td>차 한잔을 마시며 강점차별화팀 · 팀장의고민팀 파트너에게 고민 털어놓기</td></tr>
+        <tr><td class="bold">안채</td><td>웰컴 드링크와 스낵, 내년의 나에게 보내는 응원 방명록</td></tr>
+        <tr><td class="bold" style="border-bottom:none;">수돗가</td><td style="border-bottom:none;">럭키드로우, 이어서 포춘쿠키와 스티커 굿즈</td></tr>
+      </table>
+      <p class="cap" style="text-align:left;">12월 15일 (목) 17:00, 20:00 두 번 같은 프로그램 · 한옥 정원 30명 · 드레스코드는 블랙과 HFK가 떠오르는 레드 아이템 · 신발을 벗는 곳이라 양말 준비 안내</p>
+    </div>
+  </div>
+  <div class="summary-card" style="margin-top:14px;">
+    <p style="color:var(--text); margin:0;"><span class="accent2 bold">공간마다 할 일을 하나씩</span> <span class="sub">2022년에는 한옥 마당, 행랑채, 안채, 수돗가에 프로그램을 하나씩 두고 멤버가 돌아다니며 골랐습니다</span></p>
+  </div></div>
+<div class="slide-section"><div class="label">2022 · 눈 내린 혜화1938</div>
+  <h2>눈 쌓인 한옥 마당에서 두 번 열었습니다</h2>
+  <div style="display:grid; grid-template-columns:repeat(3, 1fr); grid-template-rows:220px 220px; gap:12px;">
+    <img class="ph" src="img/hfk-year-end/hanok-yard.jpg" alt="눈 쌓인 한옥 마당">
+    <img class="ph" src="img/hfk-year-end/hanok-photozone.jpg" alt="풍선이 걸린 포토존">
+    <img class="ph" src="img/hfk-year-end/hanok-brochure.jpg" alt="파티 브로셔">
+    <img class="ph" src="img/hfk-year-end/hanok-gifts.jpg" alt="수돗가 옆 럭키드로우 선물">
+    <img class="ph" src="img/hfk-year-end/hanok-room.jpg" alt="안채에서 이야기하는 멤버들">
+    <img class="ph" src="img/hfk-year-end/hanok-group.jpg" alt="한옥 앞 단체 사진">
+  </div>
+  <p class="cap" style="text-align:left;">사진 앱 '22 HFK Nov-Jan' 앨범의 12월 15일 사진입니다</p></div>
+<div class="slide-section"><div class="label">2023 · 서울브루어리 성수 · Your presence will be our present</div>
+  <h2>선물과 리본, 장소가 세 번 바뀐 파티</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:start;">
+    <div class="card" style="padding:10px 18px;">
+      <p class="bold" style="color:var(--text); margin-bottom:6px;">장소가 세 번 바뀌었습니다</p>
+      <table class="tl" style="width:100%; border-collapse:collapse; line-height:1.5; color:var(--text);">
+        <tr><td class="dim" style="width:22%;">10월 12일</td><td>삼성 강남 확정. 대관비는 무료지만 케이터링이 안 됨</td></tr>
+        <tr><td class="dim">10월 19일</td><td>답사해 보니 사무실 조명에 극장식 좌석이라 대화하기 어려움. 광화문이 보이는 더룸 탁트인 검토</td></tr>
+        <tr><td class="dim" style="border-bottom:none;">11월 22일</td><td style="border-bottom:none;"><span class="bold">서울브루어리 성수 5층으로 최종 확정</span></td></tr>
+      </table>
+      <p class="cap" style="text-align:left;">TF 문서에는 10월 12일부터 11월 22일까지 회의와 수정안이 다섯 번 적혀 있습니다 · 대상은 23시즌에 한 번이라도 등록한 멤버</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div class="card" style="padding:10px 18px;"><p style="color:var(--text);"><span class="bold">선물과 리본</span> · 입장할 때 리본 색을 뽑고 4명씩 한 테이블에 앉는 계획이었습니다</p></div>
+      <div class="card" style="padding:10px 18px;"><p style="color:var(--text);"><span class="bold">굿즈 와인잔</span> · 컵에 HFK에서 인상 깊었던 점을 적으며 입장하는 계획이었습니다</p></div>
+      <div class="card" style="padding:10px 18px;"><p style="color:var(--text);"><span class="bold">2024 HFK 방향</span> · You are a Community Leader. 팀 파트너와 클럽 호스트에 도전해 보자고 제안했습니다</p></div>
+      <div class="card" style="padding:10px 18px;"><p style="color:var(--text);"><span class="bold">뒤풀이</span> · 살롱드룰렛. 미리 신청한 멤버들이 무작위로 짝을 지어 저녁을 먹습니다</p></div>
+    </div>
+  </div>
+  <p class="cap" style="text-align:left; margin-top:10px;">프로그램은 TF 최종 기획안(11월 22일) 기준입니다 · 드레스코드 화이트와 베이지에 레드 포인트 · <span class="ask">❓ 확인: 실제 참석 인원</span></p></div>
+<div class="slide-section"><div class="label">2023 · 12월 2일 서울브루어리 성수</div>
+  <h2>긴 테이블에 앉아 2024년 계획을 들었습니다</h2>
+  <div style="display:grid; grid-template-columns:repeat(3, 1fr); grid-template-rows:220px 220px; gap:12px;">
+    <img class="ph" src="img/hfk-year-end/brewery-screen.jpg" alt="Your presence will be our present 화면">
+    <img class="ph" src="img/hfk-year-end/brewery-plan.jpg" alt="HFK 2024 계획 발표 화면">
+    <img class="ph" src="img/hfk-year-end/brewery-hall.jpg" alt="서울브루어리 5층 전경">
+    <img class="ph" src="img/hfk-year-end/brewery-table.jpg" alt="테이블에 앉은 멤버들">
+    <img class="ph" src="img/hfk-year-end/brewery-two.jpg" alt="이야기하는 멤버 두 명">
+    <img class="ph" src="img/hfk-year-end/brewery-laugh.jpg" alt="웃고 있는 멤버들">
+  </div>
+  <p class="cap" style="text-align:left;">사진 앱 '23 HFK Nov-Jan' 앨범의 12월 2일 사진입니다</p></div>
+<div class="slide-section"><div class="label">2024 · 더 플라자 호텔 메이플홀</div>
+  <h2>10주년, 오아시스 앞 호텔에서 91명이</h2>
+  <div style="display:grid; grid-template-columns:1fr 1.25fr; gap:22px; align-items:stretch;">
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div class="card" style="padding:12px 18px;"><p style="font-size:1.3em; font-weight:700; color:var(--accent); line-height:1.1;">91명</p><p class="stat-label">얼리버드 기간에 정원 90명이 마감됐습니다</p></div>
+      <div class="card" style="padding:12px 18px;"><p style="font-size:1.3em; font-weight:700; color:var(--accent); line-height:1.1;">983개</p><p class="stat-label">멤버들이 40여 개 품목, 약 2,200만원어치 선물을 협찬했습니다</p></div>
+      <div class="card" style="padding:12px 18px;"><p style="font-size:1.3em; font-weight:700; color:var(--accent); line-height:1.1;">14.5만원</p><p class="stat-label">티켓비와 참석자 모두에게 준 선물 약 10종의 값이 비슷했습니다</p></div>
+    </div>
+    <div style="height:470px;"><img class="ph" src="img/hfk-year-end/plaza-luckydraw.jpg" alt="럭키드로우 선물과 풍선 장식"></div>
+  </div>
+  <p class="cap" style="text-align:left; margin-top:10px;">12월 15일 (일) 18:00 · 인터내셔널 뷔페 · 포토부스 · 미니게임 · 2025 HFK 플랜 소개 · 럭키드로우 · 드레스코드 블랙과 레드, 비즈니스 캐주얼</p></div>
+<div class="slide-section"><div class="label">2024 · 아이스브레이킹</div>
+  <h2>초대장에 적힌 연도로 테이블을 골랐습니다</h2>
+  <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;">
+    <div><div style="height:250px;"><img class="ph" src="img/hfk-year-end/plaza-invites.jpg" alt="연도가 적힌 초대장"></div><p class="cap">기억하고 싶거나 궁금한 해의 초대장을 골라 앉았습니다. 초대장 안에는 그해 HFK의 인상 깊은 이벤트를 적었습니다</p></div>
+    <div><div style="height:250px;"><img class="ph" src="img/hfk-year-end/plaza-year-table.jpg" alt="2021 표지가 놓인 테이블"></div><p class="cap">테이블마다 연도 표지를 놓았습니다</p></div>
+    <div><div style="height:250px;"><img class="ph" src="img/hfk-year-end/plaza-nametag.jpg" alt="QR 명찰 출력기"></div><p class="cap">QR을 찍으면 명찰이 바로 나왔습니다. 멤버 영학님이 협찬한 이벤터스 서비스로 출석까지 확인했습니다</p></div>
+  </div>
+  <div class="summary-card" style="margin-top:16px;">
+    <p style="color:var(--text); margin:0;"><span class="accent2 bold">멤버가 회사에서 만든 선물</span> <span class="sub">오뚜기 카레는 멤버가 기획했고, 백세주는 멤버가 리브랜딩에 참여한 제품입니다</span></p>
+  </div></div>
+<div class="slide-section"><div class="label">2025 · 커먼테이블 (사당)</div>
+  <h2>작년과 반대로, 정원 30명이 자정까지</h2>
+  <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:22px; align-items:stretch;">
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div class="card" style="padding:12px 18px;"><p style="color:var(--text);"><span class="bold">작게, 대신 알차게</span><br>많이 초대하기보다 티켓비가 높더라도 그만큼의 시간을 준비하자는 파티였습니다. 선착순 30명, 12만원</p></div>
+      <div class="card" style="padding:12px 18px;"><p style="color:var(--text);"><span class="bold">올해의 ⭐️⭐️</span><br>테이블마다 올해의 책, 음악, 공간, 루틴, 잊히지 않는 말을 모았습니다. 멤버들은 테이블을 옮겨 다니며 리스트를 채웠습니다</p></div>
+      <div class="card" style="padding:12px 18px;"><p style="color:var(--text);"><span class="bold">밑줄 익스체인지</span><br>밑줄 그으며 읽은 책을 한 권씩 가져왔습니다. 누구에게 추천하는지 카드에 적고, 다른 멤버의 책과 바꿨습니다</p></div>
+    </div>
+    <div style="height:500px;"><img class="ph" src="img/hfk-year-end/ct-tree.jpg" alt="크리스마스 트리가 놓인 커먼테이블"></div>
+  </div>
+  <p class="cap" style="text-align:left; margin-top:10px;">12월 20일 (토) 18:00 · 멤버 주한님과 수연님이 운영하는 곳 · 선물: 오뚜기 산타 머그, 낼나 2026 연력, 하프타임 키링 · <span class="ask">❓ 확인: 실제 참석 인원 · 드레스코드</span></p></div>
+<div class="slide-section"><div class="label">2025 · 올해의 조각들</div>
+  <h2>책을 바꾸고, 이름이 적힌 와인 바스켓을 받았습니다</h2>
+  <div style="display:grid; grid-template-columns:repeat(3, 1fr); grid-template-rows:220px 220px; gap:12px;">
+    <img class="ph" src="img/hfk-year-end/ct-books.jpg" alt="멤버들이 가져온 책">
+    <img class="ph" src="img/hfk-year-end/ct-exchange.jpg" alt="밑줄 친 책을 펼쳐 보는 멤버">
+    <img class="ph" src="img/hfk-year-end/ct-writing.jpg" alt="추천 카드를 쓰는 멤버">
+    <img class="ph" src="img/hfk-year-end/ct-basket.jpg" alt="참석자 이름이 적힌 와인 바스켓">
+    <img class="ph" src="img/hfk-year-end/ct-talk.jpg" alt="테이블에서 이야기하는 멤버들">
+    <img class="ph" src="img/hfk-year-end/ct-plan.jpg" alt="내년 HFK 방향 발표">
+  </div>
+  <p class="cap" style="text-align:left;">와인 바스켓은 커먼테이블 대표 주한님이 참석자 명단을 받아 깜짝 선물로 준비했습니다 · 2026 HFK 방향: You are a Creator, '내 인프라는 내 자신이다'</p></div>
+<div class="section-separator" id="sec-3"><span class="sep-label">Part 2 · 해마다 이어진 것</span></div>
+<div class="slide-section"><div><div class="label">Part 2 · 해마다 이어진 것</div><h1 style="font-size:1.8em;">장소는 매년 바뀌어도 <span class="accent2">빠지지 않은 것</span></h1><p style="color:var(--text); margin-top:24px; line-height:1.8;">성수, 줌, 덕수궁, 혜화, 다시 성수, 시청, 사당. 장소와 규모는 해마다 달랐습니다.<br>그래도 기록이 남은 파티에는 같은 프로그램이 되풀이됩니다.</p></div></div>
+<div class="slide-section"><div class="label">Traditions</div><h2>해마다 이어진 네 가지</h2><div class="stack" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">멤버 협찬 럭키드로우</h3><p style="color:var(--text); margin-top:6px;">2019년 상품 19종에서 2024년 선물 983개까지 늘었습니다. 멤버가 회사에서 만든 제품과 서비스를 나눕니다</p><p class="dim" style="margin-top:6px;">2025년에는 참석자 모두에게 선물 3종을 드렸습니다(협찬 2종 · HFK 키링)</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">내년 HFK 방향 발표</h3><p style="color:var(--text); margin-top:6px;">2019 · 2020년 다음 해 프리뷰, 2023년 You are a Community Leader, 2025년 You are a Creator</p><p class="dim" style="margin-top:6px;">2024년 발표는 2025 HFK 플랜 · ❓ 확인: 슬로건</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">스몰토크 · 아이스브레이킹</h3><p style="color:var(--text); margin-top:6px;">2019 테이블별 인사, 2022 공간마다 다른 활동, 2023 리본 색, 2024 연도가 적힌 초대장, 2025 올해의 ⭐️⭐️</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">레드 드레스코드</h3><p style="color:var(--text); margin-top:6px;">2019 White and Red, 2022 블랙과 레드 아이템, 2023 화이트와 베이지에 레드 포인트, 2024 블랙과 레드</p><p class="dim" style="margin-top:6px;">2020은 온라인, 2021 · 2025는 ❓ 확인</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="color:var(--text); margin:0;"><span class="accent2 bold">2025년 후기에서</span> <span class="sub">'연말 파티는 대부분 서로 모르시는 분들로 가득 채워집니다. 그리고 매년 파티에서 어색하지 않게 새로운 사람을 알아갈 수 있는 프로그램을 준비합니다.'</span></p></div></div>
+<div class="slide-section"><div class="label">Scale · 규모와 티켓비</div>
+  <h2>큰 파티와 작은 파티를 오갔습니다</h2>
+  <div class="card" style="padding:16px 22px;">
+    <div style="display:grid; grid-template-columns:70px 1fr 120px; gap:12px 14px; align-items:center; color:var(--text);">
+      <span class="yr">2019</span><div class="bar" style="width:65%;"></div><span>59명 · 6만원</span>
+      <span class="yr">2020</span><div class="dim">온라인 · 인원 ❓</div><span>5천원</span>
+      <span class="yr">2021</span><div class="bar" style="width:22%;"></div><span>20명 · ❓</span>
+      <span class="yr">2022</span><div class="bar" style="width:33%; opacity:0.6;"></div><span>30명 · ❓</span>
+      <span class="yr">2023</span><div class="bar" style="width:66%; opacity:0.6;"></div><span>목표 60명 · 6.5만원</span>
+      <span class="yr">2024</span><div class="bar" style="width:100%; background:var(--accent2);"></div><span>91명 · 14.5만원</span>
+      <span class="yr">2025</span><div class="bar" style="width:33%; opacity:0.6;"></div><span>30명 · 12만원</span>
+    </div>
+    <p class="cap" style="text-align:left; margin-top:12px;">연한 막대는 정원이나 목표 인원입니다. 2019년은 신청 명단, 2021년과 2024년은 실제 참석 인원입니다</p>
+  </div>
+  <div class="summary-card" style="margin-top:16px;">
+    <p style="color:var(--text); margin:0;"><span class="accent2 bold">'반복되는 컨셉의 연말 파티에서 벗어나야 할 필요도 있었다'</span><br><span class="sub">2024년 파티를 마치고 쓴 메모입니다. 다음 해에는 반대로 작은 파티를 열었습니다</span></p>
+  </div></div>
+<div class="section-separator" id="sec-4"><span class="sep-label">2026 · 레터 7호에 공지한 내용</span></div>
+<div class="slide-section"><div class="label">2026 · 레터 7호에 공지한 내용</div><h2>2026년, 지금까지 정한 것</h2><div class="stack" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">짧은 강연과 네트워킹</h3><p style="color:var(--text); margin-top:6px;">역사, 재즈, 미술 분야의 짧은 강연을 듣고 네트워킹을 합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">이날 하루는 'AI' 금지</h3><p style="color:var(--text); margin-top:6px;">한 해 동안 AI라는 말에 많이 시달렸으니, 연말 하루만큼은 AI에서 한 발짝 떨어져 지식을 즐기자는 제안입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">12월 중 저녁</h3><p style="color:var(--text); margin-top:6px;">일시와 장소는 함께 정하고 있습니다 · ❓ 확인: 확정 날짜와 장소</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">TF 2명</h3><p style="color:var(--text); margin-top:6px;">세부 프로그램 기획과 현장 지원을 맡습니다. 오프라인 미팅은 2번 정도입니다</p></div></div></div>
+<div class="slide-section"><div class="label">Questions for TF</div><h2>지난 파티를 보고 TF와 정할 질문</h2><div class="stack" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">스몰토크와 아이스브레이킹은 무엇으로 할까요</h3><p style="color:var(--text); margin-top:6px;">2023년에는 리본, 2024년에는 연도 초대장, 2025년에는 올해의 ⭐️⭐️를 썼습니다. 올해는 강연 주제를 테이블 대화로 이을 방법이 필요합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">럭키드로우와 협찬은 어떻게 할까요</h3><p style="color:var(--text); margin-top:6px;">2024년처럼 추첨으로 할지, 2025년처럼 모두에게 나눌지 정합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">내년 HFK 방향 발표는 언제 할까요</h3><p style="color:var(--text); margin-top:6px;">강연 사이에 넣을지, 마무리에 둘지 정합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">드레스코드 레드를 이어갈까요</h3><p style="color:var(--text); margin-top:6px;">2019년부터 기록이 남은 해에는 늘 레드가 있었습니다</p></div></div></div>
+<div class="slide-section"><div style="display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center; height:640px;">
+    <div style="height:540px;"><img class="ph" src="img/hfk-year-end/ct-table.jpg" alt="2025년 커먼테이블에서 대화하는 멤버들"></div>
+    <div style="text-align:left;">
+      <div class="label">Closing</div>
+      <h1 style="font-size:1.6em;">2026년 12월을<br><span class="accent2">같이 준비합니다</span></h1>
+      <p style="margin-top:22px; line-height:1.9;">2019 성수 · 2020 줌 · 2021 덕수궁 · 2022 혜화<br>2023 성수 · 2024 시청 · 2025 사당 · 2026 ?</p>
+      <p style="margin-top:18px; color:var(--text);">Your Year-End Matters.</p>
+      <p class="dim" style="margin-top:30px;">2026 연말파티 TF 첫 모임 · HFK</p>
+    </div>
+  </div></div>
+
+<script>
+  document.querySelectorAll('#sticky-nav .nav-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+  const navItems = document.querySelectorAll('#sticky-nav .nav-item');
+  const sectionAnchors = ['sec-recap','sec-news','sec-work','sec-a','sec-workshop','sec-wrap'].map(id => document.getElementById(id));
+  function updateNav() {
+    const scrollY = window.scrollY + 60;
+    let activeIdx = 0;
+    sectionAnchors.forEach((anchor, i) => { if (anchor && anchor.offsetTop <= scrollY) activeIdx = i; });
+    navItems.forEach((item, i) => item.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+</script>
+</body>
+</html>

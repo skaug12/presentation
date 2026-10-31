@@ -111,6 +111,13 @@
     .yr { font-weight:700; color:var(--accent); }
     .bar { height:26px; border-radius:4px; background:var(--accent); }
     .tl .ask, .cap .ask { font-size:0.95em; padding:2px 8px; }
+    /* 모바일판(make_deck_mobile)에서만: 두 칸 배치를 세로로 쌓는다 */
+    .slide-section div[style*="grid-template-columns"] { grid-template-columns:1fr !important; height:auto !important; }
+    .slide-section div[style*="repeat(3"][style*="grid-template-rows"] { grid-template-columns:repeat(2, 1fr) !important; grid-template-rows:none !important; grid-auto-rows:130px; }
+    .slide-section div[style*="grid-template-columns:70px"] { grid-template-columns:44px 1fr 92px !important; }
+    .slide-section div[style*="height:"]:has(> img.ph) { height:240px !important; }
+    .slide-section .card:has(> table.tl) { overflow-x:auto; }
+    .slide-section table.tl:has(th) { min-width:560px; }
   </style>
   <div style="display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center; height:640px;">
     <div style="text-align:left;">
