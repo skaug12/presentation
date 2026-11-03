@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3-1. 3사분면 스킬 발견 · 너희가 꽃이다 7회차</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #F8F7F4;
+    --text: #2C2C2C;
+    --text-sub: #6B6B6B;
+    --text-dim: #9A9A9A;
+    --accent: #8B5E3C;
+    --accent2: #3D5A80;
+    --accent3: #5B7B5E;
+    --accent4: #7B6B8A;
+    --accent5: #8A5E5E;
+    --accent6: #5A7B7B;
+    --card-bg: #F1EFEA;
+    --r-background-color: var(--bg);
+    --r-main-font: 'Pretendard', -apple-system, sans-serif;
+    --r-heading-font: 'Pretendard', -apple-system, sans-serif;
+    --r-main-color: var(--text);
+    --r-heading-color: var(--text);
+    --r-main-font-size: 30px;
+  }
+  .reveal { font-weight: 400; }
+  .reveal h1 { font-size: 2.4em; font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; }
+  .reveal h2 { font-size: 1.3em; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5em; }
+  .reveal h3 { font-size: 0.7em; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 6px; word-break: keep-all; overflow-wrap: break-word; }
+  .reveal p { font-size: 0.6em; line-height: 1.6; color: var(--text-sub); }
+  .reveal li { font-size: 0.6em; line-height: 1.6; color: var(--text-sub); }
+  .reveal ul { list-style: none; padding-left: 0; margin: 0; }
+  .reveal ul li { padding-left: 14px; position: relative; }
+  .reveal ul li::before { content: ""; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; border-radius: 50%; background: var(--text-dim); }
+  .reveal ol { padding-left: 18px; }
+  .reveal ol li { padding-left: 4px; }
+  .reveal ol li::before { display: none; }
+  .reveal section { text-align: left; padding: 36px 60px 56px !important; box-sizing: border-box; overflow: hidden; }
+  .reveal .slides section:not(.present) { opacity: 0 !important; visibility: hidden !important; }
+  .reveal code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.88em; }
+  .reveal .slides { text-align: left; }
+  .reveal .slide-number { font-family: 'Pretendard'; font-size: 11px; color: var(--text-dim); }
+  .reveal .controls { color: var(--accent); }
+  .reveal .progress { display: none; }
+
+  .sub { color: var(--text-sub); }
+  .dim { color: var(--text-dim); }
+  .accent { color: var(--accent); }
+  .accent2 { color: var(--accent2); }
+  .accent3 { color: var(--accent3); }
+  .accent4 { color: var(--accent4); }
+  .accent5 { color: var(--accent5); }
+  .accent6 { color: var(--accent6); }
+  .bold { font-weight: 600; }
+  .small { font-size: 0.6em !important; }
+  .tiny { font-size: 0.52em !important; }
+
+  .label { font-size: 0.42em; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+
+  .grid { display: grid; gap: 24px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card { background: var(--card-bg); border-radius: 8px; padding: 22px 24px; overflow: hidden; }
+  .card h3 { margin: 0; }
+  .card p { margin: 0; }
+  .card ul, .card ol { margin: 0; }
+  .card > * + * { margin-top: 12px !important; }
+  .card li + li { margin-top: 3px; }
+
+  .code-block { background: #2C2C2C; border-radius: 8px; padding: 18px 22px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.52em; line-height: 1.85; color: #D4D0C8; text-align: left; }
+  .code-block .prompt { color: var(--accent3); }
+  .code-block .cmd { color: #D4A574; }
+  .code-block .comment { color: #6B6B6B; }
+
+  .skill-tag { display: inline-block; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.5em; font-weight: 500; padding: 3px 10px; border-radius: 4px; background: rgba(139,94,60,0.08); color: var(--accent); margin-bottom: 8px; }
+
+  .summary-card { background: var(--card-bg); border-radius: 8px; padding: 14px 24px; text-align: center; }
+  .qblock { background: rgba(139,94,60,0.06); border-radius: 8px; padding: 14px 20px; }
+
+  .placeholder { border: 1.5px dashed rgba(139,94,60,0.4); background: rgba(139,94,60,0.03); }
+  .fillnote { font-size: 0.46em; color: var(--accent); background: rgba(139,94,60,0.07); border-radius: 6px; padding: 8px 14px; }
+
+  .stat-num { font-size: 1.4em; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+  .stat-label { font-size: 0.46em; color: var(--text-sub); margin-top: 4px; }
+
+  .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #F8F7F4; font-size: 0.48em; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+
+  #custom-progress { position: fixed; bottom: 0; left: 0; right: 0; height: 28px; background: #ECEAE5; display: flex; z-index: 100; font-family: 'Pretendard', sans-serif; }
+  #custom-progress .seg { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.02em; position: relative; transition: background 0.3s, color 0.3s; cursor: pointer; }
+  #custom-progress .seg.active { background: var(--accent); color: #F8F7F4; }
+  #custom-progress .seg.done { background: rgba(139,94,60,0.2); color: var(--accent); }
+  #custom-progress .seg + .seg { border-left: 1px solid rgba(0,0,0,0.06); }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%; text-align:center;"><h1>3-1. 3사분면 <span class="accent2">스킬 발견</span></h1><p style="font-size:0.78em; color:var(--text-sub); font-weight:400; margin-top:16px;">7회차 · ③ 스킬과 다른 프로그램 연결</p><p class="dim" style="font-size:0.46em; margin-top:40px;">너희가 꽃이다 AX · 7회차 · 11월 3일 (화) · @Seulki.log</p></div></section>
+
+<section>
+  <div class="label">Map · 넉 달 중 지금 위치</div> <h2>열네 번 중 일곱 번째, ③ 칸을 시작합니다</h2> <div style="display:grid; grid-template-columns:repeat(14, 1fr); gap:6px; margin:18px 0 10px;"> <div class="card" style="padding:10px 4px; text-align:center; opacity:0.55;"><p class="dim" style="font-size:0.36em; margin:0;">8/25</p><p class="bold " style="font-size:0.46em; margin:4px 0 0;">1</p></div> <div class="card" style="padding:10px 4px; text-align:center; opacity:0.55;"><p class="dim" style="font-size:0.36em; margin:0;">9/15</p><p class="bold " style="font-size:0.46em; margin:4px 0 0;">2</p></div> <div class="card" style="padding:10px 4px; text-align:center; opacity:0.55;"><p class="dim" style="font-size:0.36em; margin:0;">9/22</p><p class="bold accent" style="font-size:0.46em; margin:4px 0 0;">3</p></div> <div class="card" style="padding:10px 4px; text-align:center; opacity:0.55;"><p class="dim" style="font-size:0.36em; margin:0;">10/6</p><p class="bold accent" style="font-size:0.46em; margin:4px 0 0;">4</p></div> <div class="card" style="padding:10px 4px; text-align:center; opacity:0.55;"><p class="dim" style="font-size:0.36em; margin:0;">10/13</p><p class="bold accent3" style="font-size:0.46em; margin:4px 0 0;">5</p></div> <div class="card" style="padding:10px 4px; text-align:center; opacity:0.55;"><p class="dim" style="font-size:0.36em; margin:0;">10/20</p><p class="bold accent3" style="font-size:0.46em; margin:4px 0 0;">6</p></div> <div class="card" style="padding:10px 4px; text-align:center; outline:2px solid var(--accent2);"><p class="dim" style="font-size:0.36em; margin:0;">11/3</p><p class="bold accent2" style="font-size:0.46em; margin:4px 0 0;">7</p></div> <div class="card" style="padding:10px 4px; text-align:center;"><p class="dim" style="font-size:0.36em; margin:0;">11/10</p><p class="bold accent2" style="font-size:0.46em; margin:4px 0 0;">8</p></div> <div class="card" style="padding:10px 4px; text-align:center;"><p class="dim" style="font-size:0.36em; margin:0;">11/17</p><p class="bold accent4" style="font-size:0.46em; margin:4px 0 0;">9</p></div> <div class="card" style="padding:10px 4px; text-align:center;"><p class="dim" style="font-size:0.36em; margin:0;">11/24</p><p class="bold accent4" style="font-size:0.46em; margin:4px 0 0;">10</p></div> <div class="card" style="padding:10px 4px; text-align:center;"><p class="dim" style="font-size:0.36em; margin:0;">12/1</p><p class="bold" style="font-size:0.46em; margin:4px 0 0;">11</p></div> <div class="card" style="padding:10px 4px; text-align:center;"><p class="dim" style="font-size:0.36em; margin:0;">12/8</p><p class="bold" style="font-size:0.46em; margin:4px 0 0;">12</p></div> <div class="card" style="padding:10px 4px; text-align:center;"><p class="dim" style="font-size:0.36em; margin:0;">12/15</p><p class="bold" style="font-size:0.46em; margin:4px 0 0;">13</p></div> <div class="card" style="padding:10px 4px; text-align:center;"><p class="dim" style="font-size:0.36em; margin:0;">12/22</p><p class="bold" style="font-size:0.46em; margin:4px 0 0;">14</p></div> </div> <div class="grid grid-4" style="gap:12px; margin-bottom:14px;"> <div class="card" style="padding:12px 16px; opacity:0.6;"><h3 class="accent">① 3 · 4회차 ✓</h3><p style="color:var(--text); margin-top:6px;">반복되고 익숙한 일입니다. Claude에게 처음부터 끝까지 맡겼습니다</p></div> <div class="card" style="padding:12px 16px; opacity:0.6;"><h3 class="accent3">② 5 · 6회차 ✓</h3><p style="color:var(--text); margin-top:6px;">반복되지만 매번 결정이 필요한 일입니다. 내가 결정할 곳을 스킬에 남겼습니다</p></div> <div class="card" style="padding:12px 16px; outline:2px solid var(--accent2);"><h3 class="accent2">③ 7 · 8회차</h3><p style="color:var(--text); margin-top:6px;">할 때마다 내용이 달라지는 일입니다. 오늘 시작합니다</p></div> <div class="card" style="padding:12px 16px;"><h3 class="accent4">④ 9 · 10회차</h3><p style="color:var(--text); margin-top:6px;">그동안 하고 싶었던 일입니다. 그 뒤로 11 · 12회차에 강의를 듣고, 13회차에 일상 업무에 적용하고, 14회차에 결과를 공유합니다</p></div> </div> <div class="summary-card" style="padding:12px 20px;"> <p style="font-size:0.54em; color:var(--text); margin:0;"> <span class="accent2 bold">10월 27일은 쉬었습니다</span> <span class="sub">그래서 7회차부터 한 주씩 밀려, 마지막 14회차는 12월 22일입니다.</span> </p> </div>
+
+</section>
+
+<section><div class="label">Agenda · 7회차 · 12:30 시작</div><h2>오늘은 스킬과 개념을 설명하고, 실습은 10분만 합니다</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">③ 칸은 무엇이 다른가</h3><p style="color:var(--text); margin-top:6px;">할 때마다 내용이 달라지는 일을 스킬로 만들 때 무엇을 적는지 설명합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">이미 받은 스킬 세 가지</h3><p style="color:var(--text); margin-top:6px;">문서 초안, 회의록, 자료조사 스킬이 어떻게 움직이는지 하나씩 열어 봅니다</p><p class="dim" style="margin-top:6px;">5회차에 받은 작업 폴더 안에 이미 들어 있습니다. 새로 설치할 것은 없습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">다른 프로그램과 연결하기</h3><p style="color:var(--text); margin-top:6px;">구글 캘린더 · 시트와 Claude를 잇는 방법, 통통통처럼 연결 통로가 없는 사이트를 다루는 방법을 설명합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">작업이 끊기지 않게</h3><p style="color:var(--text); margin-top:6px;">여러 날 걸리는 일을 이어 가도록 CLAUDE.md에 넣을 작업 로그 규칙을 드립니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">실습 10분과 1:1 코칭</h3><p style="color:var(--text); margin-top:6px;">가져오신 ③ 후보 하나로 스킬을 한 번만 불러 봅니다. 구글 연결과 Aside 설치는 1:1 시간에 함께 합니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">오늘의 목표</span> <span class="sub">③ 일을 Claude에게 맡길 때 필요한 스킬과 연결 방법을 이해합니다. 직접 써 보는 일은 이번 주에 각자 합니다</span></p></div></section>
+
+<section><div class="label">Concept · ①·②와 달라지는 것</div><h2>③ 일은 매번 내용이 달라서, 스킬에는 틀을 적습니다</h2><p style="margin-bottom:12px;">① 스킬에는 순서를 처음부터 끝까지 적었고, ② 스킬에는 내가 결정할 곳을 적었습니다. ③ 일은 할 때마다 내용이 달라서 같은 순서를 그대로 되풀이할 수 없습니다. 그래서 내용 대신 아래 네 가지를 스킬에 적습니다.</p><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">틀 · 매번 같은 뼈대</h3><p style="color:var(--text); margin-top:6px;">기획서라면 문제, 이유, 할 일, 비용, 일정처럼 늘 같은 순서만 스킬에 둡니다. 내용은 그때그때 채웁니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">빈칸 · 모르는 곳은 비워 두기</h3><p style="color:var(--text); margin-top:6px;">자료가 없는 칸을 Claude가 그럴듯한 문장으로 채우지 않게 합니다. 빈칸 목록이 곧 내가 할 일입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">출처 · 사실마다 근거</h3><p style="color:var(--text); margin-top:6px;">처음 보는 내용이라 틀려도 알아채기 어렵습니다. 숫자와 사실마다 출처를 붙이게 해서 확인할 곳을 남깁니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">기록 · 다음 번에 이어 가기</h3><p style="color:var(--text); margin-top:6px;">자주 하지 않는 일이라 지난번 방법을 잊기 쉽습니다. 기록을 남겨 두고, 다음에는 그 기록부터 읽게 합니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">오늘 소개하는 세 스킬에 이 네 가지가 모두 들어 있습니다</span> <span class="sub">스킬 파일을 열어 보면 '하지 않을 것' 칸에 빈칸과 출처 규칙이 적혀 있습니다</span></p></div></section>
+
+<section><div class="label">Concept · 스킬 · 기준 · 기록</div><h2>Claude는 ③ 일을 할 때 파일 세 종류를 읽습니다</h2><p style="margin-bottom:12px;">스킬 하나만으로는 ③ 일이 잘 되지 않습니다. 작업 폴더 안의 세 가지 파일이 함께 있어야 내 일처럼 나옵니다.</p><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">스킬 · <code class="accent">.claude/skills/</code></h3><p style="color:var(--text); margin-top:6px;">매번 같은 틀과 순서, 그리고 하지 않을 것을 적습니다</p><p class="dim" style="margin-top:6px;">오늘 소개하는 세 스킬이 여기에 있습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">기준 · <code class="accent">guide/</code></h3><p style="color:var(--text); margin-top:6px;">내 말투, 표기 규칙, 결정 기준을 적습니다</p><p class="dim" style="margin-top:6px;">6회차에 만든 말투 파일과 결정 기준 파일이 여기에 있습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">기록 · <code class="accent">worklog/</code> · <code class="accent">output/</code></h3><p style="color:var(--text); margin-top:6px;">지난번에 무엇을 했고 어디서 멈췄는지 남습니다</p><p class="dim" style="margin-top:6px;">5회차에 받은 리캡 스킬이 이 기록을 읽어 하던 일을 되살립니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">셋 중 하나가 빠지면</span> <span class="sub">기준이 없으면 남이 쓴 것 같은 글이 나옵니다. 기록이 없으면 일을 시작할 때마다 처음부터 설명해야 합니다</span></p></div></section>
+
+<section><div class="label">Skills · 무엇을 하고, 어떻게 부르나</div><h2>작업 폴더에 이미 있는 ③ 스킬 세 가지</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">문서 초안 · <code class="accent">yrf-doc-draft</code></h3><p style="color:var(--text); margin-top:6px;">기획서, 제안서, 보고서의 뼈대를 세우고 자료가 있는 칸만 채웁니다</p><p class="dim" style="margin-top:6px;">이렇게 부릅니다: '기획서 초안 써줘', '이거 문서로 정리해줘'</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">회의록 · <code class="accent">yrf-meeting-notes</code></h3><p style="color:var(--text); margin-top:6px;">회의 메모나 녹취를 네 칸으로 나눕니다. 결정된 것 · 할 일 · 결론이 안 난 것 · 다음 회의입니다</p><p class="dim" style="margin-top:6px;">이렇게 부릅니다: '회의록 정리해줘', '이 미팅에서 뭐 정해졌지'</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">자료조사 · <code class="accent">yrf-research</code></h3><p style="color:var(--text); margin-top:6px;">출처가 붙은 자료조사를 합니다. 못 찾은 것은 못 찾았다고 남깁니다</p><p class="dim" style="margin-top:6px;">이렇게 부릅니다: '이거 좀 알아봐줘', '사실인지 확인해줘'</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">스킬 이름은 외우지 않아도 됩니다</span> <span class="sub">평소 말로 부탁하면 Claude가 스킬 파일 맨 위의 설명 문장을 보고 맞는 스킬을 고릅니다. 설명 문장에 적힌 부르는 말이 그 기준입니다</span></p></div></section>
+
+<section>
+  <div class="label">Skill 1 · 문서 초안 · yrf-doc-draft</div> <h2>빈 화면 앞에서 보내는 30분을 없앱니다</h2> <p style="margin-bottom:12px;">이 스킬은 뼈대와 빈칸까지만 만들고, 결정은 나에게 남깁니다. <span class="bold">맨 먼저 읽는 사람이 누구인지 묻습니다.</span> 원장님께 올리는 글인지, 학부모께 보내는 글인지, 동료와 나누는 글인지에 따라 첫 문단이 달라지기 때문입니다.</p> <div class="grid grid-3" style="gap:16px; margin-bottom:14px;"> <div class="card" style="padding:16px 20px;"> <h3 class="accent">기획서</h3> <p style="color:var(--text); margin-top:6px;">문제 · 왜 지금 · 무엇을 · 어떻게 · 얼마 · 언제 · 성공 기준</p> <p class="dim" style="font-size:0.42em; margin-top:8px;">예: 겨울방학 특강 기획</p> </div> <div class="card" style="padding:16px 20px;"> <h3 class="accent3">제안서</h3> <p style="color:var(--text); margin-top:6px;">상대의 상황 · 문제 · 해결 · 근거가 되는 사례와 숫자 · 비용 · 다음 단계</p> <p class="dim" style="font-size:0.42em; margin-top:8px;">예: 협력 학교나 업체에 보내는 제안</p> </div> <div class="card" style="padding:16px 20px;"> <h3 class="accent2">보고서</h3> <p style="color:var(--text); margin-top:6px;">결론 먼저 · 근거 · 과정 · 남은 것과 위험</p> <p class="dim" style="font-size:0.42em; margin-top:8px;">예: 원기옥 한 달 결과 보고</p> </div> </div> <div class="qblock" style="padding:14px 20px;"> <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;"> <span class="accent2 bold">문장은 내 말투 파일을 따릅니다</span> <code>guide/말투.md</code>가 있으면 그 기준으로 씁니다. 없으면 먼저 <code>yrf-my-voice</code>로 말투 파일을 만들자고 권합니다. 결과물은 <code>output/2026-11/기획서-겨울특강-1103.md</code>처럼 저장됩니다. </p> </div>
+
+</section>
+
+<section>
+  <div class="label">Skill 1 · 문서 초안 · 결과물 맨 위</div> <h2>결과물 맨 위에는 빈칸 목록이 붙습니다</h2> <div style="display:grid; grid-template-columns:1.3fr 1fr; gap:16px; margin-bottom:14px;"> <div class="card" style="padding:18px 24px;"> <p style="font-size:0.46em; line-height:1.95; color:var(--text); margin:0; font-family:ui-monospace,Menlo,monospace;"> <span class="accent bold"># 기획서 · 겨울방학 특강 · 초안</span><br><br> <span class="accent2 bold">빈칸 목록 · 구해 와야 완성됩니다</span><br> [ ] 작년 겨울 특강 수강생 수 · 행정 시트 필요<br> [ ] 강사별 가능한 시간 · 강사 확인 필요<br> [ ] 교재 제작비 · 지난 견적 필요<br><br> <span class="accent bold">## 문제</span><br> 방학 중 고2 내신 대비 수업이 없다 <span class="dim">(10/20 상담 기록)</span><br> <span class="accent bold">## 비용</span><br> 교재비 [출처 필요] </p> </div> <div style="display:flex; flex-direction:column; gap:12px;"> <div class="card" style="padding:14px 20px;"> <h3 class="accent3">빈칸은 그럴듯하게 채우지 않습니다</h3> <p style="color:var(--text); margin-top:6px;">모르는 칸은 <code>[ ]</code>로 비워 두고 무엇이 필요한지 적습니다</p> </div> <div class="card" style="padding:14px 20px;"> <h3 class="accent2">숫자를 지어내지 않습니다</h3> <p style="color:var(--text); margin-top:6px;">예시 숫자를 넣을 때는 반드시 '(예시)'를 붙입니다. 출처가 없으면 '[출처 필요]'라고 적습니다</p> </div> <div class="card" style="padding:14px 20px;"> <h3 class="accent4">완성본이라고 말하지 않습니다</h3> <p style="color:var(--text); margin-top:6px;">이 스킬의 결과물은 언제나 초안입니다</p> </div> </div> </div> <div class="summary-card" style="padding:12px 20px;"> <p style="font-size:0.54em; color:var(--text); margin:0;"> <span class="accent2 bold">빈칸 목록이 이번 주 내 할 일입니다</span> <span class="sub">위 예시의 내용은 설명을 위해 지어낸 것입니다. 실제 초안에서는 내가 건넨 자료로 채운 칸에만 내용이 들어갑니다.</span> </p> </div>
+
+</section>
+
+<section>
+  <div class="label">Skill 2 · 회의록 · yrf-meeting-notes</div> <h2>회의가 끝나면 누가 무엇을 언제까지 하는지만 남깁니다</h2> <div class="grid grid-4" style="gap:12px; margin-bottom:14px;"> <div class="card" style="padding:14px 18px;"> <h3 class="accent">결정된 것</h3> <p style="color:var(--text); margin-top:6px;">확정된 문장만 적습니다</p> </div> <div class="card" style="padding:14px 18px;"> <h3 class="accent3">할 일</h3> <p style="color:var(--text); margin-top:6px;">담당 · 할 일 · 마감일 세 칸을 함께 적습니다</p> </div> <div class="card" style="padding:14px 18px;"> <h3 class="accent2">결론이 안 난 것</h3> <p style="color:var(--text); margin-top:6px;">이야기는 했지만 정하지 못한 것입니다</p> </div> <div class="card" style="padding:14px 18px;"> <h3 class="accent4">다음 회의</h3> <p style="color:var(--text); margin-top:6px;">날짜와 안건입니다</p> </div> </div> <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:14px;"> <div class="card" style="padding:14px 20px;"> <h3 class="accent5">추측해서 채우지 않습니다</h3> <p style="color:var(--text); margin-top:6px;">담당자나 마감일이 비어 있으면 비어 있다고 표시하고 따로 알려 줍니다. 회의에서 아무도 맡지 않은 일이 이렇게 드러납니다</p> </div> <div class="card" style="padding:14px 20px;"> <h3 class="accent5">말을 매끄럽게 고치지 않습니다</h3> <p style="color:var(--text); margin-top:6px;">결정 문장은 원래 한 말에 가깝게 남깁니다. 잡담은 요약에 넣지 않습니다</p> </div> </div> <div class="qblock" style="padding:12px 20px;"> <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;"> <span class="accent2 bold">6회차에 받은 질문의 답이기도 합니다</span> 회의록을 AI가 쓰면 머릿속에 남지 않아 불안하다는 질문이 있었습니다. 결정 문장이 원래 말 그대로 남아 있으면, 나중에 '그때 뭐라고 정했지?'를 Claude에게 물어 바로 찾을 수 있습니다. 밖으로 보낼 사본은 <code>yrf-privacy-check</code>를 먼저 돌립니다. </p> </div>
+
+</section>
+
+<section>
+  <div class="label">Skill 3 · 자료조사 · yrf-research</div> <h2>AI가 가장 자주 틀리는 일이라 출처를 꼭 붙이게 합니다</h2> <p style="margin-bottom:12px;">AI는 모르는 것도 그럴듯하게 답합니다. 조사는 AI에게 가장 많이 시키는 일이면서 가장 많이 틀리는 일입니다. 이 스킬은 모든 문장에 출처와 날짜를 붙이게 해서, 확인할 수 있는 답만 남깁니다.</p> <div style="display:grid; grid-template-columns:1fr 1.4fr; gap:16px; margin-bottom:14px;"> <div class="card" style="padding:16px 20px;"> <h3 class="accent">1 · 질문을 잘게 나눕니다</h3> <p style="color:var(--text); margin-top:6px;">'학원 시장이 얼마나 커?'라는 질문은 답할 수 없습니다. '세종시 · 2024~2026년 · 고등부 · 어느 기관의 집계'처럼 나누어야 답이 나옵니다</p> </div> <div class="card" style="padding:16px 20px;"> <h3 class="accent3">2 · 세 칸으로 나누어 보고합니다</h3> <p style="color:var(--text); margin-top:6px;"><span class="bold">확인된 것</span>은 출처가 두 곳 이상인 내용입니다. <span class="bold">한 곳에서만 나온 것</span>은 따로 표시합니다. <span class="bold">못 찾은 것</span>은 빈칸으로 남깁니다</p> </div> </div> <div class="grid grid-3" style="gap:16px; margin-bottom:12px;"> <div class="card" style="padding:12px 18px;"><p style="color:var(--text); margin:0;">숫자가 서로 다르면 평균을 내지 않고, 둘 다 적고 어디서 갈리는지 씁니다</p></div> <div class="card" style="padding:12px 18px;"><p style="color:var(--text); margin:0;">블로그와 커뮤니티 글은 1차 출처로 쓰지 않고, 원래 자료를 찾아 들어갑니다</p></div> <div class="card" style="padding:12px 18px;"><p style="color:var(--text); margin:0;">연도, 금액, 비율은 기억으로 쓰지 않습니다</p></div> </div> <p class="dim" style="font-size:0.42em;">결과물은 <code>output/2026-11/조사-주제-1103.md</code>로 저장되고, 문서 초안 스킬이 이 파일을 읽어 근거로 씁니다.</p>
+
+</section>
+
+<section><div class="label">Skills · 겨울방학 특강을 기획한다면</div><h2>세 스킬은 이어서 씁니다</h2><p style="margin-bottom:12px;">조사 결과는 파일로 남고, 문서 초안 스킬이 그 파일을 읽습니다. 그래서 세 스킬을 순서대로 부르면 한 가지 일이 처음부터 끝까지 이어집니다.</p><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">1 · 자료조사</h3><p style="color:var(--text); margin-top:6px;">'세종시 고등부 겨울방학 특강 사례를 알아봐줘'</p><p class="dim" style="margin-top:6px;">출처가 붙은 조사 파일이 <code class="accent">output/</code>에 남습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">2 · 문서 초안</h3><p style="color:var(--text); margin-top:6px;">'방금 조사한 결과로 원장님께 올릴 기획서 초안을 써줘'</p><p class="dim" style="margin-top:6px;">빈칸 목록을 보고 필요한 자료를 구해 옵니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">3 · 회의록</h3><p style="color:var(--text); margin-top:6px;">기획 회의가 끝나면 메모를 붙이고 '회의록 정리해줘'</p><p class="dim" style="margin-top:6px;">결정된 것과 결론이 안 난 것이 나뉩니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">4 · 다시 문서 초안</h3><p style="color:var(--text); margin-top:6px;">'회의록에서 결정된 대로 기획서를 고쳐줘'</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">같은 일을 다음 해에 다시 할 때</span> <span class="sub">조사 파일, 기획서, 회의록이 모두 <code class="accent">output/</code>에 남아 있습니다. 리캡 스킬로 '작년 겨울 특강 기획 어떻게 했지?'라고 물으면 거기서 시작합니다</span></p></div></section>
+
+<section><div class="label">Connect · 개념</div><h2>Claude를 다른 프로그램과 잇는 방법은 세 가지입니다</h2><p style="margin-bottom:12px;">Claude Code는 혼자서는 내 컴퓨터 안의 파일만 다룹니다. 구글 캘린더나 학원 관리 사이트의 자료를 쓰려면 연결이 필요합니다.</p><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">커넥터 · MCP</h3><p style="color:var(--text); margin-top:6px;">프로그램 회사가 Claude와 이어지는 통로를 열어 둔 경우입니다. MCP는 AI와 프로그램을 잇는 공통 규격의 이름입니다</p><p class="dim" style="margin-top:6px;">구글 캘린더 · 시트처럼 많이 쓰는 서비스는 대부분 있습니다. 부탁하는 문장은 '구글 시트 연결해줘'입니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">명령어 도구 · CLI</h3><p style="color:var(--text); margin-top:6px;">프로그램을 글자 명령으로 다루는 도구를 설치하고, 그 명령은 Claude가 대신 입력합니다</p><p class="dim" style="margin-top:6px;">구글에는 gws라는 도구가 있습니다. 커넥터로 안 되는 일을 할 때 씁니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">브라우저 에이전트</h3><p style="color:var(--text); margin-top:6px;">연결 통로가 없는 사이트에서는 AI가 브라우저 화면을 보고 사람처럼 누르고 입력합니다</p><p class="dim" style="margin-top:6px;">Aside 브라우저가 이 방식입니다. 통통통처럼 학원 전용 사이트에 씁니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">고르는 순서</span> <span class="sub">커넥터가 있으면 커넥터를 씁니다. 없으면 명령어 도구, 둘 다 없을 때 브라우저 에이전트를 씁니다. 화면을 보고 움직이는 방식이 가장 느리고 자주 멈춥니다</span></p></div></section>
+
+<section><div class="label">Connect · 구글 캘린더 · 시트 · 드라이브</div><h2>구글을 연결하면 이런 일을 시킬 수 있습니다</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">일정 → 준비물</h3><p style="color:var(--text); margin-top:6px;">'다음 주 상담 일정마다 준비할 자료를 정리해줘'</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">시트 대조</h3><p style="color:var(--text); margin-top:6px;">'수강생 명단 시트에서 연락처가 겹치는 줄을 찾아줘'</p><p class="dim" style="margin-top:6px;">엑셀이나 CSV 파일로 받았다면 작업 폴더의 <code class="accent">yrf-sheet</code> 스킬로 같은 일을 합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">회의록 → 캘린더</h3><p style="color:var(--text); margin-top:6px;">'회의록의 할 일을 마감일에 맞춰 캘린더에 넣어줘. 넣기 전에 목록부터 보여줘'</p><p class="dim" style="margin-top:6px;">회의록 스킬과 이어지는 사용법입니다. 넣기 전에 목록을 보는 단계를 꼭 둡니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">드라이브 찾기</h3><p style="color:var(--text); margin-top:6px;">'드라이브에서 지난 겨울 특강 자료를 찾아줘'</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">읽은 내용도 Claude 서버로 갑니다</span> <span class="sub">캘린더와 시트에서 읽은 내용도 대화와 똑같이 처리됩니다. 학생과 학부모의 이름과 연락처를 함께 다루는 시트는 연결하기 전에 한 번 더 생각합니다</span></p></div></section>
+
+<section><div class="label">Connect · 작업 폴더 사용설명서 '도구' 편</div><h2>연결하기 전에 스스로 물어볼 네 가지</h2><p style="margin-bottom:12px;">5회차에 받은 작업 폴더의 <code class="accent">사용설명서/도구.md</code>에 적어 둔 기준입니다.</p><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">1 · 무엇을 자동으로 하려는가</h3><p style="color:var(--text); margin-top:6px;">쓸 곳이 정해지지 않았다면 연결하지 않습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">2 · 직접 세 번 이상 해 봤는가</h3><p style="color:var(--text); margin-top:6px;">아니라면 이번에는 직접 하고, 나중에 연결합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">3 · 학원 계정이라면 관리자 승인이 필요한가</h3><p style="color:var(--text); margin-top:6px;">학원 구글 계정은 관리자가 연결을 막아 두었을 수 있습니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">4 · 읽기 권한만 먼저 열었는가</h3><p style="color:var(--text); margin-top:6px;">읽기로 한 번 확인한 다음에 쓰기 권한을 엽니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">연결한 것은 적어 둡니다</span> <span class="sub">무엇을 어떤 권한으로 연결했는지 <code class="accent">guide/연결한도구.md</code>에 남깁니다. 연결에 쓰는 비밀번호는 <code class="accent">yrf-secrets</code> 스킬로 <code class="accent">.env</code> 파일에 보관합니다</span></p></div></section>
+
+<section>
+  <div class="label">Connect · 📋 행정 · Aside 브라우저로 통통통 다루기</div> <h2>화면 일은 Aside가, 파일 일은 Claude Code가 맡습니다</h2> <p style="margin-bottom:12px;">통통통처럼 학원 전용 사이트는 Claude와 이어지는 통로가 없습니다. 이때는 AI가 들어 있는 브라우저인 Aside가 사이트 화면을 대신 다루고, 내려받은 파일은 Claude Code가 정리합니다. 일을 한 번에 맡기지 않고 아래처럼 나누어 맡깁니다.</p> <div class="grid grid-4" style="gap:12px; margin-bottom:14px;"> <div class="card" style="padding:14px 18px;"> <h3 class="accent">1 · Aside</h3> <p style="color:var(--text); margin-top:6px;">통통통에서 수강생 명단을 내려받습니다</p> </div> <div class="card" style="padding:14px 18px;"> <h3 class="accent3">2 · Claude Code</h3> <p style="color:var(--text); margin-top:6px;">반별 수강료 청구표를 CSV 파일로 만듭니다</p> <p class="dim" style="font-size:0.42em; margin-top:6px;"><code>yrf-sheet</code> 스킬</p> </div> <div class="card" style="padding:14px 18px;"> <h3 class="accent2">3 · Claude Code</h3> <p style="color:var(--text); margin-top:6px;">지난달과 비교해 달라진 곳을 찾습니다</p> </div> <div class="card" style="padding:14px 18px;"> <h3 class="accent4">4 · Aside</h3> <p style="color:var(--text); margin-top:6px;">확인한 결과를 통통통에 입력합니다</p> </div> </div> <div class="qblock" style="padding:12px 20px;"> <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;"> <span class="accent2 bold">4번 단계는 보내기와 같습니다</span> 사이트에 입력한 내용은 되돌리기 어렵습니다. 5회차 카톡 보내기에서 배운 관문처럼, 입력하기 전에 Claude가 무엇을 넣을지 목록으로 보여 주고 내가 확인한 뒤에만 넣게 합니다. Aside 설치는 오늘 1:1 시간에 함께 합니다. </p> </div>
+
+</section>
+
+<section>
+  <div class="label">Log · CLAUDE.md에 넣는 작업 로그 규칙</div> <h2>여러 날 걸리는 일은 작업 로그 파일 하나로 이어 갑니다</h2> <p style="margin-bottom:12px;">대화가 길어지거나 다음 날 새 창을 열면 Claude는 앞의 대화를 기억하지 못합니다. 5회차에 받은 리캡 스킬은 남은 기록을 읽어 하던 일을 되살립니다. 오늘 넣는 규칙은 그 기록을 처음부터 제대로 남기게 합니다.</p> <div class="card" style="padding:16px 22px; margin-bottom:14px;"> <h3 class="accent">CLAUDE.md의 '지킬 것' 아래에 더할 문장</h3> <p style="font-size:0.48em; line-height:1.9; color:var(--text); margin-top:10px;">- 여러 날 걸리는 일은 <code>worklog/작업-주제.md</code> 파일 하나에 목표, 지금 지킬 지침, 남은 일, 결정한 것과 그 이유를 적는다<br>- 새 지시를 받으면 진행 중인 일과 비교해서, 바뀐 항목을 로그에서 고친다<br>- 새 창에서 이어서 할 때는 로그부터 읽고 지금 상태를 확인한 다음 시작한다</p> </div> <div class="grid grid-2" style="gap:16px; margin-bottom:12px;"> <div class="card" style="padding:14px 20px;"> <h3 class="accent3">넣는 방법</h3> <p style="color:var(--text); margin-top:6px;">위 세 줄을 복사해 Claude에게 'CLAUDE.md의 지킬 것 아래에 이 규칙을 더해줘'라고 보냅니다</p> </div> <div class="card" style="padding:14px 20px;"> <h3 class="accent2">③ 일에 특히 필요한 이유</h3> <p style="color:var(--text); margin-top:6px;">③ 일은 중간에 조건이 자주 바뀝니다. 바뀐 조건을 로그에 고쳐 두지 않으면, Claude가 처음 받은 지시대로 계속 일합니다</p> </div> </div> <p class="dim" style="font-size:0.42em;">출처: 2026년 9월 29일 OpenAI 개발자 행사에서 공개된 공유 작업 로그 지침을 Claude Code에 맞게 고쳤습니다.</p>
+
+</section>
+
+<section><div class="label">Practice · 가져오신 ③ 후보 하나로</div><h2>실습은 10분, 스킬을 한 번만 불러 봅니다</h2><p style="margin-bottom:12px;">6회차에 ③ 후보 세 가지와 지난 결과물을 한 건씩 준비해 오시기로 했습니다. 그중 하나를 골라 아래 셋 가운데 맞는 문장 하나만 보냅니다.</p><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">문서를 만드는 일이라면</h3><p style="color:var(--text); margin-top:6px;">지난 결과물을 채팅창에 끌어다 놓고 '이런 문서를 새로 만들어야 해. 초안 써줘'</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">회의나 대화를 정리하는 일이라면</h3><p style="color:var(--text); margin-top:6px;">메모나 녹취를 붙여 넣고 '회의록 정리해줘'</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">알아보는 일이라면</h3><p style="color:var(--text); margin-top:6px;">'(알고 싶은 것) 좀 알아봐줘. 보고서에 쓸 거야'</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">확인할 것은 하나뿐입니다</span> <span class="sub">결과물 맨 위에 빈칸 목록이나 못 찾은 것 목록이 있는지만 봅니다. 그 목록이 이번 주 내 할 일입니다. 실습이 끝나면 트랙별 1:1 코칭을 시작합니다</span></p></div></section>
+
+<section><div class="label">Next · 8회차 · 11월 10일 (화) · ③ 체크리스트와 결정 기준</div><h2>다음 회차까지 할 일입니다</h2><div class="grid grid-4" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">이번 주에 할 일</h3><p style="color:var(--text); margin-top:6px;">오늘 고른 ③ 일을 세 스킬 가운데 하나로 두 번 이상 실제 업무에 써 봅니다</p><p class="dim" style="margin-top:6px;">결과물에서 내가 직접 고친 곳을 매번 worklog에 적습니다. 8회차 확인 질문의 재료가 됩니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">CLAUDE.md에 한 줄</h3><p style="color:var(--text); margin-top:6px;">작업 로그 규칙 세 줄을 CLAUDE.md에 더합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">준비해 올 것</h3><p style="color:var(--text); margin-top:6px;">이번 주에 만든 ③ 결과물 두 건과, 내가 고친 곳을 적은 worklog를 준비합니다</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">금요일</h3><p style="color:var(--text); margin-top:6px;">Claude에게 '이번 주 worklog를 보고 되찾은 시간의 합계를 내 줘'라고 보내 한 주 합계를 확인합니다</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">다음 회차</span> <span class="sub">③ 스킬에 확인 질문과 결정 기준을 붙이고, 결과를 다른 AI인 Codex에게 한 번 더 확인하게 하는 방법을 배웁니다</span></p></div></section>
+</div>
+</div>
+
+<div id="custom-progress">
+  <div class="seg" data-section="0" onclick="goSection(0)">오프닝</div>
+  <div class="seg" data-section="1" onclick="goSection(1)">지금까지</div>
+  <div class="seg" data-section="2" onclick="goSection(2)">③ 칸이란</div>
+  <div class="seg" data-section="3" onclick="goSection(3)">받은 스킬 세 가지</div>
+  <div class="seg" data-section="4" onclick="goSection(4)">다른 프로그램과 연결</div>
+  <div class="seg" data-section="5" onclick="goSection(5)">끊기지 않게</div>
+  <div class="seg" data-section="6" onclick="goSection(6)">실습</div>
+  <div class="seg" data-section="7" onclick="goSection(7)">마무리</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+<script>
+  const sections = [[0], [1, 2], [3, 4], [5, 6, 7, 8, 9, 10], [11, 12, 13, 14], [15], [16], [17]];
+
+  function goSection(idx) {
+    if (sections[idx]) Reveal.slide(sections[idx][0]);
+  }
+
+  function updateProgress() {
+    const cur = Reveal.getIndices().h;
+    document.querySelectorAll('#custom-progress .seg').forEach((seg, i) => {
+      const s = sections[i];
+      seg.classList.remove('active', 'done');
+      if (cur >= s[0] && cur <= s[s.length - 1]) seg.classList.add('active');
+      else if (cur > s[s.length - 1]) seg.classList.add('done');
+    });
+  }
+
+  Reveal.initialize({
+    hash: true,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    center: true,
+    controls: true,
+    controlsLayout: 'edges',
+    slideNumber: 'c/t',
+  });
+
+  Reveal.on('slidechanged', updateProgress);
+  Reveal.on('ready', updateProgress);
+</script>
+</body>
+</html>
