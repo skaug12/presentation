@@ -138,6 +138,39 @@
 </section>
 
 <section>
+  <div class="label">Recap &middot; 회차마다 함께 진행한 네 가지</div>
+  <h2 style="text-transform:none;">지금까지 만든 것과 받은 것을 한 표로 정리했습니다</h2>
+  <div class="card" style="padding:10px 16px; margin-bottom:12px;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.4em; line-height:1.6; color:var(--text); word-break:keep-all;">
+      <thead>
+        <tr style="font-weight:600; border-bottom:1px solid rgba(0,0,0,0.08);">
+          <td style="padding:4px 6px; width:11%;" class="dim">회차</td>
+          <td style="padding:4px 6px; width:21%;" class="accent">실습으로 만든 것</td>
+          <td style="padding:4px 6px; width:23%;" class="accent2">AI 소식</td>
+          <td style="padding:4px 6px; width:25%;" class="accent3">소개한 스킬과 도구</td>
+          <td style="padding:4px 6px; width:20%;" class="accent4">받은 스킬</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:4px 6px;" class="dim">1회차 &middot; 9월 15일</td><td style="padding:4px 6px;">AI에게 넘기고 싶은 일 하나</td><td style="padding:4px 6px;">AI가 틀리는 이유, 요즘 자주 듣는 세 단어</td><td style="padding:4px 6px;">제 스킬 /wed, 인스타 저장글 정리 스킬</td><td style="padding:4px 6px;" class="dim">없음</td></tr>
+        <tr><td style="padding:4px 6px;" class="dim">2회차 &middot; 9월 29일</td><td style="padding:4px 6px;">클로드 코드 설치, 캘린더 조회 스킬, 업무 스무 가지로 채운 PP 매트릭스</td><td style="padding:4px 6px;" class="dim">설치에 집중해 다루지 않았습니다</td><td style="padding:4px 6px;">깃허브의 스킬 모음 k-skill</td><td style="padding:4px 6px;">/recap</td></tr>
+        <tr><td style="padding:4px 6px;" class="dim">3회차 &middot; 10월 13일</td><td style="padding:4px 6px;">① 영역 스킬</td><td style="padding:4px 6px;">클로드 세 모델의 새 버전, ChatGPT와 Gemini의 무료 사용 조건</td><td style="padding:4px 6px;">Codex, Aside, Orca, Headroom</td><td style="padding:4px 6px;">업무일지 키트 &middot; 10월 18일 슬랙</td></tr>
+        <tr><td style="padding:4px 6px;" class="dim">4회차 &middot; 10월 27일</td><td style="padding:4px 6px;">② 영역 스킬의 검토 체크리스트</td><td style="padding:4px 6px;">시키지 않아도 알아서 일하는 AI, 클로드 비서 앱, 팀원과 AI가 함께 고치는 문서</td><td style="padding:4px 6px;">글 검수 훅, /eli5, ponytail, caveman, graphify, karpathy-guidelines</td><td style="padding:4px 6px;" class="dim">6회차에 한꺼번에 드립니다</td></tr>
+        <tr style="background:rgba(0,0,0,0.03);"><td style="padding:4px 6px;" class="accent bold">5회차 &middot; 오늘</td><td style="padding:4px 6px;" class="bold">CLAUDE.md 규칙 두 줄, Codex에게 검토받은 결과물</td><td style="padding:4px 6px;" class="bold">Gemini 문서와 슬라이드, ChatGPT와 Codex가 함께 쓰는 사용량 한도, AI가 대신하지 못하는 것</td><td style="padding:4px 6px;" class="bold">/insights, claude-md-management, Codex 설치</td><td style="padding:4px 6px;" class="bold">피드백 &middot; 자료 키트, <span style="white-space:nowrap;">hfk-verify</span>, <span style="white-space:nowrap;">hfk-worklog</span></td></tr>
+        <tr><td style="padding:4px 6px;" class="dim">6회차 &middot; 11월 24일</td><td style="padding:4px 6px;" class="dim">④ 영역의 미뤄 둔 일을 기획부터 완성까지</td><td style="padding:4px 6px;" class="dim">11월 10일부터 2주 동안의 소식</td><td style="padding:4px 6px;" class="dim">superpowers, frontend-design, design-taste, /insights 리포트 비교</td><td style="padding:4px 6px;" class="dim">남은 스킬과 스타터 모음</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="summary-card" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0;">
+      <span class="accent2 bold">앞 회차에 소개한 도구가 다음 실습으로 이어집니다</span>
+      <span class="sub">3회차에 함께 쓰면 좋은 도구로 소개한 Codex로 오늘 검토 실습을 합니다. 받은 스킬은 6회차에 시즌 전체를 돌아보며 한 번에 정리합니다.</span>
+    </p>
+  </div>
+
+</section>
+
+<section>
   <div class="label">4회차 4L &middot; 10월 27일 &middot; 세 분이 적어 주셨습니다</div>
   <h2 style="text-transform:none;">실습 시간이 부족했다는 말씀이 세 분 모두에게서 나왔습니다</h2>
   <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
@@ -833,7 +866,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
 <script>
-  const sections = [[0, 1], [2, 3, 4, 5], [6, 7, 8, 9], [10, 11, 12, 13, 14, 15, 16, 17], [18, 19, 20, 21, 22, 23], [24], [25, 26, 27, 28, 29, 30, 31], [32, 33, 34, 35]];
+  const sections = [[0, 1], [2, 3, 4, 5, 6], [7, 8, 9, 10], [11, 12, 13, 14, 15, 16, 17, 18], [19, 20, 21, 22, 23, 24], [25], [26, 27, 28, 29, 30, 31, 32], [33, 34, 35, 36]];
 
   function goSection(idx) {
     if (sections[idx]) Reveal.slide(sections[idx][0]);
