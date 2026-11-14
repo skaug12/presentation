@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>적어 둔 규칙대로 AI가 일하고, 마지막 확인은 내가 합니다 · 26가을 AI부사수 5회차</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #F8F7F4;
+    --text: #2C2C2C;
+    --text-sub: #6B6B6B;
+    --text-dim: #9A9A9A;
+    --accent: #8B5E3C;
+    --accent2: #3D5A80;
+    --accent3: #5B7B5E;
+    --accent4: #7B6B8A;
+    --accent5: #8A5E5E;
+    --accent6: #5A7B7B;
+    --card-bg: #F1EFEA;
+    --r-background-color: var(--bg);
+    --r-main-font: 'Pretendard', -apple-system, sans-serif;
+    --r-heading-font: 'Pretendard', -apple-system, sans-serif;
+    --r-main-color: var(--text);
+    --r-heading-color: var(--text);
+    --r-main-font-size: 30px;
+  }
+  .reveal { font-weight: 400; }
+  .reveal h1 { font-size: 2.4em; font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; }
+  .reveal h2 { font-size: 1.3em; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5em; }
+  .reveal h3 { font-size: 0.7em; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 6px; word-break: keep-all; overflow-wrap: break-word; }
+  .reveal p { font-size: 0.6em; line-height: 1.6; color: var(--text-sub); }
+  .reveal li { font-size: 0.6em; line-height: 1.6; color: var(--text-sub); }
+  .reveal ul { list-style: none; padding-left: 0; margin: 0; }
+  .reveal ul li { padding-left: 14px; position: relative; }
+  .reveal ul li::before { content: ""; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; border-radius: 50%; background: var(--text-dim); }
+  .reveal ol { padding-left: 18px; }
+  .reveal ol li { padding-left: 4px; }
+  .reveal ol li::before { display: none; }
+  .reveal section { text-align: left; padding: 36px 60px 56px !important; box-sizing: border-box; overflow: hidden; }
+  .reveal .slides section:not(.present) { opacity: 0 !important; visibility: hidden !important; }
+  .reveal code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.88em; }
+  .reveal .slides { text-align: left; }
+  .reveal .slide-number { font-family: 'Pretendard'; font-size: 11px; color: var(--text-dim); }
+  .reveal .controls { color: var(--accent); }
+  .reveal .progress { display: none; }
+
+  .sub { color: var(--text-sub); }
+  .dim { color: var(--text-dim); }
+  .accent { color: var(--accent); }
+  .accent2 { color: var(--accent2); }
+  .accent3 { color: var(--accent3); }
+  .accent4 { color: var(--accent4); }
+  .accent5 { color: var(--accent5); }
+  .accent6 { color: var(--accent6); }
+  .bold { font-weight: 600; }
+  .small { font-size: 0.6em !important; }
+  .tiny { font-size: 0.52em !important; }
+
+  .label { font-size: 0.42em; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+
+  .grid { display: grid; gap: 24px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card { background: var(--card-bg); border-radius: 8px; padding: 22px 24px; overflow: hidden; }
+  .card h3 { margin: 0; }
+  .card p { margin: 0; }
+  .card ul, .card ol { margin: 0; }
+  .card > * + * { margin-top: 12px !important; }
+  .card li + li { margin-top: 3px; }
+
+  .code-block { background: #2C2C2C; border-radius: 8px; padding: 18px 22px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.52em; line-height: 1.85; color: #D4D0C8; text-align: left; }
+  .code-block .prompt { color: var(--accent3); }
+  .code-block .cmd { color: #D4A574; }
+  .code-block .comment { color: #6B6B6B; }
+
+  .skill-tag { display: inline-block; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.5em; font-weight: 500; padding: 3px 10px; border-radius: 4px; background: rgba(139,94,60,0.08); color: var(--accent); margin-bottom: 8px; }
+
+  .summary-card { background: var(--card-bg); border-radius: 8px; padding: 14px 24px; text-align: center; }
+  .qblock { background: rgba(139,94,60,0.06); border-radius: 8px; padding: 14px 20px; }
+
+  .placeholder { border: 1.5px dashed rgba(139,94,60,0.4); background: rgba(139,94,60,0.03); }
+  .fillnote { font-size: 0.46em; color: var(--accent); background: rgba(139,94,60,0.07); border-radius: 6px; padding: 8px 14px; }
+
+  .stat-num { font-size: 1.4em; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+  .stat-label { font-size: 0.46em; color: var(--text-sub); margin-top: 4px; }
+
+  .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #F8F7F4; font-size: 0.48em; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+
+  #custom-progress { position: fixed; bottom: 0; left: 0; right: 0; height: 28px; background: #ECEAE5; display: flex; z-index: 100; font-family: 'Pretendard', sans-serif; }
+  #custom-progress .seg { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: var(--text-dim); letter-spacing: 0.02em; position: relative; transition: background 0.3s, color 0.3s; cursor: pointer; }
+  #custom-progress .seg.active { background: var(--accent); color: #F8F7F4; }
+  #custom-progress .seg.done { background: rgba(139,94,60,0.2); color: var(--accent); }
+  #custom-progress .seg + .seg { border-left: 1px solid rgba(0,0,0,0.06); }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%; text-align:center;"><h1>적어 둔 <span class="accent2">규칙대로</span> AI가 일하고,<br>마지막 확인은 내가 합니다</h1><p style="font-size:0.78em; color:var(--text-sub); font-weight:400; margin-top:16px;">5회차 · ③ 영역 · 가끔 하는 일, AI와 나눠서 하기</p><p class="dim" style="font-size:0.46em; margin-top:40px;">26가을 AI부사수(SUN) 5회차 · 11월 15일 (일) 10:30 · 5층 오아시스덕수궁 · @Seulki.log</p></div></section>
+<section>
+<div class="label">Time table · 5회차 · 10:30–13:00</div><h2>오늘은 AI가 할 일과 내가 할 일을 나눕니다</h2><p style="margin-bottom:12px;">③ 영역은 가끔 하지만 내가 가장 잘 아는 일입니다. 고칠 곳과 순서를 규칙으로 적어 두면 AI가 그대로 합니다. 결과를 확인하고 보내는 버튼을 누르는 일은 내가 합니다.</p><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">15분 · 10:30</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">돌아보기</span></p><p class="dim" style="margin-top:6px;">4회차 4L과 지난 2주 동안 써 본 경험을 나눕니다.</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">15분 · 10:45</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">AI 소식</span></p><p class="dim" style="margin-top:6px;">11월 10일 공개된 페이블 5.2와 Gemini 대화창에서 문서를 만드는 기능을 소개합니다.</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent4">25분 · 11:00</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">제 사례 · AI가 한 일과 내가 한 일</span></p><p class="dim" style="margin-top:6px;">시즌 전환, 상사께 드리는 보고, 검토 페이지 사례를 공유합니다.</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">15분 · 11:25</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">지난 대화에서 규칙 찾기</span></p></div><div class="card" style="padding:16px 20px; "><h3 class="accent6">10분 · 11:40</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">쉬는 시간</span></p></div><div class="card" style="padding:16px 20px; "><h3 class="accent6">70분 · 11:50</h3><p style="color:var(--text); margin-top:6px;"><span class="bold">실습과 4L 회고</span></p><p class="dim" style="margin-top:6px;">CLAUDE.md에 일하는 규칙을 넣고, 다른 AI인 Codex에게 결과물을 한 번 더 검토받습니다. 마지막에 한 분씩 공유하고 4L을 적습니다.</p></div></div>
+
+</section>
+<section>
+  <div class="label">Recap · 지금까지와 앞으로</div>
+  <h2 style="text-transform:none;">지금까지 한 것과 오늘 할 것</h2>
+  <div class="card" style="padding:12px 20px; margin-bottom:12px;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.5em; line-height:1.7; color:var(--text);">
+      <thead>
+        <tr style="color:var(--text-dim); font-weight:600; border-bottom:1px solid rgba(0,0,0,0.08);">
+          <td style="padding:4px 8px; width:22%;">회차</td><td style="padding:4px 8px;">한 일</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:4px 8px;" class="dim">1회차 · 9월 20일 (일)</td><td style="padding:4px 8px;">클로드 코드가 무엇인지 배우고, AI에게 넘기고 싶은 일을 하나씩 떠올렸습니다.</td></tr>
+        <tr><td style="padding:4px 8px;" class="dim">2회차 · 10월 4일 (일)</td><td style="padding:4px 8px;">VS Code와 클로드 코드를 설치하고, 업무 스무 가지를 PP 매트릭스로 파악했습니다.</td></tr>
+        <tr><td style="padding:4px 8px;" class="dim">3회차 · 10월 18일 (일)</td><td style="padding:4px 8px;">① 영역의 일을 골라 스킬로 만들어 직접 돌려 봤습니다.</td></tr>
+        <tr><td style="padding:4px 8px;" class="dim">4회차 · 11월 1일 (일)</td><td style="padding:4px 8px;">② 영역 스킬에 검토 체크리스트를 넣었습니다. AI가 먼저 스스로 검토하고 나에게 넘깁니다.</td></tr>
+        <tr style="background:rgba(0,0,0,0.03);"><td style="padding:4px 8px;" class="accent bold">5회차 · 오늘</td><td style="padding:4px 8px;" class="bold">③ 영역의 일에서 일하는 규칙을 찾아 CLAUDE.md에 적고, 다른 AI에게 한 번 더 검토를 받습니다.</td></tr>
+        <tr><td style="padding:4px 8px;" class="dim">6회차 · 11월 22일 (일)</td><td style="padding:4px 8px;">④ 영역에 있는 미뤄 둔 일을 기획부터 완성까지 해 보고, 시즌 동안 받은 스킬을 한 번에 돌아봅니다.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="summary-card" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0;">
+      <span class="accent2 bold">오늘의 목표</span>
+      <span class="sub">다음에 같은 일을 할 때 AI가 먼저 읽을 규칙 두 줄을 CLAUDE.md에 넣습니다. 그리고 결과물 한 가지를 Codex에게 검토받아, 틀린 곳이 있는지 직접 확인합니다.</span>
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">Recap · 회차마다 함께 진행한 네 가지</div>
+  <h2 style="text-transform:none;">지금까지 만든 것과 받은 것을 한 표로 정리했습니다</h2>
+  <div class="card" style="padding:10px 16px; margin-bottom:12px;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.4em; line-height:1.6; color:var(--text); word-break:keep-all;">
+      <thead>
+        <tr style="font-weight:600; border-bottom:1px solid rgba(0,0,0,0.08);">
+          <td style="padding:4px 6px; width:11%;" class="dim">회차</td>
+          <td style="padding:4px 6px; width:21%;" class="accent">실습으로 만든 것</td>
+          <td style="padding:4px 6px; width:23%;" class="accent2">AI 소식</td>
+          <td style="padding:4px 6px; width:25%;" class="accent3">소개한 스킬과 도구</td>
+          <td style="padding:4px 6px; width:20%;" class="accent4">받은 스킬</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:4px 6px;" class="dim">1회차 · 9월 20일</td><td style="padding:4px 6px;">AI에게 넘기고 싶은 일 하나</td><td style="padding:4px 6px;">AI가 틀리는 이유, 요즘 자주 듣는 세 단어</td><td style="padding:4px 6px;">제 스킬 /wed, 인스타 저장글 정리 스킬</td><td style="padding:4px 6px;" class="dim">없음</td></tr>
+        <tr><td style="padding:4px 6px;" class="dim">2회차 · 10월 4일</td><td style="padding:4px 6px;">클로드 코드 설치, 캘린더 조회 스킬, 업무 스무 가지로 채운 PP 매트릭스</td><td style="padding:4px 6px;" class="dim">설치에 집중해 다루지 않았습니다</td><td style="padding:4px 6px;">깃허브의 스킬 모음 k-skill</td><td style="padding:4px 6px;">/recap</td></tr>
+        <tr><td style="padding:4px 6px;" class="dim">3회차 · 10월 18일</td><td style="padding:4px 6px;">① 영역 스킬</td><td style="padding:4px 6px;">클로드 세 모델의 새 버전, ChatGPT와 Gemini의 무료 사용 조건</td><td style="padding:4px 6px;">Codex, Aside, Orca, Headroom</td><td style="padding:4px 6px;">업무일지 키트 · 10월 18일 슬랙</td></tr>
+        <tr><td style="padding:4px 6px;" class="dim">4회차 · 11월 1일</td><td style="padding:4px 6px;">② 영역 스킬의 검토 체크리스트</td><td style="padding:4px 6px;">시키지 않아도 알아서 일하는 AI, 클로드 비서 앱, 팀원과 AI가 함께 고치는 문서</td><td style="padding:4px 6px;">글 검수 훅, /eli5, ponytail, caveman, graphify, karpathy-guidelines</td><td style="padding:4px 6px;">피드백 · 자료 키트 · 11월 1일 슬랙</td></tr>
+        <tr style="background:rgba(0,0,0,0.03);"><td style="padding:4px 6px;" class="accent bold">5회차 · 오늘</td><td style="padding:4px 6px;" class="bold">CLAUDE.md 규칙 두 줄, Codex에게 검토받은 결과물</td><td style="padding:4px 6px;" class="bold">페이블 5.2, Gemini 문서와 슬라이드, ChatGPT와 Codex가 함께 쓰는 사용량 한도, AI가 대신하지 못하는 것</td><td style="padding:4px 6px;" class="bold">/insights, claude-md-management, Codex 설치</td><td style="padding:4px 6px;" class="bold"><span style="white-space:nowrap;">hfk-verify</span>, <span style="white-space:nowrap;">hfk-worklog</span></td></tr>
+        <tr><td style="padding:4px 6px;" class="dim">6회차 · 11월 22일</td><td style="padding:4px 6px;" class="dim">④ 영역의 미뤄 둔 일을 기획부터 완성까지</td><td style="padding:4px 6px;" class="dim">11월 11일부터 22일까지의 소식</td><td style="padding:4px 6px;" class="dim">superpowers, frontend-design, design-taste, /insights 리포트 비교</td><td style="padding:4px 6px;" class="dim">남은 스킬과 스타터 모음</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="summary-card" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0;">
+      <span class="accent2 bold">앞 회차에 소개한 도구가 다음 실습으로 이어집니다</span>
+      <span class="sub">3회차에 함께 쓰면 좋은 도구로 소개한 Codex로 오늘 검토 실습을 합니다. 받은 스킬은 6회차에 시즌 전체를 돌아보며 한 번에 정리합니다.</span>
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">4회차 4L · 11월 1일 · 열두 분이 적어 주셨습니다</div>
+  <h2 style="text-transform:none;">사례 공유가 좋았다는 말씀이 열두 분 가운데 아홉 분에게서 나왔습니다</h2>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent" style="text-transform:none;">허미현 님</h3>
+      <p style="color:var(--text); margin-top:6px;">필수 스킬 공유, 서로 하는 작업 공유가 좋았음. 케이스 스터디가 된다.</p>
+      <p class="dim" style="margin-top:6px;">엉성해도 아웃풋을 만들 것</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2" style="text-transform:none;">김윤영 님</h3>
+      <p style="color:var(--text); margin-top:6px;">다른 분들이 고른 업무 내용을 들으며 그 방식을 내 업무에 이렇게 활용해보면 좋겠다는 인사이트를 얻을 수 있었습니다.</p>
+      <p class="dim" style="margin-top:6px;">매 회차마다 똑같이 느끼지만, 모른다고 슬기님께 물어보기보다 일단 클로드랑 상의해보자. 클로드는 똑똑하다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3" style="text-transform:none;">허재필 님</h3>
+      <p style="color:var(--text); margin-top:6px;">슬기님과 다른 분들의 활용 후기를 들을 수 있어서 좋았습니다.</p>
+      <p class="dim" style="margin-top:6px;">향후 2주간 매일 클로드코드에게 내가 오늘 업무시간에 한 일을 정리해서 알려주고, 어떻게 Ai를 활용하는게 좋을지 물어보겠습니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">그래서 오늘도 실습 70분의 마지막에 한 분씩 공유합니다</span>
+      강의는 짧게 하고, 실습 시간 안에 결과물을 만듭니다. 마지막 4L은 실습이 끝난 뒤 따로 10분을 드립니다. 지난 2주 동안 ② 영역 스킬을 실제 일에 써 보신 분은 어떤 곳을 고쳤는지 한 분만 들려주세요.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">PP(Potential × Pattern) 매트릭스 · 오늘은 ③ 영역</div>
+  <h2 style="text-transform:none;">오늘은 ③ 영역, 과장급 AI부사수를 만듭니다</h2>
+  <p style="margin-bottom:10px;">③ 영역은 <span class="bold">가끔 하지만 내가 가장 잘 아는 일</span>입니다. 기준은 이미 머릿속에 있지만, 가끔 하니까 다음번에는 순서를 잊습니다. <span class="bold">작업 기록과 규칙을 워크스페이스인 작업 폴더에 쌓아</span> 매번 처음부터 설명하지 않게 합니다.</p>
+  <div style="display:grid; grid-template-columns:auto 1fr 1fr; gap:10px; align-items:stretch; margin-bottom:12px;">
+    <div></div>
+    <div class="dim" style="font-size:0.44em; text-align:center; font-weight:600;">익숙한 일 · 아는 기준을 AI에게 알려 줍니다</div>
+    <div class="dim" style="font-size:0.44em; text-align:center; font-weight:600;">새로운 일 · AI와 상의하며 기준을 만듭니다</div>
+    <div class="dim" style="font-size:0.44em; font-weight:600; writing-mode:vertical-rl; text-align:center;">자주 반복 · 스킬로 자동화</div>
+    <div class="card" style="padding:14px 18px; opacity:0.6;">
+      <h3 class="accent" style="text-transform:none;">① 사원급 · 3회차</h3>
+      <p style="color:var(--text); margin-top:6px;">자주 반복하고 내가 가장 잘 아는 일입니다.</p>
+      <p class="dim" style="margin-top:6px;">제 스킬: /wed · /add-contacts</p>
+    </div>
+    <div class="card" style="padding:14px 18px; opacity:0.6;">
+      <h3 class="accent3" style="text-transform:none;">② 대리급 · 4회차</h3>
+      <p style="color:var(--text); margin-top:6px;">자주 반복하지만 더 잘하고 싶은 일입니다.</p>
+      <p class="dim" style="margin-top:6px;">제 스킬: /generate-letter · /post-linkedin</p>
+    </div>
+    <div class="dim" style="font-size:0.44em; font-weight:600; writing-mode:vertical-rl; text-align:center;">가끔 · 기록으로 이어 가기</div>
+    <div class="card" style="padding:14px 18px; border:2px solid var(--accent2);">
+      <h3 class="accent2" style="text-transform:none;">③ 과장급 · 5회차 오늘</h3>
+      <p style="color:var(--text); margin-top:6px;">가끔 하지만 내가 가장 잘 아는 일입니다.</p>
+      <p class="dim" style="margin-top:6px;">예: 분기마다 하는 정산, 1년에 두 번 하는 행사 준비 &nbsp;|&nbsp; 제 스킬: /move-member · /handover-season</p>
+    </div>
+    <div class="card" style="padding:14px 18px; opacity:0.6;">
+      <h3 class="accent4" style="text-transform:none;">④ 파트너급 · 6회차 11월 22일</h3>
+      <p style="color:var(--text); margin-top:6px;">해 본 적 없는, 미뤄 둔 일입니다.</p>
+      <p class="dim" style="margin-top:6px;">제 스킬: /expand-idea · /watch-instagram</p>
+    </div>
+  </div>
+  <div class="summary-card" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0;">
+      <span class="accent2 bold">③ 영역에서 AI가 하는 일</span>
+      <span class="sub">내가 적어 둔 규칙과 지난 기록을 먼저 읽고 순서대로 일합니다. 틀리면 문제가 커지는 곳에서는 멈추고 나에게 확인을 받습니다.</span>
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">4회차 다시 보기 · ② 영역 · 5분</div>
+  <h2 style="text-transform:none;">② 영역의 기준은 내가 다 정하지 않아도 됩니다</h2>
+  <p style="margin-bottom:12px;">4회차에는 AI에게 기준 후보 다섯 가지를 받아 그중 세 가지를 골랐습니다. ② 영역의 일은 아직 부족한 부분이 있어 무엇을 볼지 바로 떠오르지 않습니다. 선배에게 잘된 예를 묻듯, <span class="bold">AI에게 기준 후보를 먼저 받아서 고릅니다</span>. 지난 2주 동안 써 보고 기준을 바꾸고 싶어졌다면 아래 문장으로 다시 고릅니다.</p>
+  <div class="card" style="padding:16px 22px; margin-bottom:12px;">
+    <p style="font-size:0.5em; line-height:1.85; color:var(--text); margin:0;">
+      4회차에 만든 '<span class="accent bold">(② 영역 스킬 이름)</span>' 스킬을 열어 주세요.<br>
+      같은 일을 잘하는 사례와 흔히 쓰는 기준을 바탕으로, 잘됐는지 볼 기준 후보 다섯 가지를 이유와 함께 보여 주세요. 제가 그중 세 가지를 고르겠습니다.<br>
+      고른 세 가지가 지금 체크리스트와 다르면, 바꿀 줄만 먼저 보여 주세요.
+    </p>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">이어 가는 도구는 2회차에 이미 드렸습니다</span>
+      2회차 선물 /recap은 길어진 대화를 정리해 다음 대화로 넘겨 줍니다. 가끔 하는 일일수록 끝날 때 /recap을 한 번 쳐 두면, 다음번에 처음부터 설명하지 않아도 됩니다.
+    </p>
+  </div>
+
+</section>
+<section>
+<div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 2 · AI 소식 · 15분</div><h1 style="font-size:1.8em;">지난 2주 소식과 <span class="accent2">트렌드</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">11월 10일 새벽, 앤트로픽이 새 모델 페이블 5.2를 공개했습니다.<br>Gemini 대화창에서 문서와 슬라이드를 바로 만드는 기능도 생겼습니다.<br>오늘 실습할 Codex는 12월부터 ChatGPT와 사용량을 함께 씁니다.<br>앤트로픽 CEO가 꼽은, AI가 대신하지 못하는 것도 함께 소개합니다.</p></div>
+
+</section>
+<section>
+  <div class="label">News 1 · 구글 · 10월 29일</div>
+  <h2 style="text-transform:none;">Gemini 앱 대화창에서 문서와 슬라이드를 바로 만듭니다</h2>
+  <p style="margin-bottom:12px;">지금까지는 AI에게 받은 글을 복사해 문서 프로그램에 붙여 넣었습니다. 이제 Gemini 앱에 '이 내용으로 슬라이드 만들어 줘'라고 하면, 대화창 안에서 파일을 만들고 미리 보여 줍니다.</p>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent" style="text-transform:none;">대화창에서 파일 만들기</h3>
+      <p style="color:var(--text); margin-top:6px;">문서, 슬라이드, 시트, PDF를 만들고 만든 화면에서 바로 고칩니다. 슬라이드는 Google Slides로 열거나 PPTX, PDF로 받습니다.</p>
+      <p class="dim" style="margin-top:6px;">무료 개인 계정에서도 씁니다. PDF는 휴대폰에서도, 나머지는 웹에서만 됩니다.</p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3" style="text-transform:none;">Google Slides 덱 전체를 한 번에 고치기</h3>
+      <p style="color:var(--text); margin-top:6px;">슬라이드 옆 창에 한 번 지시하면 덱 전체의 글꼴과 색을 맞추고, 드라이브 자료를 넣어 고칩니다.</p>
+      <p class="dim" style="margin-top:6px;">지금은 영어로만 지시할 수 있고, 회사용 유료 요금제부터 씁니다. 모든 계정에 퍼지기까지 15일 넘게 걸릴 수 있습니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">만드는 일은 점점 쉬워집니다</span>
+      오늘 주제인 확인이 더 중요해집니다. 파일은 AI가 몇 초 만에 만들어도, 숫자와 날짜가 맞는지 확인하고 보낼지 정하는 일은 여전히 내가 합니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">News 2 · 오픈AI · 앤트로픽 · 10월 27일 ~ 11월 2일</div>
+  <h2 style="text-transform:none;">ChatGPT와 Codex는 12월부터 사용량 한도를 함께 씁니다</h2>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent" style="text-transform:none;">ChatGPT 대화 탭과 업무 탭이 합쳐집니다</h3>
+      <p style="color:var(--text); margin-top:6px;">12월부터 Plus, Pro, Business 요금제는 ChatGPT와 Codex가 사용량 한도를 같이 씁니다. 짧은 답을 빨리 주는 Instant 대화는 한도에서 빠집니다.</p>
+      <p class="dim" style="margin-top:6px;">11월 2일 보도와 오픈AI가 사용자에게 보낸 메일 기준이며, 아직 시작 전입니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2" style="text-transform:none;">ChatGPT에 아이클라우드 메일과 캘린더 연결</h3>
+      <p style="color:var(--text); margin-top:6px;">10월 27일부터 아이클라우드 메일을 찾고, 받은편지함을 정리하고, 일정을 확인하고 고칩니다. 모든 요금제에서 씁니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3" style="text-transform:none;">회사용 Claude에 팀 리포트</h3>
+      <p style="color:var(--text); margin-top:6px;">10월 28일, 회사 계정 관리자가 팀이 Claude로 한 일과 쓴 비용을 리포트로 봅니다. 팀이 함께 쓰는 월 예산도 정합니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">클로드 코드가 고칠 수 있는 범위를 정하는 설정이 생겼습니다</span>
+      10월 30일부터 AI가 작업 폴더 밖의 파일을 고치지 못하게 막는 설정을 켤 수 있습니다. 클로드 코드에 '작업 폴더 밖에는 파일을 쓰지 못하게 설정해 줘'라고 하면 됩니다. 10월 31일부터는 VS Code 채팅창에서 바로 로그인도 됩니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">News 3 · 함께 읽을 거리 넷</div>
+  <h2 style="text-transform:none;">만드는 일은 AI가 맡아도, 내가 아는 것은 AI가 대신하지 못합니다</h2>
+  <div class="grid grid-2" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:12px 18px;">
+      <h3 class="accent" style="text-transform:none;"><a href="https://www.instagram.com/p/DfZ5soClrod/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">앤트로픽 CEO가 꼽은, AI가 대신하지 못하는 것</a></h3>
+      <p style="color:var(--text); margin-top:6px;">아모데이는 블룸버그 인터뷰에서 소프트웨어를 빨리 만드는 능력은 더는 방어벽이 아니라고 했습니다. 대신 고객과의 관계, 업계 노하우, 그 회사만 아는 지식을 꼽았습니다.</p>
+      <p class="dim" style="margin-top:6px;">가진 방어벽을 전부 적어 보라고 조언했습니다.</p>
+    </div>
+    <div class="card" style="padding:12px 18px;">
+      <h3 class="accent2" style="text-transform:none;"><a href="https://www.instagram.com/p/DfRnpxJATzs/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">카파시가 2시간 만에 만든 유튜브</a></h3>
+      <p style="color:var(--text); margin-top:6px;">10월 31일, AI 연구자 안드레이 카파시가 새 영상 사이트를 열었습니다. 해커뉴스 댓글에서 추천받은 영상 6,454개를 150개 주제로 묶었습니다. 만드는 일은 클로드가 했고, 본인은 자료와 서버, 도메인만 준비했습니다.</p>
+      <p class="dim" style="margin-top:6px;">hackertube.org</p>
+    </div>
+    <div class="card" style="padding:12px 18px;">
+      <h3 class="accent3" style="text-transform:none;"><a href="https://www.instagram.com/p/DfWPHFiILdz/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">AI마다 답하는 버릇이 다릅니다</a></h3>
+      <p style="color:var(--text); margin-top:6px;">10월 19일 Artificial Analysis가 같은 질문 900개로 AI가 답하는 성향을 비교했습니다. 답의 근거와 한계를 밝히는 투명성은 100을 기준으로 GPT-6 Astra 94, Claude Opus 5.5 88, Gemini 4 Argon 18이었습니다.</p>
+      <p class="dim" style="margin-top:6px;">오늘 다른 AI에게 한 번 더 검토받는 이유이기도 합니다.</p>
+    </div>
+    <div class="card" style="padding:12px 18px;">
+      <h3 class="accent4" style="text-transform:none;"><a href="https://www.instagram.com/p/DfOUhK9IIxX/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">기록을 다시 찾아 쓰게 돕는 무료 도구 셋</a></h3>
+      <p style="color:var(--text); margin-top:6px;">Basic Memory는 AI가 지난 결정과 기록을 기억하게 합니다. SilverBullet은 혼자 쓰는 위키이고, Docmost는 팀이 함께 쓰는 위키입니다.</p>
+      <p class="dim" style="margin-top:6px;">셋 다 무료로 공개된 프로그램이지만, 설치에 개발 도구가 필요해 이름만 소개합니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">오늘 적을 규칙이 내 방어벽입니다</span>
+      AI를 바꿔도 CLAUDE.md에 적어 둔 일하는 규칙은 계속 통합니다. 오늘 실습에서 첫 규칙을 적습니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">News 4 · 앤트로픽 · 11월 10일</div>
+  <h2 style="text-transform:none;">11월 10일 새벽, 클로드의 새 모델 페이블 5.2가 공개됐습니다</h2>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent" style="text-transform:none;"><a href="https://www.instagram.com/p/DfiyVeOGhSX/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">어려운 작업을 위한 모델, 페이블 5.2</a></h3>
+      <p style="color:var(--text); margin-top:6px;">앤트로픽이 한국 시각 11월 10일 새벽 4시에 페이블 5.2를 공개했습니다. 답하는 속도는 페이블 5.1보다 최대 30% 빠릅니다. 유료 요금제 사용자는 클로드 앱과 클로드 코드의 모델 목록에서 페이블 5.2를 바로 선택합니다.</p>
+      <p class="dim" style="margin-top:6px;">Pro 요금제 사용자는 주간 사용량의 50%까지 페이블을 사용합니다. 이번 주에는 앤트로픽이 대상 유료 요금제에 페이블 사용량을 추가로 제공합니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2" style="text-transform:none;"><a href="https://www.instagram.com/p/Dfgh70QGt57/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">클로드에 새로 생긴 기능 세 가지</a></h3>
+      <p style="color:var(--text); margin-top:6px;">클로드가 구글 문서와 시트를 직접 열어 읽고 수정합니다. 데이터가 바뀌면 숫자가 자동으로 갱신되는 대시보드도 만듭니다. 클로드 코드에서는 질문에 ultrathink를 함께 적으면 어려운 문제를 더 깊이 검토한 뒤 답합니다.</p>
+      <p class="dim" style="margin-top:6px;">세 기능 모두 Pro 요금제부터 사용합니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3" style="text-transform:none;"><a href="https://www.instagram.com/p/DfisZRcD8DN/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">채팅으로 하는 영상 편집</a></h3>
+      <p style="color:var(--text); margin-top:6px;">영상 AI 서비스 힉스필드를 클로드에 연결하면 채팅만으로 영상 색감을 보정합니다. 배경을 지워 인물만 떼어 내고, 화면을 지나가는 행인도 지웁니다.</p>
+      <p class="dim" style="margin-top:6px;">힉스필드의 광고 게시물을 바탕으로 소개합니다. 사용하려면 힉스필드 계정이 별도로 필요합니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">평소 업무에는 Opus 5.5를 먼저 씁니다</span>
+      앤트로픽도 대부분의 코딩과 업무에는 Opus 5.5부터 쓰라고 추천합니다. 페이블은 시간이 오래 걸리는 어려운 작업에만 사용합니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">News 5 · 함께 읽을 거리 셋</div>
+  <h2 style="text-transform:none;">AI가 맡는 일이 늘수록, 직접 확인할 일이 중요해집니다</h2>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent" style="text-transform:none;"><a href="https://www.instagram.com/p/Dfa2OYmn6p1/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">머스크가 1년 동안 내놓은 AI 전망</a></h3>
+      <p style="color:var(--text); margin-top:6px;">일론 머스크는 2027년까지 사무직 업무부터 AI가 대신하고, 2036년에는 돈이 의미를 잃는다고 예측했습니다. 용접, 배관, 요리처럼 몸을 쓰는 일은 훨씬 오래 유지된다고 봤습니다.</p>
+      <p class="dim" style="margin-top:6px;">머스크가 말한 시기는 1년 사이에도 여러 번 늦춰졌습니다. 엔비디아의 젠슨 황은 AI 덕분에 일이 오히려 늘어난다고 전망합니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2" style="text-transform:none;"><a href="https://www.instagram.com/p/De8LEGIEYRh/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">사람을 줄이는 기업과 할 일을 늘리는 기업</a></h3>
+      <p style="color:var(--text); margin-top:6px;">스탠퍼드 경제학자 에릭 브린욜프슨은 EBS 특강 〈넥스트 비전〉에서 AI로 인력을 줄이는 기업보다 할 수 있는 일을 늘리는 기업이 더 오래간다고 말했습니다.</p>
+      <p class="dim" style="margin-top:6px;">AI로 새로 할 수 있게 된 업무를 함께 떠올립니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3" style="text-transform:none;"><a href="https://www.instagram.com/p/Delg5FuEyL9/" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">가장 먼저 사라지는 것은 평범함</a></h3>
+      <p style="color:var(--text); margin-top:6px;">인스타그램 계정 인생책장은 같은 시간을 일해도 AI를 활용하는 사람과 그렇지 않은 사람의 생산성 차이가 커진다고 말합니다. 앞으로는 지식보다 배우는 속도가 중요하다는 주장입니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">AI가 할 일과 내가 확인할 일을 나눕니다</span>
+      세 글 모두 AI가 맡는 일이 늘어난다고 전망합니다. 오늘 실습에서는 AI가 따를 규칙을 CLAUDE.md에 적고, 내가 직접 확인할 일을 정합니다.
+    </p>
+  </div>
+
+</section>
+<section>
+<div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 3 · 제 사례 · ③ 영역 · 25분</div><h1 style="font-size:1.8em;">AI가 한 일과 <span class="accent2">내가 한 일</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">제 ③ 영역의 일은 한 시즌에 한두 번 하지만, 틀리면 여러 곳에서 한꺼번에 문제가 생깁니다.<br>고칠 곳과 순서를 규칙으로 적어 두니 AI가 그대로 했습니다. 결과를 확인하고 보내는 버튼은 제가 눌렀습니다.</p></div>
+
+</section>
+<section>
+  <div class="label">My Case 1 · /handover-season · /close-season · 8월 14일 · 27일</div>
+  <h2 style="text-transform:none;">머릿속에만 있던 시즌 전환을 확인 단계 16개로 적었습니다</h2>
+  <p style="margin-bottom:12px;">시즌을 넘길 때는 지난 시즌 채널을 정리하고, 정산하고, 새 시즌 채널을 만들고, 멤버를 초대합니다. 석 달에 한 번이라 매번 무엇인가 빠졌습니다. 8월과 9월에 살펴보니 <span class="bold">아무 경고 없이 빠져 있던 것이 17가지</span>였습니다.</p>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent" style="text-transform:none;">/handover-season · 시즌 전환</h3>
+      <p style="color:var(--text); margin-top:6px;">12단계마다 앞 단계를 확인해야 다음 단계로 갑니다. 확인이 실패하면 멈춥니다. 파트너께 보내는 글은 제가 승인해야 나갑니다.</p>
+      <p class="dim" style="margin-top:6px;">8월 27일 26가을 전환: 새 채널 23개, 초대 1,401건, 실패 0건</p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3" style="text-transform:none;">/close-season · 끝난 시즌 파일 정리</h3>
+      <p style="color:var(--text); margin-top:6px;">끝난 시즌 폴더의 파일을 계속 쓸 것, 근거로 남길 것, 지울 것 셋으로 나눕니다. 밖으로 나갔는지는 짐작하지 않고 슬랙과 메일 기록으로 확인합니다. 지우는 것은 제가 표를 보고 정합니다.</p>
+      <p class="dim" style="margin-top:6px;">8월 14일 결과물 폴더에 쌓인 파일 1,489개를 정리하면서 만들었습니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">아직 스킬로 처음부터 끝까지 돌려 보지는 않았습니다</span>
+      두 스킬 모두 일을 마친 날 과정을 적어 만든 것입니다. 다음 시즌 전환 때 처음으로 스킬로 돌립니다. 한 줄 더: 조회수 리포트를 뽑는 /ga-report도 ③ 영역 스킬입니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">My Case 2 · 상사와의 소통 매니저 · AI가 한 일</div>
+  <h2 style="text-transform:none;">상사께 쓰는 글의 규칙 41개를 한 파일에 적었습니다</h2>
+  <p style="margin-bottom:12px;">4회차에 소개한 매주 수요일 진행 보고에 이어, 상사께 드리는 답장까지 같은 규칙으로 쓰게 했습니다. AI는 초안을 쓸 때마다 규칙 파일부터 읽습니다.</p>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent" style="text-transform:none;">결정을 여쭐 때</h3>
+      <p style="color:var(--text); margin-top:6px;">번호를 붙인 선택지, 추천안과 이유 한 줄, 답 기한을 적습니다. 번호만 적어 답하실 수 있게 씁니다.</p>
+      <p class="dim" style="margin-top:6px;">8월 30일 환불 방식 결정은 이렇게 여쭈어 4분 만에 답을 받았습니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2" style="text-transform:none;">짧게</h3>
+      <p style="color:var(--text); margin-top:6px;">상사 메시지 길이의 가운데 값은 48자입니다. 스레드 답 182건 중 38건이 '네네'였습니다. 배경 설명은 댓글로 뺍니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3" style="text-transform:none;">시간</h3>
+      <p style="color:var(--text); margin-top:6px;">밤 9시 뒤에는 결정을 여쭈지 않습니다. 밤늦게 제가 승인하면 다음 날 아침 9시에 올립니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">4회차에 소개한 고친 곳 모으기는 계속 돌고 있습니다</span>
+      10월 28일에는 '이번 주에는 결정해 주실 일도, 부탁드릴 일도 없습니다'라는 줄을 지웠습니다. 다음 초안부터 같은 줄이 빠집니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">My Case 2 · 상사와의 소통 매니저 · 내가 한 일 · 10월 27일 ~ 11월 2일</div>
+  <h2 style="text-transform:none;">상사께 가는 글은 초안 그대로 보낸 것이 한 건도 없습니다</h2>
+  <p style="margin-bottom:12px;">상사께 가는 글은 반드시 초안을 거칩니다. 보내는 버튼은 제 계정으로 제가 누릅니다. 봇이 보내면 상사께는 봇이 답한 것처럼 보이기 때문입니다.</p>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:12px 16px; text-align:center;">
+      <div class="stat-num">27건</div>
+      <div class="stat-label">일주일 동안 AI가 쓴 답장 초안</div>
+    </div>
+    <div class="card" style="padding:12px 16px; text-align:center;">
+      <div class="stat-num">5 · 0</div>
+      <div class="stat-label">보낸 답장 · 그중 초안을 그대로 보낸 답장</div>
+    </div>
+    <div class="card" style="padding:12px 16px; text-align:center;">
+      <div class="stat-num">15 · 7</div>
+      <div class="stat-label">답하지 않기로 한 것 · 아직 열어 둔 것</div>
+    </div>
+  </div>
+  <div class="card" style="padding:12px 18px; margin-bottom:12px;">
+    <h3 class="accent5" style="text-transform:none;">제가 고친 곳</h3>
+    <p style="color:var(--text); margin-top:6px;">초안: '네, 후기를 10월 30일(금) 오전에 공개로 바꾸겠습니다.' 로 시작하는 세 줄<br>보낸 글: '넵넵 그럼 바로 공개로 올릴게요 ㅎㅎ'</p>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">초안은 상사의 말투보다 늘 깁니다</span>
+      규칙에 '짧게'를 적어 두어도 그렇습니다. 그래서 무엇을 답할지, 얼마나 짧게 답할지는 제가 정합니다. 매주 수요일 진행 보고도 세 번 중 두 번은 고쳐서 올렸고, 한 번은 올리지 않았습니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">My Case 3 · 검토 페이지 · 11월 5일</div>
+  <h2 style="text-transform:none;">버튼을 누르면 AI가 혼자 일하는 세션을 따로 시작합니다</h2>
+  <div style="display:grid; grid-template-columns:1.3fr 1fr; gap:16px; margin-bottom:12px; align-items:start;">
+    <div><img src="img/ai-busasu-26fall-5/review-page.jpg" alt="검토 페이지에서 고친 문장이 초록색으로 표시된 화면" style="width:100%; border-radius:8px; display:block; margin:0;"><p class="dim" style="margin:8px 0 0;">VS Code 탭에서 고칠 문장을 드래그하고 메모를 적습니다. 10월 23일부터 11월 6일까지 표시 656건을 남겼습니다.</p></div>
+    <div style="display:grid; gap:12px;">
+      <div class="card" style="padding:12px 18px;">
+        <h3 class="accent" style="text-transform:none;">AI가 한 일 · 별도 세션에서 고치고 검수하기</h3>
+        <p style="color:var(--text); margin-top:4px;">수정사항 반영 버튼을 누르면 클로드가 별도 세션에서 노트를 고치고, 글을 검수하고, 결과를 업무일지에 적습니다.</p>
+      </div>
+      <div class="card" style="padding:12px 18px;">
+        <h3 class="accent3" style="text-transform:none;">내가 한 일 · 되물은 표시 정하기와 배포</h3>
+        <p style="color:var(--text); margin-top:4px;">메모만으로 정할 수 없는 표시는 고치지 않고 저에게 되묻습니다. 실제 페이지에 올리는 일과 PDF는 세션이 하지 않습니다.</p>
+        <p class="dim" style="margin-top:4px;">11월 5일 시험에서 5분 동안 표시 13건 중 11건을 반영했고, 2건은 저에게 되물었습니다.</p>
+      </div>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">표시도 규칙이 됩니다</span>
+      표시 557건을 13가지 유형의 교정 사례집으로 묶었고, 세션은 고치기 전에 사례집부터 읽습니다. 제 맥에서만 돌아가는 도구라 오늘은 사례로만 소개합니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">정리 · 세 사례에서 제가 나눈 것</div>
+  <h2 style="text-transform:none;">순서대로 고치는 일은 AI가, 확인하고 보내는 일은 내가 합니다</h2>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent" style="text-transform:none;">AI가 하는 일 · 적어 둔 규칙대로</h3>
+      <ul style="margin-top:8px;">
+        <li>고칠 곳과 순서: 시즌 전환 12단계</li>
+        <li>글의 규칙: 상사께 쓰는 글 41개</li>
+        
+        <li>표시 반영: 노트 고치기와 글 검수</li>
+      </ul>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3" style="text-transform:none;">내가 하는 일 · 직접 확인합니다</h3>
+      <ul style="margin-top:8px;">
+        
+        <li>지울 파일 고르기</li>
+        <li>상사께 가는 글을 고치고 직접 보내기</li>
+        <li>메모만으로 정할 수 없는 표시 정하기</li>
+      </ul>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">오늘 실습은 규칙 적기와 한 번 더 검토받기, 두 가지입니다</span>
+      4회차에는 내보내는 일을 사람이 맡는다고 정리했습니다. 오늘은 실습 1에서 AI가 따를 규칙을 CLAUDE.md에 적고, 실습 2에서 내보내기 전 결과물을 다른 AI에게 한 번 더 검토받습니다.
+    </p>
+  </div>
+
+</section>
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 4 · 규칙 찾기 · 15분</div><h1 style="font-size:1.8em;">지난 대화에서 <span class="accent2">일하는 규칙을 찾습니다</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">클로드 코드는 지난 대화 기록으로 내가 일하는 방식을 리포트로 정리해 줍니다.<br>리포트에서 자꾸 고친 곳을 찾아 CLAUDE.md에 규칙으로 적습니다.</p><p class="dim" style="font-size:0.5em; margin-top:20px;">/insights → CLAUDE.md → claude-md-management → 피드백 · 자료 키트</p></div></section>
+<section>
+  <div class="label">규칙 찾기 1 · /insights · 제 리포트 · 10월 27일</div>
+  <h2 style="text-transform:none;">리포트는 자주 차이가 난 곳과 넣을 규칙을 함께 알려 줍니다</h2>
+  <p style="margin-bottom:12px;">5월 31일부터 10월 27일까지 다섯 달 동안의 대화 818개를 분석한 리포트입니다. 마지막에 'CLAUDE.md에 추가할 만한 규칙'을 따로 적어 줍니다. 가장 자주 차이가 난 곳 세 가지와 제가 한 일입니다.</p>
+  <div class="card" style="padding:12px 20px; margin-bottom:12px;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.48em; line-height:1.7; color:var(--text);">
+      <thead>
+        <tr style="color:var(--text-dim); font-weight:600; border-bottom:1px solid rgba(0,0,0,0.08);">
+          <td style="padding:4px 8px; width:36%;">리포트가 짚은 곳</td><td style="padding:4px 8px; width:32%;">리포트가 준 규칙</td><td style="padding:4px 8px;">제가 한 일</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:4px 8px;">말하지 않은 것을 AI가 짐작으로 채웠습니다. 멤버용 키트를 맥 기준으로 만들었습니다. 멤버는 윈도우를 씁니다.</td><td style="padding:4px 8px;">멤버에게 줄 결과물은 비개발자와 윈도우 기준으로 만듭니다.</td><td style="padding:4px 8px;" class="dim">아직 넣지 않았습니다. 오늘 실습 1에서 같이 넣습니다.</td></tr>
+        <tr><td style="padding:4px 8px;">확인하지 않고 안 된다고 말했습니다. 스포티파이 연결이 되어 있지만 없다고 했습니다.</td><td style="padding:4px 8px;">찾아본 결과를 다 읽기 전에는 없다고 말하지 않습니다.</td><td style="padding:4px 8px;" class="dim">10월 1일 '연결돼 있다'를 규칙으로 적었습니다.</td></tr>
+        <tr><td style="padding:4px 8px;">고치라고 한 곳보다 넓게 고쳤습니다. 제가 고쳐 둔 덱을 AI가 덮어썼습니다.</td><td style="padding:4px 8px;">덱을 고치기 전에 최근에 누가 고쳤는지 보고, 있으면 묻습니다.</td><td style="padding:4px 8px;" class="dim">10월 20일 '배포 전에 최신본과 비교한다'를 넣었습니다.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">잘한 일도 적어 줍니다</span>
+      Codex에게 업무일지 키트를 검토받아 버그 9개를 찾은 일을 꼽았습니다. 비밀번호 같은 값이 기록에 남을 수 있던 버그도 있었습니다. 실습 2에서 같은 검토를 해 봅니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">규칙 찾기 1 · /insights 쓰는 법</div>
+  <h2 style="text-transform:none;">채팅창에 /insights 한 줄이면 리포트가 나옵니다</h2>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent" style="text-transform:none;">만들기</h3>
+      <ol style="margin-top:8px;">
+        <li>클로드 코드 채팅창에 <code class="accent">/insights</code> 를 칩니다.</li>
+        <li>몇 분 뒤 브라우저에 리포트가 열립니다.</li>
+        <li>리포트는 영어로 나옵니다. 이어서 '이 리포트를 한국어로 정리해 줘'라고 합니다.</li>
+      </ol>
+      <p class="dim" style="margin-top:6px;">2회차에 설치하셨으니 오늘이면 6주 동안의 대화가 쌓였습니다.</p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3" style="text-transform:none;">읽을 때 알아 둘 것</h3>
+      <ul style="margin-top:8px;">
+        <li>리포트를 만든 컴퓨터의 대화만 봅니다. 회사 PC와 개인 노트북을 같이 쓰면 리포트도 따로 나옵니다.</li>
+        <li>대화가 적으면 리포트도 짧습니다. 그래도 '자주 고친 곳' 한두 개는 나옵니다.</li>
+        <li>회사 업무 내용이 그대로 나옵니다. 화면 공유는 원하시는 분만 합니다.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">6회차에 한 번 더 돌립니다</span>
+      오늘 넣은 규칙이 2주 뒤 리포트에서 어떻게 달라졌는지 비교해 봅니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">규칙 찾기 2 · CLAUDE.md · claude-md-management</div>
+  <h2 style="text-transform:none;">찾은 규칙은 CLAUDE.md에 적고, 쌓이면 정리합니다</h2>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:12px 18px;">
+      <h3 class="accent" style="text-transform:none;"><a href="https://github.com/skaug12/hfk-ai-starter/blob/main/CLAUDE.md" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">CLAUDE.md</a> <span class="dim" style="font-size:0.7em; font-weight:500;">· 30줄 양식</span></h3>
+      <p style="color:var(--text); margin-top:4px;">클로드 코드가 대화를 시작할 때마다 가장 먼저 읽는 메모입니다. 작업 폴더 맨 위에 둡니다. 신입에게 주는 인수인계 메모처럼, 짧을수록 잘 지킵니다.</p>
+      <p style="color:var(--text); margin-top:6px;">양식은 나는 누구인지, 결과물은 어디에 두는지, 일하는 방식, 하지 않을 것 네 항목입니다.</p>
+      <p class="dim" style="margin-top:6px;">넣어 둘 만한 규칙 예: 대화가 길어지거나 요약된 뒤에는 오늘 업무일지부터 읽고 이어 갑니다.</p>
+    </div>
+    <div class="card" style="padding:12px 18px;">
+      <h3 class="accent3" style="text-transform:none;"><a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-md-management" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">claude-md-management</a> <span class="dim" style="font-size:0.7em; font-weight:500;">· 앤트로픽 공식</span></h3>
+      <p style="color:var(--text); margin-top:4px;">CLAUDE.md가 길어지거나 지금 하는 일과 맞지 않게 되면 점수를 매기고 고칠 곳을 알려 줍니다.</p>
+      <ul style="margin-top:6px;">
+        <li>'내 CLAUDE.md 점검해 줘'라고 하면 점검합니다.</li>
+        <li>대화를 마칠 때 <code class="accent">/revise-claude-md</code> 를 치면, 이번 대화에서 배운 점을 CLAUDE.md에 넣자고 제안합니다.</li>
+      </ul>
+      <p class="dim" style="margin-top: 8px;"><span class="bold">설치</span></p>
+      <p style="margin-top:2px; line-height:1.6;">클로드 코드 채팅창에 한 줄씩<br><code class="accent" style="font-size:0.9em;">/plugin marketplace add anthropics/claude-plugins-official</code><br><code class="accent" style="font-size:0.9em;">/plugin install claude-md-management@claude-plugins-official</code></p>
+    </div>
+  </div>
+
+</section>
+<section>
+  <div class="label">규칙 찾기 3 · 피드백 · 자료 키트</div>
+  <h2 style="text-transform:none;">키트를 설치하면 규칙과 자료가 작업 폴더에 저절로 쌓입니다</h2>
+  <p style="margin-bottom:12px;">창을 새로 열면 클로드는 지난 대화를 기억하지 못해서, 같은 말을 여러 번 하게 됩니다. 키트는 일하는 동안 세 가지를 작업 폴더에 쌓고, 클로드는 일을 시작할 때마다 규칙과 자료를 먼저 읽습니다.</p>
+  <div class="grid grid-3" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent" style="text-transform:none;">내 규칙</h3>
+      <p class="dim" style="margin-top:2px;"><code class="accent">memory/MEMORY.md</code></p>
+      <p style="color:var(--text); margin-top:6px;">내가 고쳐 준 말이 규칙 파일로 쌓입니다. '표는 3열까지만 써 줘', '확인 안 된 금액은 지어내지 마' 같은 말입니다.</p>
+      <p class="dim" style="margin-top:6px;">이번 한 번만 필요한 말은 저장하지 않습니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2" style="text-transform:none;">내 자료</h3>
+      <p class="dim" style="margin-top:2px;"><code class="accent">자료/목록.md</code></p>
+      <p style="color:var(--text); margin-top:6px;">내가 건넨 링크와 파일이 날짜와 함께 한 줄씩 적힙니다.</p>
+      <p class="dim" style="margin-top:6px;">지난주에 건넨 시트 링크를 다시 찾아 붙여 넣지 않아도 됩니다.</p>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3" style="text-transform:none;">업무일지</h3>
+      <p class="dim" style="margin-top:2px;"><code class="accent">worklog</code> 폴더</p>
+      <p style="color:var(--text); margin-top:6px;">클로드가 한 일이 날짜별 파일로 적힙니다. 왜 했는지, 무엇을 고쳤는지, 어떻게 확인했는지를 씁니다.</p>
+      <p class="dim" style="margin-top:6px;">묻고 답하기만 한 대화는 기록하지 않습니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">키트는 쌓고, CLAUDE.md에는 내가 고릅니다</span>
+      키트에 쌓인 규칙 가운데 꼭 지킬 것만 골라 CLAUDE.md에 30줄 안으로 적습니다. 실습 1에서 규칙을 정리합니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">규칙 찾기 3 · 키트가 설정하는 훅 8개</div>
+  <h2 style="text-transform:none;">설치 명령 한 줄로 훅 8개가 설정됩니다</h2>
+  <p style="margin-bottom:12px;">훅은 정해진 순간마다 저절로 도는 장치입니다. 4회차에 소개한 글 검수 훅과 같은 방식입니다.</p>
+  <div class="grid grid-2" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent" style="text-transform:none;">창을 열 때 · 3개</h3>
+      <ul style="margin-top:6px;"><li>오늘 업무일지와 업무일지 쓰는 규칙을 보여 줍니다.</li><li>AI가 memory/MEMORY.md의 규칙 목록을 먼저 읽게 합니다.</li><li>최근에 건넨 링크와 파일 15개를 보여 줍니다.</li></ul>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent2" style="text-transform:none;">내가 말할 때 · 2개</h3>
+      <ul style="margin-top:6px;"><li>'다음부터', '하지 마', '기억해'가 들어가면 규칙으로 저장할지 AI가 정합니다.</li><li>링크나 파일 위치를 붙여 넣으면 자료 목록에 한 줄 적습니다.</li></ul>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent3" style="text-transform:none;">파일을 고칠 때 · 2개</h3>
+      <ul style="margin-top:6px;"><li>고치기 전에 오늘 업무일지에 창의 목적이 있는지 봅니다. 없으면 멈추고 목적부터 적게 합니다.</li><li>고친 뒤에는 바꾼 파일과 실행한 명령을 업무일지에 한 줄씩 적습니다.</li></ul>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <h3 class="accent4" style="text-transform:none;">답을 마칠 때 · 1개</h3>
+      <ul style="margin-top:6px;"><li>파일을 고쳤지만 결과 줄이 없으면 한 번 막고 결과를 쓰게 합니다.</li><li>묻고 답하기만 한 경우는 막지 않습니다.</li></ul>
+    </div>
+  </div>
+
+</section>
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Break · 11:40–11:50</div><h1 style="font-size:1.8em;">10분 <span class="accent2">쉬어 갑니다</span></h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">쉬는 시간이 끝나면 바로 실습을 시작합니다.<br>VS Code에서 작업 폴더를 열고, pp-매트릭스.md의 ③ 영역에서 가끔 하지만 잘 아는 일 한 가지를 골라 두세요.</p></div></section>
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%;"><div class="label">Part 5 · 실습 · 50분</div><h1 style="font-size:1.8em;">규칙은 <span class="accent2">적어 두고</span>, 결과물은 한 번 더 검토받습니다</h1><p style="font-size:0.66em; color:var(--text); margin-top:24px; line-height:1.8;">실습 1에서는 다음번에도 AI가 먼저 읽을 일하는 규칙을 CLAUDE.md에 적습니다.<br>실습 2에서는 결과물 한 가지를 다른 AI에게 한 번 더 검토받습니다.</p><p class="dim" style="font-size:0.5em; margin-top:20px;">실습 1 키트 설치와 규칙 넣기 20분 · 실습 2 Codex 검토 30분</p></div></section>
+<section>
+  <div class="label">실습 1 앞에 · 키트 설치 · 아직 설치하지 않은 분만</div>
+  <h2 style="text-transform:none;">실습 전에 작업 폴더에 키트를 설치합니다</h2>
+  <p style="margin-bottom:12px;">VS Code에서 작업 폴더를 연 채로 아래쪽 터미널 창에 붙여 넣습니다. 마지막 줄 근처에 '설치 완료'가 보이면 끝입니다.</p>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent" style="text-transform:none;">맥</h3>
+      <p style="margin-top:8px; line-height:1.6;"><code class="accent" style="font-size:0.9em; word-break:break-all;">curl -fsSL https://thehfk.github.io/hfk-ai-bss/worklog-kit/install.sh | bash</code></p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3" style="text-transform:none;">윈도우</h3>
+      <p style="margin-top:8px; line-height:1.6;"><code class="accent" style="font-size:0.8em; word-break:break-all;">[Net.ServicePointManager]::SecurityProtocol='Tls12'; iwr -useb https://thehfk.github.io/hfk-ai-bss/worklog-kit/install.ps1 -OutFile "$env:TEMP\hfk-kit.ps1"; powershell -NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\hfk-kit.ps1" -ProjectDir "$PWD"</code></p>
+      <p class="dim" style="margin-top:6px;">'파이썬 3.8 이상이 필요합니다'가 보이면 화면의 주소에서 파이썬을 설치합니다. 첫 화면 아래쪽 'Add python.exe to PATH'에 꼭 체크합니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">설치한 뒤에는 클로드 코드를 껐다가 다시 켭니다</span>
+      폴더를 믿을지 묻는 창이 뜨면 동의를 누릅니다. 동의해야 저장이 시작됩니다. 10월 18일에 업무일지 키트를 설치했어도 한 번 더 설치해 주세요. 쌓인 기록은 지워지지 않습니다. 회사 컴퓨터는 보안 설정 때문에 설치가 막힐 수 있습니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">실습 1 · 규칙 넣기 · 20분 · 그대로 복사해서 붙여 넣기</div>
+  <h2 style="text-transform:none;">1. 지난 대화에서 일하는 규칙을 찾아 CLAUDE.md에 넣습니다</h2>
+  <p style="margin-bottom:12px;">먼저 채팅창에 <code class="accent">/insights</code> 를 치고 리포트가 나오면 아래 문장을 붙여 넣습니다. 리포트가 비어 있어도 키트에 쌓인 규칙과 업무일지로 찾습니다.</p>
+  <div class="card" style="padding:16px 22px; margin-bottom:12px;">
+    <p style="font-size:0.5em; line-height:1.85; color:var(--text); margin:0;">
+      방금 만든 /insights 리포트를 보고 CLAUDE.md에 넣을 규칙을 찾아 주세요. 질문은 한 번에 하나씩 해 주세요.<br>
+      &nbsp;1. 제가 AI의 결과를 자주 고친 곳 세 가지를 보여 주세요. memory/MEMORY.md에 쌓인 규칙도 같이 봐 주세요. 리포트가 비어 있으면 작업 폴더의 업무일지와 결과물을 보고 찾아 주세요.<br>
+      &nbsp;2. 각각을 CLAUDE.md에 넣을 규칙 한 줄로 바꿔 주세요. 제가 두 개를 고르겠습니다.<br>
+      &nbsp;3. 제 ③ 영역 일인 '<span class="accent bold">(③ 영역 업무 이름)</span>'을 다음에 할 때 잊기 쉬운 순서와, 틀리면 문제가 커지는 곳을 물어봐 주세요. 답을 규칙 한두 줄로 적어 주세요.<br>
+      &nbsp;4. CLAUDE.md가 없으면 hfk-ai-starter의 30줄 양식으로 새로 만들어 주세요. 30줄을 넘기지 마세요.<br>
+      &nbsp;5. 저장하기 전에 바뀌는 줄만 먼저 보여 주세요. 원래 있던 내용은 지우지 마세요.
+    </p>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">확인하는 법</span>
+      새 대화를 열고 '내 CLAUDE.md에 적힌 규칙을 말해 줘'라고 해 보세요. 방금 넣은 두 줄을 말하면 됩니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">실습 2 앞에 · 제 Codex 검토 · 8월 30일 ~ 11월 1일</div>
+  <h2 style="text-transform:none;">저는 되돌릴 수 없는 일 앞에 다른 AI의 검토를 걸어 두었습니다</h2>
+  <p style="margin-bottom:12px;">내가 쓴 글을 내가 검토하면 같은 착각을 두 번 합니다. AI도 같습니다. 클로드가 만든 것을 오픈AI의 Codex에게 다시 보게 합니다. 저는 <span class="bold">한 번 나가면 되돌릴 수 없는 프로그램</span>을 고칠 때만 Codex가 저절로 검토하게 해 두었습니다. 문자 발송, 정산, 배포 프로그램입니다.</p>
+  <div class="grid grid-3" style="gap:14px; margin-bottom:12px;">
+    <div class="card" style="padding:12px 16px; text-align:center;">
+      <div class="stat-num">153번</div>
+      <div class="stat-label">8월 30일부터 11월 1일까지 Codex가 검토한 횟수</div>
+    </div>
+    <div class="card" style="padding:14px 18px; grid-column: span 2;">
+      <h3 class="accent5" style="text-transform:none;">10월 28일 · Codex가 짚은 두 곳</h3>
+      <p style="color:var(--text); margin-top:6px;">하나는 맞았습니다. 신청자 안내 메일 프로그램이 멈춰 있어도 '자동 발송 중'이라고 보여 주고 있었습니다. 다시 돌려 확인하고, '아직 안 나간 사람 N명'을 알리게 고쳤습니다.</p>
+      <p style="color:var(--text); margin-top:6px;">나머지 한 곳은 다른 대화에서 만들던 파일이라 그대로 두었습니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">맞는지 정하는 일은 사람이 합니다</span>
+      Codex의 지적도 틀릴 수 있습니다. 검토는 한 번 더 멈춰서 확인하는 단계이고, 고칠지는 제가 정합니다. 클로드 쪽에는 '다 됐습니다'라고 말하기 전에 확인을 다시 돌려 증거를 보이게 하는 스킬도 있습니다. superpowers 묶음의 verification-before-completion입니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">실습 2 · Codex 설치와 로그인 · 10분</div>
+  <h2 style="text-transform:none;">2. 다른 AI인 Codex를 설치합니다</h2>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent" style="text-transform:none;">맥</h3>
+      <p style="color:var(--text); margin-top:6px;">VS Code 아래쪽 터미널 창에 붙여 넣습니다.</p>
+      <p style="margin-top:6px; line-height:1.6;"><code class="accent" style="font-size:0.9em;">curl -fsSL https://chatgpt.com/codex/install.sh | sh</code></p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3" style="text-transform:none;">윈도우</h3>
+      <p style="color:var(--text); margin-top:6px;">새 PowerShell 창을 열고 붙여 넣습니다.</p>
+      <p style="margin-top:6px; line-height:1.6;"><code class="accent" style="font-size:0.9em;">powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"</code></p>
+    </div>
+  </div>
+  <div class="card" style="padding:14px 20px; margin-bottom:12px;">
+    <h3 class="accent2" style="text-transform:none;">처음 한 번 로그인</h3>
+    <p style="color:var(--text); margin-top:6px;">터미널에 <code class="accent">codex</code> 를 치고 <span class="bold">Sign in with ChatGPT</span>를 고릅니다. 브라우저가 열리면 ChatGPT 계정으로 로그인합니다. 로그인되면 <code class="accent">/exit</code> 로 나옵니다.</p>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">ChatGPT Plus 요금제부터 씁니다</span>
+      ChatGPT 요금제는 4회차에 미리 확인을 부탁드렸습니다. 요금제가 없는 분은 제 화면으로 함께 보시고, 실습 2의 문장은 그대로 따라 쳐 보세요. Codex가 없으면 클로드가 반대 근거를 직접 찾아 검토합니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">실습 2 · Codex에게 검토받기 · 20분 · 그대로 복사해서 붙여 넣기</div>
+  <h2 style="text-transform:none;">3. 결과물을 Codex에게 한 번 더 검토받습니다</h2>
+  <p style="margin-bottom:12px;">4회차에 만든 결과물이나 최근에 쓴 보고서 한 편을 고릅니다. 회사 파일이 없으면 '연습용 주간 보고서를 만들어 줘'라고 먼저 만들어도 됩니다. 클로드 코드 채팅창에 붙여 넣습니다.</p>
+  <div class="card" style="padding:16px 22px; margin-bottom:12px;">
+    <p style="font-size:0.5em; line-height:1.85; color:var(--text); margin:0;">
+      '<span class="accent bold">(파일 이름)</span>'을 Codex에게 한 번 더 검토받고 싶습니다.<br>
+      &nbsp;1. 파일에서 숫자, 날짜, 이름, 단정하는 문장만 뽑아 목록을 만들어 주세요. 의견과 제안은 빼 주세요.<br>
+      &nbsp;2. 고객 이름이나 연락처가 있으면 넘기기 전에 지워 주세요.<br>
+      &nbsp;3. 목록을 codex exec로 넘겨 주세요. 맞으면 확인, 틀리면 무엇이 틀렸는지, 모르면 확인 불가로 답하게 하고, 동의하기 전에 반례부터 찾게 해 주세요.<br>
+      &nbsp;4. 결과를 확인, 틀림, 확인 불가 세 칸 표로 보여 주세요.<br>
+      &nbsp;5. 원래 파일은 고치지 마세요. 틀림이 있으면 고칠지 저에게 물어봐 주세요.
+    </p>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">확인 불가가 나와도 괜찮습니다</span>
+      원본을 직접 열어 맞춰 볼 곳을 알려 준 것입니다. 코드를 쓰는 분은 Codex 창에서 <code class="accent">/review</code> 를 치면, 파일을 고치지 않고 바뀐 곳의 문제만 순서대로 알려 줍니다. 같은 일을 여러 AI에게 같이 시켜 비교하는 Orca라는 앱도 있습니다.
+    </p>
+  </div>
+
+</section>
+<section>
+  <div class="label">선물 · 오늘 실습을 스킬로</div>
+  <h2 style="text-transform:none;">오늘 실습을 다음부터는 한마디로 부릅니다</h2>
+  <div class="grid grid-2" style="gap:16px; margin-bottom:12px;">
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent" style="text-transform:none;"><a href="https://github.com/skaug12/hfk-ai-starter/tree/main/.claude/skills/hfk-verify" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">hfk-verify</a> <span class="dim" style="font-size:0.7em; font-weight:500;">· 내가 확인할 때</span></h3>
+      <p style="color:var(--text); margin-top:6px;">'내보내기 전에 검증해 줘'라고 하면 실습 2의 순서를 그대로 합니다. 결과는 확인, 틀림, 확인 불가로만 나누고, '대체로 맞다'처럼 두루뭉술하게 줄이지 않습니다.</p>
+      <p class="dim" style="margin-top:6px;">상사, 고객, 외부로 나가는 글에만 씁니다. 매번 돌리면 결국 안 돌리게 됩니다.</p>
+    </div>
+    <div class="card" style="padding:14px 20px;">
+      <h3 class="accent3" style="text-transform:none;"><a href="https://github.com/skaug12/hfk-ai-starter/tree/main/.claude/skills/hfk-worklog" target="_blank" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">hfk-worklog</a> <span class="dim" style="font-size:0.7em; font-weight:500;">· AI에게 맡기는 기록</span></h3>
+      <p style="color:var(--text); margin-top:6px;">하루에 한 일을 한 줄씩 남기는 기록입니다. 키트를 설치했다면 업무일지가 저절로 쌓여 따로 쓰지 않아도 됩니다. 쌓인 기록은 다음번 /insights의 재료가 됩니다.</p>
+    </div>
+  </div>
+  <div class="qblock" style="padding:12px 20px;">
+    <p style="font-size:0.54em; color:var(--text); margin:0; line-height:1.7;">
+      <span class="accent2 bold">넣는 법</span>
+      클로드 코드에 '링크의 스킬을 작업 폴더에 넣어 줘'라고 하고 링크를 붙여 넣습니다. 나머지 선물은 6회차에 시즌 전체를 돌아보며 한꺼번에 드립니다.
+    </p>
+  </div>
+
+</section>
+<section><div class="label">Share · 12:40</div><h2>한 분씩 30초 동안 이야기해 주세요</h2><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">넣은 규칙</h3><p style="color:var(--text); margin-top:6px;">CLAUDE.md에 넣은 규칙 두 줄 가운데 한 줄을 말씀해 주세요.</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">Codex가 짚은 곳</h3><p style="color:var(--text); margin-top:6px;">틀림이나 확인 불가로 나온 곳이 있었다면 말씀해 주세요.</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">내가 직접 할 일</h3><p style="color:var(--text); margin-top:6px;">③ 영역 일에서 AI에게 넘기지 않고 직접 하기로 한 것 한 가지를 말씀해 주세요.</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">같은 일을 하는 분이 있다면</span> <span class="sub">서로의 규칙을 빌려 와 보세요. 내가 적지 않은 규칙이 보입니다.</span></p></div></section>
+<section><div class="label">Next · 11월 22일 (일) · 6회차 · ④ 영역</div><h2>다음 회차까지</h2><p style="margin-bottom:12px;">6회차는 ④ 영역, 해 본 적 없는 미뤄 둔 일입니다. 기획부터 완성까지 해 보고, 시즌 동안 받은 스킬을 한 번에 돌아봅니다.</p><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">규칙이 지켜지는지 보기</h3><p style="color:var(--text); margin-top:6px;">오늘 넣은 규칙 두 줄이 다음 대화에서 지켜지는지 한 번 이상 확인합니다.</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">골라 오실 것</h3><p style="color:var(--text); margin-top:6px;">pp-매트릭스.md의 ④ 영역에서, 그동안 하고 싶었지만 미뤄 둔 일 한 가지를 골라 옵니다.</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent3">전날 한 번</h3><p style="color:var(--text); margin-top:6px;">6회차 전날인 11월 21일에 /insights를 한 번 더 돌려 오세요. 오늘 리포트와 비교합니다.</p></div></div><div class="summary-card" style="padding:12px 20px;"><p style="font-size:0.54em; color:var(--text); margin:0;"><span class="accent2 bold">질문은 슬랙 스레드에 남겨 주세요</span> <span class="sub">막힌 곳 한 줄이면 충분합니다. 6회차 자료에 반영하겠습니다.</span></p></div></section>
+<section><div class="label">4L · 12:50 · 10분</div><h2>오늘의 4L을 한 줄씩 적어 주세요</h2><p style="margin-bottom:12px;">슬랙 캔버스 <span class="bold">4L 리뷰_26가을_AI부사수(SUN)</span>의 5회차 칸에 적어 주세요.</p><div class="grid grid-3" style="gap:16px; margin-bottom:14px;"><div class="card" style="padding:16px 20px; "><h3 class="accent">Liked</h3><p style="color:var(--text); margin-top:6px;">좋았던 것</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent2">Learned</h3><p style="color:var(--text); margin-top:6px;">새로 알게 된 것</p></div><div class="card" style="padding:16px 20px; "><h3 class="accent5">Lacked</h3><p style="color:var(--text); margin-top:6px;">부족했던 것</p><ul style="margin-top:8px;"><li><span class="bold">accent4</span> Long for | 바라는 것</li></ul></div></div></section>
+<section><div style="display:flex; flex-direction:column; justify-content:center; height:100%; text-align:center;"><h1 style="font-size:1.8em;">적어 둔 규칙대로 AI가 일하고, 마지막 확인은 내가 합니다</h1><p style="font-size:0.66em; color:var(--text); margin-top:28px; line-height:1.9;">가끔 하는 일은 순서를 규칙으로 적어 두면 다음번에 AI가 먼저 읽습니다.<br>같은 말을 세 번 하면 규칙으로 적을 때입니다.<br>틀리면 되돌릴 수 없는 곳에서는 한 번 멈추고, 보내는 버튼은 제가 누릅니다.</p><div style="margin-top:40px;"><p class="dim" style="font-size:0.46em;">26가을 AI부사수(SUN) 5회차 · 11월 15일 (일) · @Seulki.log</p></div></div></section>
+</div>
+</div>
+
+<div id="custom-progress">
+  <div class="seg" data-section="0" onclick="goSection(0)">오프닝</div>
+  <div class="seg" data-section="1" onclick="goSection(1)">돌아보기</div>
+  <div class="seg" data-section="2" onclick="goSection(2)">AI 소식</div>
+  <div class="seg" data-section="3" onclick="goSection(3)">제 사례</div>
+  <div class="seg" data-section="4" onclick="goSection(4)">규칙 찾기</div>
+  <div class="seg" data-section="5" onclick="goSection(5)">쉬는 시간</div>
+  <div class="seg" data-section="6" onclick="goSection(6)">실습</div>
+  <div class="seg" data-section="7" onclick="goSection(7)">공유 · 마무리</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+<script>
+  const sections = [[0, 1], [2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12], [13, 14, 15, 16, 17, 18], [19, 20, 21, 22, 23, 24], [25], [26, 27, 28, 29, 30, 31, 32], [33, 34, 35, 36]];
+
+  function goSection(idx) {
+    if (sections[idx]) Reveal.slide(sections[idx][0]);
+  }
+
+  function updateProgress() {
+    const cur = Reveal.getIndices().h;
+    document.querySelectorAll('#custom-progress .seg').forEach((seg, i) => {
+      const s = sections[i];
+      seg.classList.remove('active', 'done');
+      if (cur >= s[0] && cur <= s[s.length - 1]) seg.classList.add('active');
+      else if (cur > s[s.length - 1]) seg.classList.add('done');
+    });
+  }
+
+  Reveal.initialize({
+    hash: true,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    center: true,
+    controls: true,
+    controlsLayout: 'edges',
+    slideNumber: 'c/t',
+  });
+
+  Reveal.on('slidechanged', updateProgress);
+  Reveal.on('ready', updateProgress);
+</script>
+</body>
+</html>
