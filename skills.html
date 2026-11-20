@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스킬 모음집 · AI부사수 26여름</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  body { font-family: 'Pretendard', -apple-system, sans-serif; background: #F8F7F4; color: #2C2C2C; max-width: 720px; margin: 80px auto; padding: 0 24px; line-height: 1.6; }
+  a.back { display: inline-block; font-size: 0.85em; color: #6B6B6B; text-decoration: none; margin-bottom: 24px; }
+  a.back:hover { color: #980000; }
+  h1 { font-size: 1.6em; font-weight: 700; margin-bottom: 8px; }
+  .lede { font-size: 0.9em; color: #6B6B6B; margin-bottom: 40px; }
+  h2.section { font-size: 1.05em; font-weight: 700; color: #980000; margin: 52px 0 4px; padding-bottom: 8px; border-bottom: 2px solid #E0DDD6; }
+  h2.section + .section-meta { font-size: 0.8em; color: #9A9A9A; margin: 0 0 20px; }
+  .item { background: #F1EFEA; border-radius: 10px; padding: 22px 24px; margin-bottom: 14px; }
+  .item .when { font-size: 0.72em; font-weight: 600; letter-spacing: .04em; color: #8B5E3C; text-transform: uppercase; }
+  .item h3 { font-size: 1em; font-weight: 700; margin: 4px 0 2px; }
+  .item .one { font-size: 0.85em; color: #6B6B6B; margin: 0 0 12px; }
+  .item p { font-size: 0.85em; margin: 0 0 10px; }
+  .item p:last-child { margin-bottom: 0; }
+  .item ul { font-size: 0.85em; margin: 0 0 10px; padding-left: 18px; }
+  .item li { margin-bottom: 3px; }
+  .item a { color: #980000; text-decoration: none; }
+  .item a:hover { text-decoration: underline; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  code { font-size: 0.86em; background: #E8E5DF; border-radius: 4px; padding: 1px 5px; }
+  pre { font-size: 0.78em; background: #2C2C2C; color: #F1EFEA; border-radius: 6px; padding: 12px 14px; overflow-x: auto; margin: 0 0 10px; line-height: 1.7; }
+  pre code { background: none; padding: 0; color: inherit; font-size: 1em; }
+  .warn { font-size: 0.8em; background: #F6EFEA; border-left: 3px solid #8B5E3C; border-radius: 0 6px 6px 0; padding: 10px 14px; margin: 0 0 10px; color: #5A4536; }
+  .warn strong { color: #8B5E3C; }
+  .note { font-size: 0.78em; color: #9A9A9A; margin: 0; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #E0DDD6; font-size: 0.8em; color: #9A9A9A; }
+  footer a { color: #6B6B6B; text-decoration: none; }
+  footer a:hover { color: #980000; }
+</style>
+</head>
+<body>
+  <a class="back" href="ai-bss.html">← AI부사수</a>
+  <h1>스킬 모음집</h1>
+  <p class="lede">26여름 주말 시즌(6월~8월) 동안 채널에 공유한 스킬과 도구를 모았습니다. 소개한 회차 순입니다.</p>
+
+  <h2 class="section">직접 만들어 나눈 것</h2>
+  <p class="section-meta">세션에서 쓰려고 만들었다가 채널에 zip으로 공유한 스킬들</p>
+
+  <div class="item">
+    <div class="when">2회차 · 7월 5일</div>
+    <h3>유튜브 브리핑</h3>
+    <p class="one">유튜브 링크 하나 → 마크다운 요약 노트</p>
+    <p>Gemini가 영상을 직접 보고 한 줄 요약, 주요 포인트, 인상적인 발언, 적용 포인트까지 노트로 만들어 줍니다. 저장만 해두고 안 보는 영상이 쌓일 때 씁니다.</p>
+    <ul>
+      <li><code>가이드.md</code> — API 키 발급부터 실행까지 따라만 하면 되는 안내서</li>
+      <li><code>analyze_youtube.py</code>, <code>analyze-youtube.md</code> — 실제 도구 파일</li>
+    </ul>
+    <p class="note">세팅 15분, 무료 Gemini 키 하나면 됩니다. 파일은 채널의 <code>유튜브-브리핑-스킬.zip</code>.</p>
+  </div>
+
+  <div class="item">
+    <div class="when">4회차 · 8월 2일</div>
+    <h3>네이버 블로그 킷</h3>
+    <p class="one">마크다운 글을 네이버 블로그 형식으로 바꿔 이미지까지 올리고 임시저장</p>
+    <p>발행 버튼은 직접 눌러야 합니다. 설치는 압축 풀고 <code>setup.sh</code> 실행 → 크롬 창에서 직접 로그인, 10분 정도 걸립니다. 자세한 건 안에 <code>README.md</code>가 있습니다.</p>
+    <div class="warn">
+      <strong>두 가지만 지켜주세요.</strong>
+      ① 각자 자기 계정으로 로그인하세요. 설치 후 생기는 <code>profile</code> 폴더는 비밀번호나 마찬가지라 절대 공유하면 안 됩니다.
+      ② 블로그 만든 지 3개월이 안 됐으면 하루 5건 이하로만. 초기 대량 발행이 저품질 판정 1순위 원인입니다.
+    </div>
+    <p class="note">첫 실행에서 <code>selector unresolved</code>가 떠도 정상입니다. 네이버 에디터 버튼 이름이 수시로 바뀌어서요 — 클로드에게 "probe 돌려서 고쳐줘"라고 하면 됩니다. 파일은 채널의 <code>naver-blog-kit.zip</code>.</p>
+  </div>
+
+  <div class="item">
+    <div class="when">5회차 · 8월 16일</div>
+    <h3>/recap</h3>
+    <p class="one">켜둔 클로드 코드 창들이 각각 뭘 하고 있는지 표로 정리</p>
+    <p>창을 두세 개 켜두면 이런 일이 생깁니다. 자리 비웠다 돌아왔는데 이 창에서 뭘 하던 중이었는지 기억이 안 나거나, 다른 창에서 뭘 하는지 몰라 같은 파일을 두 번 고치거나요. <code>/recap</code>은 클로드가 다른 창의 클로드에게 직접 말을 걸어 상황을 받아옵니다.</p>
+    <ul>
+      <li><code>/recap</code> — 지금 이 창에서 뭘 하던 중이었는지 요약</li>
+      <li><code>/recap all</code> — 켜져 있는 모든 창이 뭘 하고 있는지 한눈에</li>
+    </ul>
+    <p>만들면서 실제로 덕을 봤습니다. 스킬 파일을 고치는 중에 <code>/recap all</code>을 돌려보니 다른 창이 같은 폴더의 파일 22개를 이미 고치고 커밋까지 한 상태였습니다. 안 물어봤으면 몰랐을 일입니다.</p>
+    <p class="note">파일 하나를 <code>.claude/commands/</code>에 복사하면 끝입니다. 30분 이상 자리를 비웠다 돌아오면 알아서 요약을 띄워주는 훅도 들어 있는데 이건 선택입니다. 파일은 채널의 <code>recap-스킬.zip</code>.</p>
+  </div>
+
+  <h2 class="section">설치해서 쓰는 스킬</h2>
+  <p class="section-meta">3회차에 한 번에 소개한 다섯 가지 + 이후 공유한 것</p>
+
+  <div class="item">
+    <div class="when">3회차 · 7월 19일</div>
+    <h3>Remotion</h3>
+    <p class="one">프롬프트 → 영상</p>
+    <p>리포: <a href="https://github.com/remotion-dev/skills">remotion-dev/skills</a> (공식) · <a href="https://github.com/haidrrrry/claude-remotion-skill">haidrrrry/claude-remotion-skill</a> (커뮤니티판)</p>
+    <pre><code>npx remotion skills add</code></pre>
+    <p>프로젝트 폴더에서 설치한 뒤 "블랭크 템플릿 + Tailwind로 Remotion 프로젝트 만들어줘" → 영상 설명 → <code>npx remotion render</code>로 MP4를 뽑습니다.</p>
+    <p class="note">Node.js와 유료 Claude 구독이 필요합니다.</p>
+  </div>
+
+  <div class="item">
+    <div class="when">3회차 · 7월 19일</div>
+    <h3>Claude Mem</h3>
+    <p class="one">세션을 넘어 기억하기</p>
+    <p>리포: <a href="https://github.com/thedotmack/claude-mem">thedotmack/claude-mem</a> · 문서: <a href="https://docs.claude-mem.ai/installation">docs.claude-mem.ai</a></p>
+    <pre><code>npx claude-mem install
+
+# 또는 플러그인으로
+/plugin marketplace add thedotmack/claude-mem
+/plugin install claude-mem@thedotmack</code></pre>
+    <div class="warn"><strong><code>npm install -g claude-mem</code>만 하면 훅이 안 걸립니다.</strong> 반드시 위 두 방식 중 하나로 설치하세요.</div>
+  </div>
+
+  <div class="item">
+    <div class="when">3회차 · 7월 19일</div>
+    <h3>UI/UX Pro Max</h3>
+    <p class="one">디자인 두뇌</p>
+    <p>리포: <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill">nextlevelbuilder/ui-ux-pro-max-skill</a></p>
+    <pre><code>/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
+/plugin install ui-ux-pro-max@ui-ux-pro-max-skill
+
+# 또는 CLI
+npx ui-ux-pro-max-cli init --ai claude</code></pre>
+  </div>
+
+  <div class="item">
+    <div class="when">3회차 · 7월 19일</div>
+    <h3>Marketing Skills</h3>
+    <p class="one">마케터 한 명을 통째로 이식 — 카피·SEO·CRO·분석 32종</p>
+    <p>Corey Haines가 만든 묶음입니다. 리포: <a href="https://github.com/coreyhaines31/marketingskills">coreyhaines31/marketingskills</a></p>
+    <pre><code>npx skills add coreyhaines31/marketingskills -a claude-code</code></pre>
+    <p class="note">부사수 워크스페이스에는 이미 설치돼 있습니다. <code>copywriting</code>, <code>seo-audit</code>, <code>page-cro</code>, <code>ad-creative</code> 같은 게 그거예요.</p>
+  </div>
+
+  <div class="item">
+    <div class="when">3회차 · 7월 19일</div>
+    <h3>Superpowers</h3>
+    <p class="one">끝판왕 프레임워크</p>
+    <p>obra(Jesse Vincent)가 만든 것. 리포: <a href="https://github.com/obra/superpowers">obra/superpowers</a> · <a href="https://github.com/obra/superpowers-marketplace">마켓플레이스</a></p>
+    <pre><code>/plugin marketplace add obra/superpowers-marketplace
+/plugin install superpowers@superpowers-marketplace</code></pre>
+    <p>설치하면 <code>/brainstorm</code>, <code>/write-plan</code>, <code>/execute-plan</code> 같은 걸 쓸 수 있습니다.</p>
+  </div>
+
+  <div class="item">
+    <div class="when">4회차 · 8월 2일</div>
+    <h3>Karpathy Skills</h3>
+    <p class="one">안드레이 카파시의 코딩 원칙을 스킬로</p>
+    <p>리포: <a href="https://github.com/multica-ai/andrej-karpathy-skills">multica-ai/andrej-karpathy-skills</a></p>
+  </div>
+
+  <h2 class="section">Claude Code 기능</h2>
+  <p class="section-meta">설치가 아니라 원래 들어 있는 기능인데 잘 안 알려진 것</p>
+
+  <div class="item">
+    <div class="when">5회차 · 8월 16일</div>
+    <h3>Remote Control</h3>
+    <p class="one">맥에서 돌고 있는 세션을 폰으로 이어서 조종하기</p>
+    <p>작업을 클라우드로 옮기는 게 아니라 <strong>맥은 계속 돌고 폰이 리모컨이 되는</strong> 방식입니다. 그래서 로컬 파일도, 지금까지의 대화 맥락도 다 살아 있습니다. 폰의 Claude 앱이나 브라우저(<a href="https://claude.ai/code">claude.ai/code</a>)에서 씁니다.</p>
+    <div class="warn"><strong>제일 많이 헷갈리는 것.</strong> 모바일 앱에서 <code>/remote-control</code>을 치는 게 아닙니다. 거긴 그 명령이 없어서 "그런 명령 없다"는 답이 돌아와요. <strong>세션을 맥에서 열어 명령어를 입력하고, 폰으로 세션을 보냅니다.</strong></div>
+    <pre><code>cd ~/내작업폴더
+claude remote-control --name 아무이름</code></pre>
+    <p>폰에서 Claude 앱을 열면 세션 목록에 방금 그 이름이 뜹니다. 누르고 대화하면 맥에서 파일을 만지며 작업합니다. 이미 돌고 있던 세션을 넘기고 싶으면 터미널에 따로 칠 것 없이 그 세션 창에 <code>/remote-control</code>만 치면 됩니다.</p>
+    <p><strong>주의 세 가지</strong></p>
+    <ul>
+      <li>맥이 잠들면 끊깁니다 → <code>caffeinate -i</code>를 따로 띄워두세요</li>
+      <li>폰과 맥이 같은 Claude 계정이어야 합니다 (첫 연결 때 기기 등록 한 번)</li>
+      <li>최신 버전이어야 합니다 → <code>claude update</code></li>
+    </ul>
+  </div>
+
+  <h2 class="section">업무 문서와 기록 방식</h2>
+  <p class="section-meta">스킬은 아니지만 세션에서 같이 다룬 것</p>
+
+  <div class="item">
+    <div class="when">4회차 · 8월 2일</div>
+    <h3>PRD</h3>
+    <p class="one">"무엇을, 왜 만드는가"를 정의하는 개발 착수 문서</p>
+    <p>기획자가 쓰고 개발·디자인이 읽습니다. 보통 들어가는 것:</p>
+    <ul>
+      <li>배경/문제 정의 — 왜 지금 이걸 하나</li>
+      <li>목표와 성공지표 (예: 가입 전환율 12%→15%)</li>
+      <li>타깃 사용자 / 유즈케이스</li>
+      <li>요구사항 (기능별 상세, 우선순위 P0/P1/P2)</li>
+      <li>화면 흐름·와이어프레임</li>
+      <li>Out of scope — 이번에 <strong>안 하는 것</strong></li>
+      <li>리스크, 의존성, 일정</li>
+    </ul>
+    <p>실행 지향입니다. 만들 것의 스펙이 핵심이고 팀 내부에서만 돕니다. 길고 상세할수록 좋다는 오해가 있는데, 실제로는 "합의된 결정"만 남기고 나머지는 링크로 빼는 게 낫습니다.</p>
+  </div>
+
+  <div class="item">
+    <div class="when">4회차 · 8월 2일</div>
+    <h3>PR/FAQ</h3>
+    <p class="one">아마존의 Working Backwards — 만들기 전에 보도자료를 먼저 쓴다</p>
+    <p>"다 만들어서 출시했다고 치고" 보도자료를 씁니다.</p>
+    <ul>
+      <li><strong>Press Release (1~1.5장)</strong> — 출시일자, 헤드라인, 부제, 요약 문단, 고객 문제, 해결책, 내부 임원 인용구, 고객 인용구, 시작 방법</li>
+      <li><strong>외부 FAQ</strong> — 고객이 물어볼 것 (얼마인가, 어떻게 쓰나, 기존 거랑 뭐가 다른가)</li>
+      <li><strong>내부 FAQ</strong> — 팀이 물어볼 것 (시장 규모, 수익 모델, 기술적 난제, 왜 우리가, 왜 지금, 실패하면?)</li>
+    </ul>
+    <p>검증 지향입니다. 스펙이 아니라 <strong>"이게 고객에게 매력적인 이야기가 되는가"</strong>를 먼저 시험합니다. 보도자료가 지루하면 그 제품도 지루한 것 — 그러면 만들지 않습니다. 아마존에선 회의 시작 때 다같이 침묵으로 읽고 토론합니다.</p>
+  </div>
+
+  <div class="item">
+    <div class="when">4회차 · 8월 2일</div>
+    <h3>worklog와 daily 노트</h3>
+    <p class="one">작업 중 실시간 기록(협업용)과 하루 끝 회고(기록용)를 나눠 쓴다</p>
+    <p><strong>worklog/ — 업무일지</strong></p>
+    <ul>
+      <li>위치: <code>worklog/YYYY-MM-DD.md</code></li>
+      <li>언제: 세션 시작할 때 목적을 먼저, 이후 편집할 때마다 자동 누적</li>
+      <li>누가: 목적은 사람이 직접, 이후 줄은 훅이 자동</li>
+      <li>목적: 여러 명이 같이 쓰는 레포에서 "누가·왜·무엇을 고쳤나" 추적</li>
+    </ul>
+    <pre><code>## session:8ef7d8e7 — 슬기
+- 목적/왜: ...
+- 무엇을: 1. ... 2. ...
+- 09:25 [Edit] scripts/adjust_season_stock.py   ← 훅 자동
+### 결과 (09:25 완료)
+- ...</code></pre>
+    <p><strong>daily/ — 데일리 노트</strong></p>
+    <ul>
+      <li>위치: <code>daily/YYYY-MM-DD.md</code></li>
+      <li>언제: 하루 마무리에 <code>/run-daily-note</code>를 실행할 때 한 번</li>
+      <li>누가: 클로드가 자동으로 수집해서 작성</li>
+      <li>목적: 하루 전체를 서사로 정리하고 커밋·푸시까지 마감</li>
+    </ul>
+    <p>구조는 "오늘 완료한 작업"(불릿 요약) → "작업 흐름"(세션별로 내 프롬프트 → 클로드 처리 → 의사결정 → 결과 → 미해결). 그 뒤에 미리알림 정리·출석 확인·커밋/푸시가 이어집니다.</p>
+    <p><strong>어디에 뭘 쓰나</strong></p>
+    <ul>
+      <li>작업 시작 직전의 목적 → worklog</li>
+      <li>파일 수정 흔적 → worklog (자동)</li>
+      <li>세션 끝의 결과·미해결 → worklog의 "결과" 항목</li>
+      <li>하루 전체 서사·의사결정 이유·다음 액션 → daily (<code>/run-daily-note</code>)</li>
+      <li>여러 날 걸치는 큰 작업의 진척 → <code>PROGRESS.md</code></li>
+    </ul>
+  </div>
+
+  <footer>
+    zip으로 나눈 스킬 세 개는 채널 첨부파일로만 배포했습니다. 필요하시면 말씀해 주세요.<br>
+    <a href="ai-bss.html">← AI부사수</a> · <a href="trends.html">트렌드 모음</a> · <a href="faq-ai-assistant.html">FAQ</a>
+  </footer>
+</body>
+</html>
